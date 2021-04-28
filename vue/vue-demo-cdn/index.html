@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,12 @@
   <link rel="icon" href="./assets/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="./assets/index.css" />
 </head>
+
 <body>
   <div id="app">
-    <!-- <div><img alt="Vue logo" src="./assets/logo.png"><hello-world msg="Hello Vue 2.6.11 + CDN" /></div> -->
+    <div><img alt="Vue logo" src="./assets/logo.png">
+      <hello-world msg="Hello Vue 2.6.11 + CDN" />
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script type="module">
@@ -31,11 +35,18 @@
     }
     const app = new Vue({
       name: 'App',
-      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld msg="Hello Vue 2.6.11 + CDN" /></div> ',
+      // template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld msg="Hello Vue 2.6.11 + CDN" /></div> ',
       components: {
         HelloWorld
+      },
+      render(h) {
+        throw new Error('oops')
+      },
+      renderError(h, err) {
+        return h('pre', { style: { color: 'red' } }, err.stack)
       }
     }).$mount('#app');
   </script>
 </body>
+
 </html>

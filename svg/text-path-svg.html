@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text-path</title>
+</head>
+
+<body>
+    <svg x="0" , y="0" , width="400px" height="400px">
+        <!-- <defs>
+            <path id="path" d="M30 40 C 50 10 ,70 10,120 40 S150 0,200 40" style="fill:none;stroke:black"></path>
+        </defs>
+        <g transform="translate(10,50)">
+            <path id="path" d="M30 40 C 50 10 ,70 10,120 40 S150 0,200 40" style="fill:none;stroke:black"></path>
+            <text>
+                <textPath xlink:href="#path">
+                    hello world
+                </textPath>
+            </text>
+        </g>
+        <g transform="translate(10,100)">
+            <path id="path" d="M30 40 C 50 10 ,70 10,120 40 S150 0,200 40" style="fill:none;stroke:black"></path>
+            <text>
+                <textPath xlink:href="#path" startOffset="80%" text-anchor="middle">
+                    hello world
+                </textPath>
+            </text>
+        </g> -->
+        <!-- <defs>
+            <mask id="mask" x="0" y="0" width="1" height="1" maskContentUnits="objectBoundingBox">
+                <circle cx=".5" cy=".5" r=".2" fill="red"></circle>
+            </mask>
+        </defs>
+        <rect x="0" y="0" width="100" height="100" style="mask:url(#mask)"></rect>
+        <rect x="0" y="0" width="100" height="100" fill="none" stroke="black"></rect> -->
+        <!-- <defs>
+            <filter id="gaussian" x="0" y="0">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2"></feGaussianBlur>
+            </filter>
+        </defs>
+        <g transform="translate(10,10)">
+            <rect x="10" y="10" width="100" height="100" fill="#ccc" filter="url(#gaussian)"></rect>
+        </g>
+        <g>
+            <rect x="10" y="10" width="100" height="100" fill="black"></rect>
+        </g> -->
+        <!-- <defs>
+            <filter id="matrix" x="0" y="0">
+                <feColorMatrix type="matrix" values="
+                0 0 0 0   0
+                0 0 0 0.9 0
+                0 0 0 0.1 0
+                0 0 0 1   0
+            "></feColorMatrix>
+            </filter>
+        </defs>
+        <text x="10" y="100" font-size="40" style="filter:url(#matrix)">发光滤镜</text> -->
+        <!-- <rect x="10" y="10" width="200" height="25" stroke="black" fill="none">
+            <animate 
+                id="c1"
+                attributeName="width" 
+                attributeType="XML" 
+                from="200" to="20" 
+                begin="0s" dur="5s" 
+                fill="freeze">
+            </animate>
+        </rect>
+        <circle cx="120" cy="60" r="10" stroke="black" fill="none">
+            <animate
+                attributeName="r"
+                attributeType="XML"
+                begin="c1.end"
+                from="10" to="20"
+                dur="4s"
+            ></animate>
+        </circle> -->
+        <!-- <g transform="translate(100,60)">
+            <rect x="-10" y="-10" width="20" height="20" style="fill:#ff9;stroke:black">
+                <animateTransform
+                    attributeType="XML"
+                    attributeName="transform" type="scale"
+                    from="1" to="4 2"
+                    dur ="3s"
+                    begin = "0s" fill="freeze"
+                ></animateTransform>
+            </rect>
+        </g> -->
+        <rect x="-10" y="-10" width="20" height="20" style="fill:#ff9;stroke:black">
+            <animateMotion
+                path="M50,135C100,25 150,225 200,125"
+                dur="6s" fill="freeze"
+            ></animateMotion>
+        </rect>
+    </svg>
+</body>
+
+</html>

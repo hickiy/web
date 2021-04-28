@@ -103,7 +103,7 @@ class Control {
   private state: any;
 }
 
-interface SelectableControl extends Control { // 接口继承类， 当前接口只有 Control 的字类能够实现，因为只有其字类能继承到Control类的私有成员和受保护的成员
+interface SelectableControl extends Control { // 接口继承类， 当前接口只有 Control 的字类能够实现，因为只有其子类能继承到Control类的私有成员和受保护的成员
   select(): void;
 }
 

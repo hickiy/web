@@ -17,3 +17,8 @@ const [element] = arr;
 global.console.log(toString);
 global.console.log(testAttrOfObj);
 global.console.log(testAttrOfArr, length, element, arr[0], arr['0']);
+const obj1 = { a: 1, b: 2 };
+
+const { a, b: b1, c = 3 } = obj1;
+
+console.log(a, b1, c);

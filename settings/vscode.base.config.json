@@ -1,58 +1,80 @@
 {
+  // 插件setting sync 同步到git的配置id
   "sync.gist": "3e17482d8f6acc64857fa267f46a5def",
-  "workbench.statusBar.visible": true,
-  "eslint.format.enable": true,
+  // vscode内启动终端的启动路径
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  // 文件类型说明
   "files.associations": {
     "*.cjson": "jsonc",
     "*.wxss": "css",
     "*.wxs": "javascript",
-    "*.json": "jsonc"
+    "*.json": "jsonc",
+    "*.wxml": "html"
   },
-  "emmet.includeLanguages": {
-      "wxml": "html"
+  // 工作区状态栏默认显示
+  "workbench.statusBar.visible": true,
+  // 工作区打开的文件状态栏默认显示
+  "workbench.activityBar.visible": true,
+  // 保存代码时自动格式化
+  "editor.formatOnSave": false,
+  // 自动格式化模式 - 修改过的文件
+  "editor.formatOnSaveMode": "modifications",
+  // 编辑器保存文件时启用eslint消除格式错误
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   },
-  "minapp-vscode.disableAutoConfig": true,
+  // 编辑器字体大小
+  "editor.fontSize": 14,
+  // vscode 窗口放大等级
+  "window.zoomLevel": 0,
+  // 自动保存
+  "files.autoSave": "off",
+  // eslint 插件相关配置
+  "eslint.format.enable": true,
   "eslint.options": {
-      "extensions": [
-        ".html",
-        ".js",
-        ".jsx",
-        ".vue"
-      ]
-    },
-    "eslint.validate": [
-      "javascript",
-      "javascriptreact",
-      "html",
-      "vue"
-    ],
-    // https://github.com/microsoft/vscode-eslint/issues/600#issuecomment-469211948
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
-    "files.autoSave": "off", // no fix on save with auto save on :-)
-    "eslint.trace.server": "messages",
-    // #region Beautify
-    "beautify.language": {
-      "html": [
-        "htm",
-        "html"
-      ],
-      "css": [
-        "css",
-        "scss"
-      ]
-    },
-    "vetur.format.defaultFormatterOptions": {
-      "js-beautify-html": {
-        "wrap_attributes": "force-expand-multiline"
-      },
-      "prettyhtml": {
-        "printWidth": 100,
-        "singleQuote": false,
-        "wrapAttributes": false,
-        "sortAttributes": false
-      }
-    },
-    "vetur.validation.template": false
+    "extensions": [
+      ".js",
+      ".jsx"
+    ]
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
+  "eslint.trace.server": "messages",
+  // vetur 插件相关配置
+  "vetur.format.defaultFormatterOptions": {
+    "prettier": {
+      "printWidth": 200,
+      "singleQuote": true,
+      "tabWidth": 4,
+      "useTabs": false,
+      "semi": true,
+      "trailingComma": "none",
+      "wrapAttributes": false,
+      "sortAttributes": false
+    }
+  },
+  "vetur.validation.template": true,
+  "vetur.validation.script": false,
+  "vetur.validation.interpolation": true,
+  "vetur.format.defaultFormatter.js": "none",
+  "vetur.format.defaultFormatter.ts": "none",
+  "vetur.format.defaultFormatter.html": "prettier",
+  // 不同文件配置对应的格式化插件
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

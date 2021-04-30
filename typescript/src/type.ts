@@ -1,7 +1,7 @@
 let naem:string = 'jiejie' // string类型
 let age:number = 18 // number类型
 let isMan:boolean = true //布尔类型
-let sb:symbol = Symbol('111') // symbol类型
+// let sb:symbol = new Symbol('111') // symbol类型
 
 
 let u:undefined = undefined // undefined类型只有一个值

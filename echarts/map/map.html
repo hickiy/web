@@ -32,16 +32,10 @@
 	<div id="app"></div>
 	</div>
 	<script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.2.1/echarts.js"></script>
-	<script src="./mapGeo.min.js"></script>
-	<script src="./map.config.js"></script>
-	<script src="./fujian.js"></script>
+	<script src="./map.js"></script>
 	<script>
 		var mapName = 'fujian';
-		const keyObj = keyMap.find(function (item) {
-			return item.label === mapName;
-		})
-		const key = keyObj ? keyObj.value : mapName
-		echarts.registerMap(mapName, MapGeo[key]);
+		echarts.registerMap(mapName, fujian);
 	</script>
 	<script>
 		// 基于准备好的dom，初始化echarts实例

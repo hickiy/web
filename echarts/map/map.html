@@ -33,9 +33,10 @@
 	</div>
 	<script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.2.1/echarts.js"></script>
 	<script src="./map.js"></script>
+	<script src="./mapGeo.min.js"></script>
 	<script>
-		var mapName = 'fujian';
-		echarts.registerMap(mapName, fujian);
+		var mapName = 'china';
+		echarts.registerMap(mapName, MapGeo['china']);
 	</script>
 	<script>
 		// 基于准备好的dom，初始化echarts实例
@@ -61,11 +62,11 @@
 					show: false
 				},
 				zoom: 1.2,
-				aspectScale: 1.0,
+				aspectScale: 1.1,
 				layoutCenter: ['50%', '50%'],
 				layoutSize: 600,
 				label: {
-					show: true
+					show: false
 				},
 				data: [],
 			}]

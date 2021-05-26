@@ -6,17 +6,17 @@
  * iterator对象的next方法，用来将迭代指针指向下一个元素
  */
 
-// function outFunction(prama1, prama2) {
-//   console.log(prama1, prama2);
-//   return '外部函数调用完毕';
-// }
+function outFunction(prama1, prama2) {
+  console.log(prama1);
+  console.log(prama2);
+  return 'finally';
+}
 
-// function* generator() {
-//   return outFunction(yield 'abc', yield 'bcd');
-// }
+function* generator() {
+  return outFunction(yield 'first', yield 'second');
+}
 
-// const interator = generator();
-
-// console.log(interator.next());
-// console.log(interator.next(1));
-// console.log(interator.next(2));
+const interator = generator();
+const a = interator.next()
+const b = interator.next(a)
+console.log(interator.next(b))

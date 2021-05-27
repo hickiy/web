@@ -9,12 +9,12 @@
  * map展开到[...map]中是进行迭代操作，展开的是map包含的数据成员
  */
 
-// const map = new Map([[1, 2]]);
-// const keys = Object.keys(map);
-// const obj = { ...map };
-// global.console.log(keys, obj);
-// const arr = [...map];
-// global.console.log(arr);
+const map = new Map([[1, 2]]);
+const keys = Object.keys(map);
+const obj = { ...map };
+global.console.log(keys, obj);
+const arr = [...map];
+global.console.log(arr);
 
 /**
  * weakMap 类与Map类相似，但是weakMap得key只能是对象
@@ -22,8 +22,8 @@
  * weakMap 通常用来存储Dom对象，防止Dom从页面移除时 导致的内存泄露
  * weakMap 由于保存的时弱引用对象，随时可能被gc 所以其不可迭代(不具备迭代接口，Set原生具有迭代接口)
  */
-const value = [1, 2];
-const map2 = new Map([['kye', value]]);
-map2.set(value, 'kye');
+// const value = [1, 2];
+// const o = {name: 'n1'}
+// const map2 = new Map([[o, value]]);
+// console.log(map2)
 
-console.log(map2, map2.get('kye'), map2.get(value));

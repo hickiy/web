@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-basis</title>
+    <style>
+        .wrap{
+            min-width: 1440px;
+            height: 1080px;
+            overflow: auto;
+            display: flex;
+            flex-flow: nowrap row;
+        }
+        div {
+            flex: 1;
+        }
+        .left-box {
+            background: red;
+        }
+        .right-box{
+            background: yellow;
+        }
+        .left-box, .right-box{
+            flex-basis: 470px;
+        }
+        .center-box {
+            background: green;
+            flex-basis: 980px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="left-box"></div>
+        <div class="center-box"></div>
+        <div class="right-box"></div>
+    </div>
+</body>
+</html>

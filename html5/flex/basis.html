@@ -13,9 +13,6 @@
             display: flex;
             flex-flow: nowrap row;
         }
-        div {
-            flex: 1;
-        }
         .left-box {
             background: red;
         }
@@ -23,18 +20,20 @@
             background: yellow;
         }
         .left-box, .right-box{
-            flex-basis: 470px;
+            flex: 1 1 470px;
         }
         .center-box {
             background: green;
-            flex-basis: 980px;
+            flex: 1 1 980px;
         }
     </style>
 </head>
 <body>
     <div class="wrap">
         <div class="left-box"></div>
-        <div class="center-box"></div>
+        <div class="center-box">
+            <div style="width: 100%; height: 400px; background: yellowgreen;"></div>
+        </div>
         <div class="right-box"></div>
     </div>
 </body>

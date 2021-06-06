@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        #info {
+            height: 400px;
+            background: #feffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="info" onclick="alert(1)">
+        <p>
+            #### CSS资源、font资源
+            * css资源全局样式、页面级公共样式、组件级公共样式（通过合理添加类名复用样式声明、尽量减少css代码数量）
+            * 尽量在组件增加了样式作用域，利用文件hash唯一性避免命名冲突，避免使用层级过深的结构化css（会影响选择器性能）。
+            * 抽离html中的行内样式、减小js代码体积、提高js代码执行速度（css加载时不阻塞dom树解析）。
+            * 利用预编译工具定义颜色变量复用（变量部分需要写兼容代码）。
+            * 减少使用伪类选择器（依赖dom结构、不方便维护）
+            * 公共样式库、ui库的css代码有条件可以考虑使用cdn服务（利用网络以及缓存来实现加速）
+        </p>
+
+        <p>
+            #### 图片资源
+            * 雪碧图、base64编码（作用是减少http请求）
+            * 当存在大量图片资源加载时、先加载一倍图、用户点击放大加载二倍图
+            * 长页面中纵向存在大量图片时、通过指令的形式，判断元素距离视口距离、动态创建img插入dome树中
+            * 图片的oss文件存储服务、（利用多节点服务器实现网络层的加速）
+        </p>
+
+        <p>
+            #### js资源
+            * webpake之类的构建工具，压缩、混淆、构建层面的分块、es模块的shaking-tree, 按需
+            加载、库文件使用cdn公共服务（实现网络层）
+            * 路由层面的异步路由、动态组件、异步加载技术（动态注入script标签加载js）
+            * 利用link标签的preload、prefetch技术预加载技术,（浏览器线程空闲时预加载资源）
+            * 对于与界面dom无关的js代码，可以直接使用异步脚本（async）,延迟脚本（defer）
+        </p>
+
+        <p>
+            #### 缓存的利用
+            * 在构建时、合理拆分css、js、chunk（静态的、经常维护修改的）以内容hash命名
+            配合服务部署过程中配置合理的强缓存、协商缓存
+            * 一般静态资源中，index.html必须使用协商缓存，以保证每次都获取到最新的文档，其
+            他资源则全部使用强缓存、完全依赖html中资源文件名称或者路径修改来实现资源更新
+        </p>
+
+        <p>
+            #### 用户体验层面
+            * 使用骨架屏、配置加载loading效果、过渡动画、加载超时的提示与回退交互
+        </p>
+        <p>
+            #### CSS资源、font资源
+            * css资源全局样式、页面级公共样式、组件级公共样式（通过合理添加类名复用样式声明、尽量减少css代码数量）
+            * 尽量在组件增加了样式作用域，利用文件hash唯一性避免命名冲突，避免使用层级过深的结构化css（会影响选择器性能）。
+            * 抽离html中的行内样式、减小js代码体积、提高js代码执行速度（css加载时不阻塞dom树解析）。
+            * 利用预编译工具定义颜色变量复用（变量部分需要写兼容代码）。
+            * 减少使用伪类选择器（依赖dom结构、不方便维护）
+            * 公共样式库、ui库的css代码有条件可以考虑使用cdn服务（利用网络以及缓存来实现加速）
+        </p>
+
+        <p>
+            #### 图片资源
+            * 雪碧图、base64编码（作用是减少http请求）
+            * 当存在大量图片资源加载时、先加载一倍图、用户点击放大加载二倍图
+            * 长页面中纵向存在大量图片时、通过指令的形式，判断元素距离视口距离、动态创建img插入dome树中
+            * 图片的oss文件存储服务、（利用多节点服务器实现网络层的加速）
+        </p>
+
+        <p>
+            #### js资源
+            * webpake之类的构建工具，压缩、混淆、构建层面的分块、es模块的shaking-tree, 按需
+            加载、库文件使用cdn公共服务（实现网络层）
+            * 路由层面的异步路由、动态组件、异步加载技术（动态注入script标签加载js）
+            * 利用link标签的preload、prefetch技术预加载技术,（浏览器线程空闲时预加载资源）
+            * 对于与界面dom无关的js代码，可以直接使用异步脚本（async）,延迟脚本（defer）
+        </p>
+
+        <p>
+            #### 缓存的利用
+            * 在构建时、合理拆分css、js、chunk（静态的、经常维护修改的）以内容hash命名
+            配合服务部署过程中配置合理的强缓存、协商缓存
+            * 一般静态资源中，index.html必须使用协商缓存，以保证每次都获取到最新的文档，其
+            他资源则全部使用强缓存、完全依赖html中资源文件名称或者路径修改来实现资源更新
+        </p>
+
+        <p>
+            #### 用户体验层面
+            * 使用骨架屏、配置加载loading效果、过渡动画、加载超时的提示与回退交互
+        </p>
+        <p>
+            #### CSS资源、font资源
+            * css资源全局样式、页面级公共样式、组件级公共样式（通过合理添加类名复用样式声明、尽量减少css代码数量）
+            * 尽量在组件增加了样式作用域，利用文件hash唯一性避免命名冲突，避免使用层级过深的结构化css（会影响选择器性能）。
+            * 抽离html中的行内样式、减小js代码体积、提高js代码执行速度（css加载时不阻塞dom树解析）。
+            * 利用预编译工具定义颜色变量复用（变量部分需要写兼容代码）。
+            * 减少使用伪类选择器（依赖dom结构、不方便维护）
+            * 公共样式库、ui库的css代码有条件可以考虑使用cdn服务（利用网络以及缓存来实现加速）
+        </p>
+
+        <p>
+            #### 图片资源
+            * 雪碧图、base64编码（作用是减少http请求）
+            * 当存在大量图片资源加载时、先加载一倍图、用户点击放大加载二倍图
+            * 长页面中纵向存在大量图片时、通过指令的形式，判断元素距离视口距离、动态创建img插入dome树中
+            * 图片的oss文件存储服务、（利用多节点服务器实现网络层的加速）
+        </p>
+
+        <p>
+            #### js资源
+            * webpake之类的构建工具，压缩、混淆、构建层面的分块、es模块的shaking-tree, 按需
+            加载、库文件使用cdn公共服务（实现网络层）
+            * 路由层面的异步路由、动态组件、异步加载技术（动态注入script标签加载js）
+            * 利用link标签的preload、prefetch技术预加载技术,（浏览器线程空闲时预加载资源）
+            * 对于与界面dom无关的js代码，可以直接使用异步脚本（async）,延迟脚本（defer）
+        </p>
+
+        <p>
+            #### 缓存的利用
+            * 在构建时、合理拆分css、js、chunk（静态的、经常维护修改的）以内容hash命名
+            配合服务部署过程中配置合理的强缓存、协商缓存
+            * 一般静态资源中，index.html必须使用协商缓存，以保证每次都获取到最新的文档，其
+            他资源则全部使用强缓存、完全依赖html中资源文件名称或者路径修改来实现资源更新
+        </p>
+
+        <p>
+            #### 用户体验层面
+            * 使用骨架屏、配置加载loading效果、过渡动画、加载超时的提示与回退交互
+        </p>
+    </div>
+    <script>
+           function __canvasWM({
+             container = document.body,
+             width = '300px',
+             height = '200px',
+             textAlign = 'center',
+             textBaseline = 'middle',
+             font = "24px",
+             fillStyle = 'rgba(184, 184, 184, 0.6)',
+             content = '4789',
+             content2 = '贵州公安局',
+             rotate = '45',
+             zIndex = 10000,
+             opacity = 0.3
+           } = {}) {
+             const args = arguments[0];
+               const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${width}">
+               <text x="50%" y="50%" dy="12px"
+                 text-anchor="middle"
+                 stroke="#000000"
+                 stroke-width="1"
+                 stroke-opacity="${opacity}"
+                 fill="none"
+                 transform="rotate(-45, 120 120)"
+                 style="font-size: ${font};">
+                 ${content}
+               </text>
+               <text x="50%" y="58%" dy="12px"
+                 text-anchor="middle"
+                 stroke="#000000"
+                 stroke-width="1"
+                 stroke-opacity="${opacity}"
+                 fill="none"
+                 transform="rotate(-45, 120 120)"
+                 style="font-size: ${font};">
+                 ${content2}
+               </text>
+             </svg>`;
+             const base64Url = `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(svgStr)))}`;
+             const __wm = document.querySelector('.__wm');
+
+             const watermarkDiv = __wm || document.createElement("div");
+             
+             const styleStr = `
+               position:fixed;
+               top:0;
+               left:0;
+               bottom:0;
+               right:0;
+               width:100%;
+               height:100%;
+               z-index:${zIndex};
+               pointer-events:none;
+               background-repeat:repeat;
+               background-image:url('${base64Url}')`;
+     
+             watermarkDiv.setAttribute('style', styleStr);
+             watermarkDiv.classList.add('__wm');
+     
+             if (!__wm) {
+               container.style.position = 'relative';
+               container.insertBefore(watermarkDiv, container.firstChild);
+             }
+           if (typeof module != 'undefined' && module.exports) {  //CMD
+             module.exports = __canvasWM;
+           } else if (typeof define == 'function' && define.amd) { // AMD
+             define(function () {
+               return __canvasWM;
+             });
+           } else {
+             window.__canvasWM = __canvasWM;
+           }
+         };
+         // 调用
+         __canvasWM();
+     </script>
+</body>
+
+</html>

@@ -36,8 +36,8 @@
 	<script src="./map.js"></script>
 	<script src="./mapGeo.min.js"></script>
 	<script>
-		var mapName = 'shanxi';
-		echarts.registerMap(mapName, MapGeo['shanxi']);
+		var mapName = 'henan';
+		echarts.registerMap(mapName, MapGeo[mapName]);
 	</script>
 	<script>
 		// 基于准备好的dom，初始化echarts实例
@@ -60,7 +60,7 @@
 				type: 'map',
 				mapType: mapName, // 自定义扩展图表类型
 				zoom: 1.2,
-				aspectScale: 1.1,
+				aspectScale: 1.2,
 				layoutCenter: ['50%', '50%'],
 				layoutSize: 600,
 				label: {

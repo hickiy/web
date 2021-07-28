@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div><img alt="Vue logo" src="./assets/logo.png">
+            <hello-world msg="Hello Vue 2.6.11 + CDN" />
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="module">
+        import utils from './index.js'
+        Vue.mixin(utils)
+        const Test = {
+            name: 'Test',
+            render(h) {
+                return h()
+            },
+        }
+        const HelloWorld = {
+            name: 'HelloWorld',
+            template: '<div><div>{{b}}</div><div>{{c}}</div><button @click="toggle">切换</button><Test></Test></div>',
+            components: { Test },
+            data() {
+                return {
+                    b: 'lili',
+                    c: 'lala'
+                };
+            },
+
+            methods: {
+                toggle() {
+                    debugger
+                },
+            }
+        }
+        const app = window.$vm = new Vue({
+            name: 'App',
+            // template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld msg="Hello Vue 2.6.11 + CDN" /></div> ',
+            components: {
+                HelloWorld,
+            },
+        }).$mount('#app');
+    </script>
+</body>
+
+</html>

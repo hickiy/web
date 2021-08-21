@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <link rel="icon" href="./assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+</head>
+
+<body>
+  <div id="app">
+    <!-- <div><img alt="Vue logo" src="./assets/logo.png">
+      <hello-world msg="Hello Vue 2.6.11 + CDN" />
+    </div> -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script type="module">
+    const a = {
+      name: 'HelloWorld',
+      template: '<div>{{msg}}  <em>test router</em></div>',
+      props: ['msg'],
+      mounted() {
+        console.log('monuted a');
+      }
+    }
+    const b = {
+      name: 'HelloWorld',
+      template: '<div>{{msg}}  <em>test router</em></div>',
+      props: ['msg'],
+      mounted() {
+        console.log('monuted b');
+      }
+    }
+    const router = new VueRouter({
+      routes: [
+        { path: '/', component: a, props: route => ({ msg: route.query.msg || 'default' }) },
+        { path: '/b/:msg', component: b, props: true },
+      ]
+
+    })
+    const app = new Vue({
+      name: 'App',
+      router,
+      template:
+        `<div>
+            <router-link to="/?msg=query">query</router-link>
+            <router-link to="/b/param1">param1</router-link>
+            <router-link to="/b/param2">param2</router-link>
+            <router-view/>
+        </div> `,
+    }).$mount('#app');
+  </script>
+</body>
+
+</html>

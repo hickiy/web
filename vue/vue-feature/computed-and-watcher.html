@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <link rel="icon" href="./assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div><img alt="Vue logo" src="./assets/logo.png">
+      <hello-world msg="Hello Vue 2.6.11 + CDN" />
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="module">
+    const HelloWorld = {
+      name: 'HelloWorld',
+      template: '<div><button @click="increment">切换</button></div>',
+      data() {
+        return {
+          a: 0
+        };
+      },
+      watch: {
+        a(n, o) {
+          console.log('watcher:' + this.b);
+        }
+      },
+      computed: {
+        b() {
+          return this.a  + 1;
+        },
+        c: {
+          get(){
+            return this.a + 1;
+          },
+          set(v) {
+            this.c  = v;
+          }
+        }
+      },
+      methods: {
+        increment() {
+          console.log('methods:' + this.a)
+          this.a+=1;
+        }
+      }
+    }
+    const app = window.$vm = new Vue({
+      name: 'App',
+      components: {
+        HelloWorld,
+      },
+    }).$mount('#app');
+  </script>
+</body>
+
+</html>

@@ -13,7 +13,7 @@
     <div id="app">
         <div><img alt="Vue logo" src="./assets/logo.png">
             <hello-world msg="Hello Vue 2.6.11 + CDN" />
-            <async-component-aguments></async-component-aguments>
+            <async-component />
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,29 +21,25 @@
         const HelloWorld = {
             name: 'HelloWorld',
             template: '<div>测试异步模块加载函数参数</div>',
-            data() {
-                return {
-                    a: 0
-                };
-            },
-            methods: {
-                increment() {
-                    this.a += 1;
-                },
-                set() {
-                    this.b = 'setter';
-                }
-            },
         }
+
+        // 注册异步组件
+        Vue.component('async-component', function (resolve, reject) {
+            setTimeout(function () {
+                // 向 `resolve` 回调传递组件定义
+                resolve({
+                    template: '<div>I am async component </div>'
+                })
+            }, 1000)
+        })
+
         const app = window.$vm = new Vue({
             name: 'App',
             components: {
                 HelloWorld,
-                AsyncComponentAguments: (a) => {
-                    a(HelloWorld);
-                },
-            },
+            }
         }).$mount('#app');
+
     </script>
 </body>
 

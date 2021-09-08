@@ -8,7 +8,7 @@ function fib1(n) {
     throw new TypeError('fibonacci: argument "n" expect a "number" gt(>) zero');
   }
   if (n === 1 || n === 2) return 1;
-  return fib1(n - 2) + fib1(n - 1);
+  return fib1(n - 1) + fib1(n - 2);
 }
 
 // second method
@@ -29,26 +29,69 @@ function fib2(n) {
 }
 
 // third method
-const fib3 = (() => {
+function fib3(n) {
   const fibCache = [1, 1];
-  return (n) => {
-    if (typeof n !== 'number' || n < 1) {
-      throw new TypeError('fibonacci: argument "n" expect a "number" gt(>) zero');
+  if (typeof n !== 'number' || n < 1) {
+    throw new TypeError('fibonacci: argument "n" expect a "number" gt(>) zero');
+  }
+  for (let i = fibCache.length; i < n; i += 1) {
+    const first = fibCache[i - 2];
+    const second = fibCache[i - 1];
+    fibCache.push(first + second);
+  }
+  return fibCache[n - 1];
+};
+
+// fourth method
+function fib4(n) {
+  const fibonacci = {
+    [Symbol.iterator]() {
+      let pre = 0, cur = 1;
+      return {
+        next() {
+          [pre, cur] = [cur, pre + cur];
+          return { done: false, value: cur }
+        }
+      }
     }
-    for (let i = fibCache.length; i < n; i += 1) {
-      const first = fibCache[i - 2];
-      const second = fibCache[i - 1];
-      fibCache.push(first + second);
+  }
+  for (var v of fibonacci) {
+    n--
+    if (n == 1) {
+      return v;
     }
-    return fibCache[n - 1];
-  };
-})();
+  }
+}
+
+// fifth method
+function fib5(n) {
+  var fibonacci = {
+    [Symbol.iterator]: function* () {
+      var pre = 0, cur = 1;
+      for (; ;) {
+        var temp = pre;
+        pre = cur;
+        cur += temp;
+        yield cur;
+      }
+    }
+  }
+
+  for (var v of fibonacci) {
+    n--
+    if (n == 1)
+      return v;
+  }
+}
+
+
+
 
 // test used time
 function tester(method, n) {
-  const startTime = new Date().getTime();
-  const fib = method(n);
-  global.console.log(new Date().getTime() - startTime, fib);
+  console.time(method.name);
+  console.log(`第${n}位斐波那契数是：${method(n)}`);
+  console.timeEnd(method.name, '\n');
 }
 
 tester(fib1, 40);
@@ -56,3 +99,7 @@ tester(fib1, 40);
 tester(fib2, 40);
 
 tester(fib3, 40);
+
+tester(fib4, 40);
+
+tester(fib5, 40);

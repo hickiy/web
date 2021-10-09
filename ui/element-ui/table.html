@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>el-table</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入组件库 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -28,9 +28,10 @@
         }
 
         .form {
-            height: 200px;
-            background-color: yellowgreen;
-
+            height: 500px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
 
         .table {
@@ -41,11 +42,14 @@
 
 <body>
     <div id="app">
-        <div class="form"></div>
+        <div class="form">
+            <el-button @click="addData">添加数据</el-button>
+            <el-button @click="clearData">清空数据</el-button>
+        </div>
         <div class="table">
             <el-table :border="true" height="100%" :data="data">
-                <el-table-column label="名字" prop="name"></el-table-column>
-                <el-table-column label="状态" prop="status"></el-table-column>
+                <el-table-column align="center" label="名字" prop="name"></el-table-column>
+                <el-table-column align="center" label="状态" prop="status"></el-table-column>
             </el-table>
         </div>
         <el-pagination :page-size="20" :pager-count="11" layout="prev, pager, next" :total="1000">
@@ -56,8 +60,16 @@
     var app = new Vue({
         el: '#app',
         data: {
-            data: [{ name: '王小宇', status: 'married' }, { name: '王昱元', status: 'divorced' }],
+            data: [],
             message: 'Hello Vue!'
+        },
+        methods: {
+            addData() {
+                this.data = new Array(10).fill({ name: '王昱元', status: 'married' });
+            },
+            clearData() {
+                this.data = [];
+            }
         }
     }).$mount()
 </script>

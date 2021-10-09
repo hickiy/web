@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>el-tooltip</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入组件库 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -16,7 +16,8 @@
             padding: 0;
             box-sizing: border-box;
         }
-        #app{
+
+        #app {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -27,17 +28,24 @@
 
 <body>
     <div id="app">
-        <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top">
-            <el-button>上左</el-button>
-        </el-tooltip>
+        <el-table :data="data" border>
+            <el-table-column align="center" label="姓名" prop="name"></el-table-column>
+            <el-table-column label="状态" width="100px" prop="status">
+                <template #default="{row}">
+                    <el-tooltip effect="dark" :content="row.status">
+                        <div style="width:100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{row.status}}</div>
+                    </el-tooltip>
+                </template>
+            </el-table-column>
+            <el-table-column align="center" label="年龄" prop="age"></el-table-column>
+        </el-table>
     </div>
 </body>
 <script>
     var app = new Vue({
         el: '#app',
         data: {
-            data: [{ name: '王小宇', status: 'married' }, { name: '王昱元', status: 'divorced' }],
-            message: 'Hello Vue!'
+            data: new Array(5).fill({ name: '王昱元', status: 'divorced,divorced,divorced,divorced,divorced,divorced,divorced,divorced,divorced,divorced,divorced,', age:"18" }),
         }
     }).$mount()
 </script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div><img alt="Vue logo" src="./assets/logo.png">
+            <hello-world v-model="obj" msg="Hello Vue 2.6.11 + CDN" />
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="module">
+        import modStr from './index.js'
+        const HelloWorld = {
+            name: 'HelloWorld',
+            template: '<div><h1>{{ msg }}</h1></div>',
+            props: {
+                msg: {
+                    type: String,
+                    default: '',
+                },
+                value: {
+                    type: Object,
+                }
+            },
+            data() {
+                return {
+                };
+            },
+            mounted() {
+                console.log(this.value);
+            }
+        }
+        const app = new Vue({
+            name: 'App',
+            components: {
+                HelloWorld
+            },
+            data() {
+                return {
+                    obj: { show: true },
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+
+</html>

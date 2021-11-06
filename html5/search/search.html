@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+    <style>
+        #content {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="content"></p>
+</body>
+<script type="text/javascript">
+    var keyword = '我';
+    var source = '我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，我的家乡，'
+    var content = document.getElementById('content');
+    var node = source.replace(new RegExp(keyword, 'g'), '<span style="color: red">' + keyword + '</span>');
+    content.innerHTML = node;
+</script>
+
+</html>

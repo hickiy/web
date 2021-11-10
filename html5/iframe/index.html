@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe</title>
+    <!-- <link rel="preload" href="http://10.0.9.170:30879" as="html"> -->
+    <style>
+        .wrap {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn-wrap {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btn-wrap">
+        <button id="btn">添加一个iframe</button>
+    </div>
+    <div id="wrap">
+        <iframe src="http://10.0.9.170:30879" frameborder="1" width="400px" height="400px"></iframe>
+    </div>
+    <script type="text/javascript">
+        var btn = document.getElementById('btn');
+        var wrap = document.getElementById('wrap');
+        btn.addEventListener('click', function() {
+            var iframe = document.createElement('iframe');
+            iframe.setAttribute('frameborder', 1);
+            iframe.setAttribute('width', '400px');
+            iframe.setAttribute('height', 400);
+            iframe.setAttribute('src', 'http://10.0.9.170:30879');
+            wrap.append(iframe);
+        })
+    </script>
+</body>
+</html>

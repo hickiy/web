@@ -1,15 +1,10 @@
 {
   // 插件setting sync 同步到git的配置id
   "sync.gist": "3e17482d8f6acc64857fa267f46a5def",
-  // vscode内启动终端的启动路径
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
   // 文件类型说明
   "files.associations": {
     "*.cjson": "jsonc",
-    "*.wxss": "css",
-    "*.wxs": "javascript",
     "*.json": "jsonc",
-    "*.wxml": "html"
   },
   // 工作区状态栏默认显示
   "workbench.statusBar.visible": true,
@@ -17,53 +12,20 @@
   "workbench.activityBar.visible": true,
   // 保存代码时自动格式化
   "editor.formatOnSave": false,
-  // 自动格式化模式 - 修改过的文件
-  "editor.formatOnSaveMode": "modifications",
-  // 编辑器保存文件时启用eslint消除格式错误
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
   // 编辑器字体大小
   "editor.fontSize": 14,
   // vscode 窗口放大等级
   "window.zoomLevel": 0,
   // 自动保存
   "files.autoSave": "off",
-  // eslint 插件相关配置
-  "eslint.format.enable": true,
-  "eslint.options": {
-    "extensions": [
-      ".js",
-      ".jsx"
-    ]
-  },
+  // 配置eslint验证的文件类型
   "eslint.validate": [
     "javascript",
-    "javascriptreact",
     "typescript",
-    "typescriptreact",
     "vue"
   ],
-  "eslint.trace.server": "messages",
-  // vetur 插件相关配置
-  "vetur.format.defaultFormatterOptions": {
-    "prettier": {
-      "printWidth": 200,
-      "singleQuote": true,
-      "tabWidth": 4,
-      "useTabs": false,
-      "semi": true,
-      "trailingComma": "none",
-      "wrapAttributes": false,
-      "sortAttributes": false
-    }
-  },
-  "vetur.validation.template": true,
-  "vetur.validation.script": false,
-  "vetur.validation.interpolation": true,
-  "vetur.format.defaultFormatter.js": "none",
-  "vetur.format.defaultFormatter.ts": "none",
-  "vetur.format.defaultFormatter.html": "prettier",
+  // 开启eslint格式化
+  "eslint.format.enable": true,
   // 不同文件配置对应的格式化插件
   "[vue]": {
     "editor.defaultFormatter": "octref.vetur"
@@ -76,5 +38,9 @@
   },
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  },
+  "json.maxItemsComputed": 10000,
+  "files.eol": "\n",
+  "terminal.integrated.cursorStyle": "line",
+  "workbench.startupEditor": "none"
 }

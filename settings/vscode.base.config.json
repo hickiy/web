@@ -4,7 +4,7 @@
   // 文件类型说明
   "files.associations": {
     "*.cjson": "jsonc",
-    "*.json": "jsonc",
+    "*.json": "jsonc"
   },
   // 工作区状态栏默认显示
   "workbench.statusBar.visible": true,
@@ -13,10 +13,9 @@
   // 保存代码时自动格式化
   "editor.formatOnSave": false,
   // 编辑器字体大小
-  "editor.fontSize": 14,
-  // vscode 窗口放大等级
-  "window.zoomLevel": 0,
+  "editor.fontSize": 16,
   // 自动保存
+  "window.zoomLevel": 0,
   "files.autoSave": "off",
   // 配置eslint验证的文件类型
   "eslint.validate": [
@@ -39,8 +38,13 @@
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "json.maxItemsComputed": 10000,
+  "json.maxItemsComputed": 100000,
   "files.eol": "\n",
+  "workbench.startupEditor": "none",
   "terminal.integrated.cursorStyle": "line",
-  "workbench.startupEditor": "none"
+  "terminal.integrated.cursorWidth": 2,
+  "terminal.integrated.enablePersistentSessions": false,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "terminal.integrated.scrollback": 10000
 }

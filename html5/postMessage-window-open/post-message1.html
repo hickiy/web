@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post-messageA</title>
+</head>
+
+<body>
+    <button id="open">开启新窗口</button>
+    <button id="send-msg">发送消息</button>
+</body>
+<script type="text/javascript">
+    let newWindow = null
+    const openBtn = document.getElementById('open');
+    openBtn.addEventListener('click', function () {
+        newWindow = window.open('./post-message2.html');
+    })
+    const sendBte = document.getElementById('send-msg');
+    sendBte.addEventListener('click', function () {
+        newWindow.postMessage('来自A的消息');
+    })
+    window.addEventListener('message', function (e) {
+        window.alert(e.data);
+    })
+</script>
+
+</html>

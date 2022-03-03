@@ -12,10 +12,6 @@
   "workbench.activityBar.visible": true,
   // 保存代码时自动格式化
   "editor.formatOnSave": false,
-  // 编辑器字体大小
-  "editor.fontSize": 16,
-  // 自动保存
-  "window.zoomLevel": 0,
   "files.autoSave": "off",
   // 配置eslint验证的文件类型
   "eslint.validate": [
@@ -46,5 +42,12 @@
   "terminal.integrated.enablePersistentSessions": false,
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
-  "terminal.integrated.scrollback": 10000
+  "terminal.integrated.scrollback": 10000,
+  "editor.tabSize": 2,
+  "window.zoomLevel": 0.4,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "vetur.validation.script": false,
+  "editor.hover.enabled": false
 }

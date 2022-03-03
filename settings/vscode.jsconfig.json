@@ -1,18 +1,17 @@
 // 此文件时vsCode官方配置，可查阅vsCode官方文档进行配置
-// @see{@link https://code.visualstudio.com/docs/languages/tsconfig}
+// @see{@link https://code.visualstudio.com/docs/languages/jsconfig}
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "allowJs": true,
-      "outDir": "",
-      "paths": {
-        "@/*": [
-          "src/*"
-        ]
-      }
-    },
-    "include": [
-      "src/*"
-    ]
-  }
-  
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "outDir": "",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/*"
+  ],
+}

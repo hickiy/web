@@ -1,8 +1,3 @@
-/* eslint-disable no-compare-neg-zero */
-/* eslint-disable use-isnan */
-/* eslint-disable no-self-compare */
-/* eslint-disable eqeqeq */
-
 /**
  * 基础类型运算与转换
  */
@@ -14,6 +9,7 @@
 // console.log(undefined == undefined); // true
 // console.log(undefined == 0); // false
 // console.log(undefined == false); // false
+// console.log(undefined == '') // false
 
 
 /**
@@ -23,7 +19,7 @@
 // console.log(null == null); // true
 // console.log(null == 0); // false
 // console.log(null == false); // false
-
+// console.log(null == '') // false
 
 /**
  * infinity 与自身相等

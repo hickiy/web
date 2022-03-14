@@ -6,14 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>js-async-defer</title>
-    <link rel="prefetch" href="./prefetch.js" as="script">
-    <script type="text/javascript" src="./default-passive-event/index.js"></script>
-    <link rel="preload" href="./preload.js" as="script">
-    <script src="./dependence.js"></script>
 </head>
 
 <body>
-
+    <script defer src="./defer.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
             console.log('DOMContentLoaded');
@@ -21,12 +17,9 @@
         window.addEventListener('load', (event) => {
             console.log('onload');
         });
-        console.log('sync js')
+        document.write('<script src="./dependence.js"' + "><" + '/script>');
     </script>
     <script async src="./async.js"></script>
-    <script defer src="./defer.js"></script>
-    <script src="./preload.js"></script>
-    <script src="./prefetch.js"></script>
 </body>
 
 </html>

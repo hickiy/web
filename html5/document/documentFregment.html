@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocumentFregment</title>
+</head>
+
+<body>
+  <script>
+    var html = "<div><span>123</span></div>";
+     var el = document.createElement("div"); 
+     el.innerHTML = html; 
+     var freg = document.createDocumentFragment(); 
+     freg.appendChild(el.firstChild); console.log(el, freg);
+  </script>
+</body>
+
+</html>

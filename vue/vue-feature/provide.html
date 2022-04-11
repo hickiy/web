@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <link rel="icon" href="./assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const HelloWorld = {
+      name: 'HelloWorld',
+      inject: ['obj'],
+      template: '<div><h1>{{ msg }}</h1><button @click="count++">count is: {{ count }}</button><p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p></div>',
+      props: {
+        msg: {
+          type: String,
+          default: '',
+        },
+      },
+      data() {
+        return {
+          count: 0,
+        };
+      },
+    }
+    const app = new Vue({
+      name: 'App',
+      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld msg="Hello Vue 2.6.11 + CDN" /></div> ',
+      components: {
+        HelloWorld
+      },
+      data() {
+        return {
+          obj: { name: 'init' },
+        }
+      },
+      provide() {
+        return {
+          obj: this.obj,
+        }
+      },
+      mounted() {
+        window.setTimeout(() => {
+          this.obj = { name: 'new' }
+        }, 2000);
+      }
+    }).$mount('#app');
+  </script>
+</body>
+
+</html>

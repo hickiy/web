@@ -28,6 +28,11 @@
           count: 0,
         };
       },
+      computed: {
+        localObj() {
+          return this.obj.name + '123';
+        }
+      }
     }
     const app = new Vue({
       name: 'App',
@@ -47,7 +52,7 @@
       },
       mounted() {
         window.setTimeout(() => {
-          this.obj = { name: 'new' }
+          this.obj = this.obj.name = 'new';
         }, 2000);
       }
     }).$mount('#app');

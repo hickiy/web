@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>table</title>
+  <style>
+    .table {
+      width: 100%;
+      display: flex;
+    }
+    .table-cell {
+      border: 1px solid black;
+      vertical-align: middle;
+      min-width: 300px;
+      width: 300px;
+      overflow-wrap: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .cell-2, .cell-4{
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="table" style="margin-bottom: 20px;">
+    <div class="table-cell cell-1">td-1</div>
+    <div class="table-cell cell-2">1111111111111111111111111111111111111111111111111111111111</div>
+    <div class="table-cell cell-3">td-3</div>
+    <div class="table-cell cell-4">测试溢出测试溢出测试溢出测试溢出测试溢出测试溢出测试溢出测试溢</div>
+  </div>
+</body>
+
+</html>

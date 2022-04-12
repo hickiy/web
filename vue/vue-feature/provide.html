@@ -15,7 +15,7 @@
   <script>
     const HelloWorld = {
       name: 'HelloWorld',
-      inject: ['obj'],
+      inject: ['obj', 'cObj'],
       template: '<div><h1>{{ msg }}</h1><button @click="count++">count is: {{ count }}</button><p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p></div>',
       props: {
         msg: {
@@ -28,9 +28,22 @@
           count: 0,
         };
       },
+
+      mounted() {
+        this.result()
+        window.setTimeout(() => {
+          this.result()
+        }, 4000)
+      },
       computed: {
         localObj() {
           return this.obj.name + '123';
+        }
+      },
+      methods: {
+        result() {
+          console.log(this.cObj, this.$parent.cObj)
+          console.log(this.cObj == this.$parent.cObj)
         }
       }
     }
@@ -42,19 +55,29 @@
       },
       data() {
         return {
-          obj: { name: 'init' },
+          obj: {
+            name: 'inint'
+          },
+          str: '',
         }
       },
       provide() {
         return {
           obj: this.obj,
+          cObj: this.cObj,
         }
       },
       mounted() {
         window.setTimeout(() => {
-          this.obj = this.obj.name = 'new';
+          this.obj.name = 'new';
+          this.str = 'str'
         }, 2000);
-      }
+      },
+      computed: {
+        cObj() {
+          return this.str ? { value: this.str } : {};
+        }
+      },
     }).$mount('#app');
   </script>
 </body>

@@ -16,40 +16,76 @@
     </div> -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/vue-router@3.0.0/dist/vue-router.js"></script>
   <script type="module">
     const a = {
-      name: 'HelloWorld',
-      template: '<div>{{msg}}  <em>test router</em></div>',
-      props: ['msg'],
+      template: '<div>{{msg}}</div>',
+      data() {
+        return {
+          msg: 'a component',
+        }
+      },
       mounted() {
         console.log('monuted a');
       }
     }
     const b = {
-      name: 'HelloWorld',
-      template: '<div>{{msg}}  <em>test router</em></div>',
-      props: ['msg'],
+      template: '<div>{{msg}}</div>',
+      data() {
+        return {
+          msg: 'b component',
+        }
+      },
       mounted() {
         console.log('monuted b');
       }
     }
+    const c = {
+      template: '<div>{{msg}}</div>',
+      data() {
+        return {
+          msg: 'c component',
+        }
+      },
+      mounted() {
+        console.log('monuted c');
+      }
+    }
     const router = new VueRouter({
       routes: [
-        { path: '/', component: a, props: route => ({ msg: route.query.msg || 'default' }) },
-        { path: '/b/:msg', component: b, props: true },
+        {
+          path: '/',
+          redirect: '/a'
+        },
+        {
+          path: '/a',
+          component: a,
+        },
+        {
+          path: '/b',
+          component: b,
+        },
+        {
+          path: '/c',
+          component: c,
+        },
       ]
 
+    })
+    router.beforeEach((to, from, next) => {
+      console.log(to);
+      if (to.query.redirect) {
+        next({ path: to.path, query: { redirect: false } })
+      }
+      next()
     })
     const app = new Vue({
       name: 'App',
       router,
       template:
         `<div>
-            <router-link to="/?msg=query">query</router-link>
-            <router-link to="/b/param1">param1</router-link>
-            <router-link to="/b/param2">param2</router-link>
-            <router-view/>
+            <router-link :to="{ path: '/b', query: { redirect: true } }">to b</router-link>
+            <router-view />
         </div> `,
     }).$mount('#app');
   </script>

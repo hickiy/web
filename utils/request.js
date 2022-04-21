@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 import pathToRegexp from 'path-to-regexp';

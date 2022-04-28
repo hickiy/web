@@ -66,7 +66,7 @@ class Table {
 }
 
 const table = new Table(100);
-table.insert('a', { birthday: '19890926' });
-table.insert('b', { birthday: '19890926' });
-table.insert('c', { birthday: '19890926' });
+table.insert('name', { birthday: '19890926' });
+table.insert('age', { birthday: '19890926' });
+table.insert('gender', { birthday: '19890926' });
 console.log(table);

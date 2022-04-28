@@ -1,6 +1,6 @@
 // 数字每隔三位加一个逗号
 const regexp1 = /(\d+?)(?=(?:\d{3})+$)/g;
-console.log('111111111'.replace(regexp1, '$1,'));
+console.log('11111111111'.replace(regexp1, '$1,'));
 // 整数或者保留两位小数
 const regexp2 = /^(\d*(\.\d{1,2})?)\d*$/;
 console.log('111.111'.replace(regexp2, '$1'))

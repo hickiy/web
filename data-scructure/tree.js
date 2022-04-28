@@ -26,20 +26,15 @@ class Tree {
     return this.right.contains(value);
   }
 
-  depthTraverse(order, cb) {
-    if (order === 'pre') {
-      cb(this.value);
-    } else if (this.left) {
-      this.left.depthTraverse(order, cb);
-    } else if (order === 'in') {
-      cb(this.value);
-    } else if (this.right) {
-      this.right.depthTraverse(order, cb);
-    } else if (order === 'post') {
-      cb(this.value);
+  depthTraverse(cb) {
+    if (this.left) {
+      this.left.depthTraverse(cb);
     }
+    if (this.right) {
+      this.right.depthTraverse(cb);
+    }
+    cb(this.value);
   }
-
   breadthTraverse(cb) {
     const quequ = [this];
     while (quequ.length) {
@@ -71,4 +66,4 @@ tree.insert(6);
 tree.insert(14);
 tree.insert(16);
 global.console.log(tree);
-global.console.log(tree.gitMaxValue());
+tree.depthTraverse(console.log);

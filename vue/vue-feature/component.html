@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <link rel="icon" href="./assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+  <div id="app">
+    <el-button type="primary" @click="handler">切换组件</el-button>
+    <component :is="active">
+      <div>999999999</div>
+    </component>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    const SubComponent = {
+      name: 'SubComponent',
+      template: '<div>123</div>'
+    }
+    const app = new Vue({
+      name: 'App',
+      components: { SubComponent },
+      data() {
+        return {
+          active: 'SubComponent'
+        }
+      },
+      methods: {
+        handler() {
+          this.active = this.active ? '' : 'SubComponent';
+        }
+      }
+    }).$mount('#app');
+  </script>
+</body>
+
+</html>

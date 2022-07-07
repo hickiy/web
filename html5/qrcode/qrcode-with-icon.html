@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    .wrap {
+      text-align: center;
+    }
+
+    #qrcode {
+      width: 200px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div id="qrcode"></div>
+  </div>
+  <script>
+    function imgQR(qrCanvas, centerImage, factor) {
+      var h = qrCanvas.height;
+      //Center size
+      var cs = h * factor;
+      //Center offset
+      var co = (h - cs) / 2;
+      var ctx = qrCanvas.getContext("2d");
+      ctx.drawImage(centerImage, 0, 0, centerImage.width, centerImage.height, co, co, cs, cs);
+    }
+    const icon = new Image();
+    icon.onload = function () {
+      var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: "https://docs.apipost.cn/preview/c1965f884871c5e8/022649a12cdf1ad7",
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+      imgQR(qrcode._oDrawing._elCanvas, this, 0.2)
+    }
+    icon.src = './success.png';
+
+  </script>
+</body>
+
+</html>

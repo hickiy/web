@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>practice the transition group feature of vue </title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <style>
+    .flip-list-move {
+      transition: transform 1s;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <transition-group name="flip-list">
+      <div v-show="step == 1" key="step-one">1234</div>
+      <div v-show="step == 2" key="sep-two">4567</div>
+    </transition-group>
+    <button @click="tiggleState">trigger</button>
+  </div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        step: 1,
+      }
+    },
+    methods: {
+      tiggleState(ev) {
+        this.step == 1 ? this.step = 2 : this.step = 1;
+      }
+    }
+  })
+</script>
+
+</html>

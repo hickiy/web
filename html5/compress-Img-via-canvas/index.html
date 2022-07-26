@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .wrap {
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div>
+      <div>
+        <canvas id="canvas" style="width: 600px; height: 300px;"></canvas>
+      </div>
+      <input id="select-img" type="file" accept=".png, .jpg, .jpeg">
+      <span id="canvas-size">文件大小：</span>
+    </div>
+    <div>
+      <div>
+        <image id="img" src="" style="width: 600px; height: 300px;"></image>
+      </div>
+      <button id="compress">压缩</button>
+      <span id="img-size">文件大小：</span>
+    </div>
+  </div>
+</body>
+<script>
+  var input = document.getElementById('select-img');
+  var sourceSize = document.getElementById('canvas-size');
+  var canvas = document.getElementById('canvas');
+  var btn = document.getElementById('compress');
+  var img = document.getElementById('img');
+  var resultSize = document.getElementById('img-size');
+  input.addEventListener('change', function (ev) {
+    var file = ev.target.files[0];
+    console.log(file);
+    var size = (file.size / 1024 / 1024).toFixed(2) + 'MB'
+    sourceSize.innerText += size;
+    var ctx = canvas.getContext('2d');
+    var image = new Image();
+    image.onload = function () {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      ctx.drawImage(this, 0, 0, image.width, image.height);
+    }
+    image.src = URL.createObjectURL(file);
+  })
+  btn.addEventListener('click', function () {
+    canvas.toBlob(function (blob) {
+      var size = (blob.size / 1024 / 1024).toFixed(2) + 'MB';
+      resultSize.innerHTML += size;
+      console.log(blob);
+      img.src = URL.createObjectURL(blob);
+    }, 'image/jpeg', 0.2);
+  })
+</script>
+
+</html>

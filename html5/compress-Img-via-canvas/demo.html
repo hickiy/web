@@ -45,7 +45,7 @@
     image = file;
   })
   btn.addEventListener('click', function () {
-    compressImage(image, 0.2).then(function (blob) {
+    compressImage(image, 0.2, 1).then(function (blob) {
       console.log(blob);
       var size = (blob.size / 1024 / 1024).toFixed(2) + 'MB';
       resultSize.innerHTML += size;

@@ -34,7 +34,7 @@
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.0/echarts.min.js"></script>
 	<script>
-		$.get('/echarts/geo/effect.svg', function (svg) {
+		$.get('/echarts/geo-effect/effect.svg', function (svg) {
 			var mapName = 'path-chart';
 			echarts.registerMap(mapName, { svg: svg });
 			// 基于准备好的dom，初始化echarts实例
@@ -76,7 +76,7 @@
 					},
 					effect: {
 						show: true,
-						period: 8,	
+						period: 8,
 						constantSpeed: 80,
 						trailLength: 0.1,
 						symbolSize: [7, 30],
@@ -98,8 +98,8 @@
 								[863.6250000000001, 331.5],
 							]
 						},
-						
-						
+
+
 						{
 							coords: [
 								[605.4230417493704, 312.02084239440023],
@@ -120,7 +120,7 @@
 								[244.84980611731683, 482.36612315353534]
 							]
 						},
-						
+
 					]
 				},
 				{
@@ -139,7 +139,7 @@
 					},
 					effect: {
 						show: true,
-						period: 8,	
+						period: 8,
 						constantSpeed: 80,
 						trailLength: 0.1,
 						symbolSize: [7, 30],
@@ -201,7 +201,7 @@
 					},
 					effect: {
 						show: true,
-						period: 8,	
+						period: 8,
 						constantSpeed: 80,
 						trailLength: 0.1,
 						symbolSize: [7, 30],

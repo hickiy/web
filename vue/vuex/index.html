@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://unpkg.com/vuex@2.0.0"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>{{remoteMsg}}</div>
+  </div>
+  <script>
+    var store = new Vuex.Store({
+      state: {
+        msg: null,
+      },
+      getters: {
+        msg(state) {
+          console.log('vuex run msg method form getter')
+          return function (store) {
+            if (state.msg) {
+              return state.msg
+            } else {
+              store.dispatch('getMsg')
+              return state.msg
+            }
+          }
+        }
+      },
+      mutations: {
+        updateMsg(state, v) {
+          state.msg = v
+        }
+      },
+      actions: {
+        getMsg({ commit }) {
+          console.log('vuex getMsg are run form actions');
+          setTimeout(function () {
+            commit('updateMsg', 'msg loaded')
+          }, 1000)
+        }
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      store: store,
+      computed: {
+        remoteMsg() {
+          console.log('component remoteMsg computed are run')
+          return this.$store.getters.msg(this.$store);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

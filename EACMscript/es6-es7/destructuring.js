@@ -6,7 +6,7 @@
  * 结构赋值支持重命名
  */
 const arr = ['elemente'];
-const obj = { a: 1, b: 2 };
+const obj = { a: 1, b: 2, d: null };
 arr.testAttrOfArr = 'testAttrOfArr';
 Object.defineProperty(obj, 'testAttrOfObj', {
   value: 'testAttrOfObj',
@@ -19,7 +19,7 @@ global.console.log(toString);
 global.console.log(testAttrOfObj);
 global.console.log(testAttrOfArr, length, element, arr[0], arr['0']);
 
-const { a, b: b1, c = 3 } = obj;
+const { a, b: b1, c = 3, d = [], ...e} = obj;
 
-console.log(a, b1, c);
+console.log(a, b1, c, d, e);
 

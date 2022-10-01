@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 可以在内嵌的iframe中直接打开一个远程的pdf文件 -->
+  <iframe width="800px" height="200px" src="http://127.0.0.1:5500/html5/iframe/pdf-in-ifreme.html"></iframe>
+  <button id="btn">获取嵌入框架的上下文</button>
+</body>
+<script>
+  const btn  = document.getElementById('btn');
+  btn.onclick = function(ev) {
+    console.log(document.getElementsByTagName('iframe')[0].style = 'width: 900px; height: 300px')
+    console.log(document.getElementsByTagName('iframe')[0].contentWindow.frames[0].document)
+}
+</script>
+</html>

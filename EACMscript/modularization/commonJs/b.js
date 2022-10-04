@@ -1,4 +1,5 @@
-const c = require('./c.js');
+const path = 'c'
+const c = require(`./${path}.js`);
 
 console.log('b runing');
 

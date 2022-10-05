@@ -9,7 +9,13 @@
 <body>
   <script src="./a.js" type="module"></script>
   <script>
-    console.log('sync code runing')
+    console.log('sync code runing');
+    window.addEventListener('DOMContentLoaded', function() {
+      console.log('domcontentloaded');
+    })
+    window.onload = function(){
+      console.log('window.onload');
+    }
   </script>
 </body>
 </html>

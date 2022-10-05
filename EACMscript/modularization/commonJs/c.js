@@ -1,6 +1,5 @@
-
 console.log('c runing');
 
-module.exports = {
+module.exports =  {
   name: 'c',
 }

@@ -7,10 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .wrap {
-      display: flex;
-      justify-content: space-around;
-    }
   </style>
 </head>
 
@@ -20,8 +16,10 @@
       <div>
         <canvas id="canvas" style="width: 600px; height: 300px;"></canvas>
       </div>
-      <input id="select-img" type="file" accept=".png, .jpg, .jpeg">
-      <span id="canvas-size">文件大小：</span>
+      <div>
+        <input id="select-img" type="file" accept="image/png, image/jpeg">
+        <span id="canvas-size">文件大小：</span>
+      </div>
     </div>
     <div>
       <div>

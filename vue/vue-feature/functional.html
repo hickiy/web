@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <link rel="icon" href="./assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const HelloWorld = {
+      name: 'HelloWorld',
+      functional: true,
+      props: {
+        msg: {
+          type: Array,
+          default: [],
+        },
+      },
+      render: function (h, context) {
+        console.log(context)
+        return h('div', {}, [h('h1', {}, context.props.msg.length)])
+      }
+    }
+    const app = new Vue({
+      name: 'App',
+      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld :msg="testArray"><div slot="test">1111</div></HelloWorld></div> ',
+      components: {
+        HelloWorld
+      },
+      data() {
+        return {
+          testArray: [1, 2],
+        }
+      },
+
+    }).$mount('#app');
+  </script>
+</body>
+
+</html>

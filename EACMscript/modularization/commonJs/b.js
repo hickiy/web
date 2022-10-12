@@ -1,7 +1,5 @@
-const c = require('./c.js');
+const c = require(`./c.js`);
 
 console.log('b runing');
 
-module.exports = {
-  name: 'b',
-}
+module.exports =  c;

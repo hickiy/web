@@ -21,25 +21,43 @@
           type: Array,
           default: [],
         },
+        fun: {
+          type: Function
+        },
       },
       methods: {
         push() {
           this.msg.push(3)
+          console.log(this);
+          this.fun()
         }
+      }
+    }
+    function noop() {
+      console.log(this, 'noop run')
+      return () => {
+        console.log(this, 'inner run');
       }
     }
     const app = new Vue({
       name: 'App',
-      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld :msg="testArray" /></div> ',
+      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld :msg="testArray" :fun="fun" /></div> ',
       components: {
         HelloWorld
+      },
+      props: {
+        noop: {
+          default: noop,
+        },
+        fun: {
+          default: noop
+        },
       },
       data() {
         return {
           testArray: [1, 2],
         }
       },
-
     }).$mount('#app');
   </script>
 </body>

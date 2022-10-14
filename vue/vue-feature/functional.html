@@ -29,7 +29,7 @@
     }
     const app = new Vue({
       name: 'App',
-      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld :msg="testArray"><div>1111</div></HelloWorld></div> ',
+      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld :msg="testArray" @click="testClick"><div>1111</div></HelloWorld></div> ',
       components: {
         HelloWorld
       },
@@ -38,7 +38,11 @@
           testArray: [1, 2],
         }
       },
-
+      methods: {
+        testClick() {
+          console.log('testClick')
+        }
+      }
     }).$mount('#app');
   </script>
 </body>

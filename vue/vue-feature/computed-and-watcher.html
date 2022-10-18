@@ -19,7 +19,7 @@
   <script type="module">
     const HelloWorld = {
       name: 'HelloWorld',
-      template: '<div><button @click="increment">切换</button></div>',
+      template: '<div><button @click="increment">切换-{{b}}</button></div>',
       data() {
         return {
           a: 0
@@ -27,25 +27,19 @@
       },
       watch: {
         a(n, o) {
-          console.log('watcher:' + this.c);
+          console.log('watcher a run')
+          this.a = this.a + 1;
         }
       },
       computed: {
         b() {
+          console.log('computed b run')
           return this.a  + 1;
         },
-        c: {
-          get(){
-            return this.a + 1;
-          },
-          set(v) {
-            this.c  = v;
-          }
-        }
       },
       methods: {
         increment() {
-          console.log('methods:' + this.a)
+          console.log('methods increment run')
           this.a+=1;
         }
       }

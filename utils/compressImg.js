@@ -2,11 +2,10 @@
  *
  * @param {Blob} blob 图片的二进制对象
  * @param {Number} qualityScale 图片质量压缩比例 0.1 - 1 之间的值
- * @param {Number} [siziScale] 可选参数，图片尺寸压缩比例 0.1 - 1 之间值
- * @param {Number} [minWitdh] 可选参数，图片最小宽度，图片宽度小于minWitdh则不进行尺寸压缩
+ * @param {Number} [minWitdh] 图片最小宽度，图片宽度小于minWitdh则不进行尺寸压缩
  * @return { Promise } 返回一个Promise对象
  */
- export default function compressImage(blob, qualityScale, siziScale, minWitdh) {
+export default function compressImage(blob, qualityScale, minWitdh) {
   if (!(blob instanceof Blob)) {
     throw TypeError('first arg: blob is not a Blob object')
   }
@@ -15,9 +14,6 @@
   }
   if (!(qualityScale <= 1 && qualityScale >= 0.1)) {
     throw RangeError('secend arg: qualityScale assign with value is not avaliable, only allowed value are between 0.1 and 1')
-  }
-  if (siziScale && !(siziScale <= 1 && siziScale >= 0.1)) {
-    throw RangeError('third arg: siziScale assign with value is not avaliable, only allowed value are between 0.1 and 1')
   }
   if (typeof minWitdh != 'number') {
     throw TypeError('fourth arg: minWitdh is not a number, allowed type of number only')
@@ -35,9 +31,9 @@
       reject('image loading failed via blob')
     }, 10000)
     img.onload = function (ev) {
-      if (siziScale && (!minWitdh || this.width * siziScale > minWitdh)) {
-        width = this.width * siziScale;
-        height = this.height * siziScale;
+      if (minWitdh && this.width > minWitdh) {
+        width = (this.width - minWitdh) * (minWitdh / this.width) + minWitdh;
+        height = this.height * (width / this.width);
       } else {
         width = this.width;
         height = this.height;

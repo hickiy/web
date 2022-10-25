@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>a标签</title>
+</head>
+<body>
+  <a id="link" href="baidu.com">测试a链接的click属性</a>
+  <script>
+    var a = document.getElementById('link');
+    // DOM2形式绑定的事件必须使用ev.preventDefault()才能阻止a标签的默认行为
+    // a.addEventListener('click', function(ev) {
+    //   console.log('触发a标签的click事件回调1111')
+    //   ev.preventDefault()
+    // })
+    // DOM0形式绑定的事件使用return false 或者ev.preventDefault()都能阻止a标签默认行为
+    a.onclick = function(ev) {
+      console.log('触发a标签的click事件回调222')
+      ev.preventDefault();
+      return false;
+    }
+  </script>
+</body>
+</html>

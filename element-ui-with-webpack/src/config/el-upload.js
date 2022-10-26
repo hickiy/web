@@ -160,12 +160,12 @@ function httpRequest(options) {
     compressImage(options.file, this.qualityScale, this.minWitdh).then(blob => {
       const file = new File([blob], options.file.name, { type: blob.type });
       options.file = file;
-      return upload(options);
+      upload(options);
     }).catch(err => {
       this.$message.error(err)
     });
   } else {
-    return upload(options)
+    upload(options)
   }
 
 }

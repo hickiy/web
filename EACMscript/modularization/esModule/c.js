@@ -1,5 +1,4 @@
-import b from './b.js';
-console.log(b, '\n', 'c runing');
+console.log('c runing');
 export default {
   name: 'c'
 }

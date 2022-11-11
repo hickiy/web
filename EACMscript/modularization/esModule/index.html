@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES模块化</title>
+</head>
+<body>
+  <script>
+    console.log('sync code')
+    window.addEventListener('DOMContentLoaded', function() {
+      console.log('domcontentloaded');
+    })
+    window.addEventListener('load', function() {
+      console.log('onload');
+    })
+    window.setTimeout(function() {
+      console.log('setTimeout code')
+    }, 0)
+  </script>
+  <script src="./a.js" type="module"></script>
+  <script src="../deferAndAsync/defer.js" defer></script>
+  <script src="../deferAndAsync/async.js" async></script>
+</body>
+</html>

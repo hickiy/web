@@ -1,12 +1,6 @@
-let c = 'c'
-import a from './a.js';
+import c from './c.JS'
 console.log('b runing');
-window.setTimeout(function () {
-  console.log(a)
-  console.log(import(`./${c}.js`).then(function(){
-    console.log('module c loaded');
-  }))
-}, 0)
+console.log(c);
 export default {
   name: 'b',
 }

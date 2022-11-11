@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMD模块化</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/require.js/2.3.6/require.min.js"></script>
+  <script>
+    console.log('sync code')
+    window.addEventListener('DOMContentLoaded', function () {
+      console.log('DOMContentLoaded')
+    })
+    window.addEventListener('load', function () {
+      console.log('onload');
+    })
+    window.setTimeout(function () {
+      console.log('setTimeout')
+    }, 0)
+  </script>
+  <script>
+    require(['a']);
+  </script>
+  <script src="../deferAndAsync/defer.js" defer></script>
+  <script src="../deferAndAsync/async.js" async></script>
+</body>
+
+</html>

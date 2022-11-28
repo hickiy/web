@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "esbuild": "esbuild ./esbuild/index.js --bundle --outfile=./esbuild/out.js"
+    "esbuild": "esbuild ./esbuild/src/index.js --bundle --outfile=./esbuild/output/bunder.js"
   },
   "author": "",
   "license": "ISC",

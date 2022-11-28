@@ -649,7 +649,7 @@ window.BMAP_AUTHENTIC_KEY = "Hv51OkEaOn2CPZAxzVLi3ZGB9l3r7sfo";
             type: "text/javascript",
             async: ""
         });
-        // c.charset = "utf-8";
+        c.charset = "utf-8";
         c.src = "https://dlswbr.baidu.com/heicha/mw/abclite-2063-s.js";
         c.addEventListener ? c.addEventListener("load", function (a) {
             a = a.target;
@@ -3530,11 +3530,11 @@ window.BMAP_AUTHENTIC_KEY = "Hv51OkEaOn2CPZAxzVLi3ZGB9l3r7sfo";
         }
         var f = c("BMAP_SECKEY"),
             g = c("SECKEY_CID"),
-            a = a + "&v=3.0&seckey=" + f + "&cid=" + g,
-            i = H("script", {
-                type: "text/javascript"
-            });
-        i.charset = "utf-8";
+            // a = a + "&v=3.0&seckey=" + f + "&cid=" + g,
+        i = H("script", {
+            type: "text/javascript"
+        });
+        // i.charset = "utf-8";
         i.src = a;
         i.addEventListener ? i.addEventListener("load", function (a) {
             a = a.target;

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>el-table</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+    }
+
+    #app {
+      height: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+    }
+
+    .table {
+      margin-top: 40px;
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="table">
+      <el-table :border="true" :data="data">
+        <span slot="prepend">
+          <el-button size="mini" icon="el-icon-download">导出</el-button>
+        </span>
+        <el-table-column align="center" label="名字" prop="name"></el-table-column>
+        <el-table-column align="center" label="状态" prop="status"></el-table-column>
+      </el-table>
+    </div>
+  </div>
+</body>
+<script>
+
+  var Table = ELEMENT.Table;
+
+  var prepend = {
+    name: 'table-prepend',
+    render(h) {
+      return h('div', {
+        style: {
+          display: 'flex',
+          flexFlow: 'row',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          height: '30px',
+          marginBottom: '20px',
+        }
+      }, [
+        this.$slots.default,
+        h('i', {
+          class: 'el-icon-s-tools', on: {
+            click: function (ev) { console.log(ev) }
+          }
+        })
+      ])
+    }
+  }
+
+  var ElTable = {
+    mixins: [Table],
+    render(h) {
+      console.log(this);
+      return h('div', {}, [h(prepend, {}, [this.$slots.prepend]), Table.render.call(this, h)]);
+      // return Table.render.call(this, h);
+      // return h(Table, {props: this.$options.propsData}, this.$slots.default)
+    }
+  }
+
+
+  var app = new Vue({
+    el: '#app',
+    components: { ElTable },
+    data: {
+      data: [],
+    },
+    methods: {
+      addData() {
+        this.data = new Array(10).fill({ name: '王昱元', status: 'married' });
+      },
+      clearData() {
+        this.data = [];
+      }
+    }
+  }).$mount()
+</script>
+
+</html>

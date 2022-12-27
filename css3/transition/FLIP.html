@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLIP animation queue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+  <style>
+    .list-complete-item {
+      transition: all 1s;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .list-complete-leave-active {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <span v-for="item in items" v-bind:key="item" class="list-complete-item">
+      {{ item }}
+    </span>
+    <button @click="tiggleState">trigger</button>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        }
+      },
+      mounted() {
+        let children = this._vnode.children;
+        children.forEach(child => {
+          if (child.elm.nodeType == 1) {
+            child.data = {
+              pos: child.elm.getBoundingClientRect()
+            };
+          }
+        });
+        this.prevChildren = [].concat(children);
+      },
+      updated() {
+        if (this.prevChildren) {
+          let children = this.prevChildren;
+          children.forEach(child => {
+            if (child.elm.nodeType == 1) {
+              child.data.newPos = child.elm.getBoundingClientRect()
+              const oldPos = child.data.pos
+              const newPos = child.data.newPos
+              const dx = oldPos.left - newPos.left
+              const dy = oldPos.top - newPos.top
+              if (dx || dy) {
+                const s = child.elm.style
+                s.transform = s.WebkitTransform = `translate(${dx}px,${dy}px)`
+                s.transitionDuration = '0s'
+              }
+            }
+          })
+          children.forEach(child => {
+            if (child.elm.nodeType == 1) {
+              const el = child.elm;
+              const s = el.style;
+              s.transform = s.WebkitTransform = s.transitionDuration = ''
+            }
+          })
+        }
+      },
+      methods: {
+        tiggleState(ev) {
+          this.items = _.shuffle(this.items);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

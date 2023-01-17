@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ofd demo</title>
+  <script src="./ofd.umd.js"></script>
+</head>
+
+<body>
+  <div class="upload-icon" @click="uploadFile">
+    <div class="upload-icon">打开OFD</div>
+    <input id="picker" type="file" ref="file" class="hidden" accept=".ofd" />
+  </div>
+  <div class="main-section" id="content" ref="contentDiv" style="background-color: #eee; text-align: center; padding: 20px" ></div>
+
+  <script>
+    console.log(ofd)
+    var input = document.getElementById('picker');
+    input.addEventListener('change', getOfdDocumentObj);
+    function getOfdDocumentObj(e) {
+      ofd.parseOfdDocument({
+        ofd: e.target.files[0],
+        success(res) {
+          console.log(res);
+          const divs = ofd.renderOfd(1600, res[0]);
+          displayOfdDiv(divs[0]);
+        },
+        fail(error) {
+          console.log('error:', error);
+        },
+      });
+    }
+    function displayOfdDiv(cloneNode) {
+
+      let contentDiv = document.getElementById("content");
+      contentDiv.innerHTML = "";
+
+      const xmlSerializer = new XMLSerializer();
+      const html = xmlSerializer.serializeToString(cloneNode);
+      console.log(cloneNode, html);
+      const svg = `
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='1600px'
+          height='800px'
+        >
+          <foreignObject
+            x='0'
+            y='0'
+            width='100%'
+            height='100%'
+          >
+            ${html}
+          </foreignObject>
+        </svg>
+      `;
+
+      const img = new Image();
+      img.src = `data:image/svg+xml;charset=utf-8,${svg}`;
+      contentDiv.appendChild(img);
+    }
+  </script>
+</body>
+
+</html>

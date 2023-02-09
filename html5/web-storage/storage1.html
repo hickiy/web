@@ -10,13 +10,13 @@
     var but = document.getElementById('btn')
     but.addEventListener('click', handled, false)
     function handled(ev) {
-        var message = window.localStorage.getItem('a')
+        var message = window.sessionStorage.getItem('a')
         if(message == '456'){
-            window.localStorage.setItem('a', '123')
+            window.sessionStorage.setItem('a', '123')
         } else {
-            window.localStorage.setItem('a', '456')
+            window.sessionStorage.setItem('a', '456')
         }
-
+        open('/html5/web-storage/storage2.html', '_blank');
     }
 </script>
 </body>

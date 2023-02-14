@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>custome-element</title>
+  <style>
+    .wrapper {
+      color: burlywood;
+      font-weight: 700;
+      font-size: 30px;
+      border-bottom: 10px solid plum;
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    native dom
+  </div>
+  <popup-info></popup-info>
+  <button id="rem-cus">删除自定义元素</button>
+  <script>
+    class PopUpInfo extends HTMLElement {
+      constructor() {
+        // 必须首先调用 super 方法
+        super();
+
+        var wrapper = document.createElement('div');
+        wrapper.innerText= 'custome dom'
+        wrapper.setAttribute('class', 'wrapper');
+
+        // 创建一些 CSS，并应用到 shadow dom 上
+        var style = document.createElement('style');
+        style.textContent = '.wrapper {color: red; font-weight: 700; font-size: 26px; border-bottom: 10px solid palegoldenrod; }'
+
+        // 插入自定义元素
+        this.appendChild(style);
+        this.appendChild(wrapper)
+      }
+    }
+    customElements.define('popup-info', PopUpInfo);
+
+    var remCus = document.getElementById('rem-cus');
+    remCus.addEventListener('click', function(ev) {
+      var cus = document.getElementsByTagName('popup-info');
+      cus[0].parentElement.removeChild(cus[0]);
+    }, false)
+  </script>
+</body>
+
+</html>

@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-    <meta charset="UTF-8">
-    <title>storage1</title>
+  <meta charset="UTF-8">
+  <title>storage1</title>
 </head>
+
 <body>
-<button id="btn">写入</button>
-<script type="text/javascript">
-    var but = document.getElementById('btn')
-    but.addEventListener('click', handled, false)
-    function handled(ev) {
-        var message = window.sessionStorage.getItem('a')
-        if(message == '456'){
-            window.sessionStorage.setItem('a', '123')
-        } else {
-            window.sessionStorage.setItem('a', '456')
-        }
-        open('/html5/web-storage/storage2.html', '_blank');
-    }
-</script>
+  <button id="session">写入sessionStorage</button>
+  <button id="local">写入localStorage</button>
+
+  <script type="text/javascript">
+    var session = document.getElementById('session');
+    var local = document.getElementById('local')
+    session.addEventListener('click', function () {
+      sessionStorage.setItem('session', Math.ceil(Math.random() * 100))
+      open('/html5/web-storage/storage2.html', '_blank');
+    }, false)
+
+    local.addEventListener('click', function () {
+      localStorage.setItem('local', Math.ceil(Math.random() * 100))
+    }, false)
+
+  </script>
 </body>
+
 </html>

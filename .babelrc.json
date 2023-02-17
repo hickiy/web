@@ -1,4 +1,0 @@
-// 使用全局babel 或者 npx babel 对代码进行降级处理时 预设的一套规则
-{
-  "presets": ["@babel/preset-env"]
-}

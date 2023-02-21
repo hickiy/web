@@ -10,7 +10,7 @@ export default {
 </script> -->
 
 
-<script>
+<script lang="js">
 import { h } from 'vue'
 // export default {
 //   name: 'hellow-world',

@@ -40,9 +40,14 @@ export default defineComponent({
     msg: { type: String, required: true },
   },
   setup(props) {
-    return () => <div>{'compose-api-tsx:  '  + props.msg}</div>;
+    return () => <div class="test">{'compose-api-tsx:  '  + props.msg}</div>;
   }
 })
 
 </script>
 
+<style scoped>
+.test {
+  color: red;
+}
+</style>

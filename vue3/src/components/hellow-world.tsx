@@ -31,6 +31,6 @@ export default defineComponent({
     msg: { type: String, required: true },
   },
   setup(props) {
-    return () =><div>{'compose-api-tsx:  '  + props.msg}</div>
+    return () => <div>{'compose-api-tsx:  '  + props.msg}</div>
   }
 })

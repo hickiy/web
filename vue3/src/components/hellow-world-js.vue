@@ -10,7 +10,7 @@ export default {
 </script> -->
 
 
-<script lang="js">
+<script lang="jsx">
 import { h } from 'vue'
 // export default {
 //   name: 'hellow-world',
@@ -33,8 +33,13 @@ export default {
     msg: String
   },
   setup(props) {
-    return () => <div>{'sfc-compose-api-jsx:  ' + props.msg}</div>
+    return () => <div class="test">{'sfc-compose-api-jsx:  ' + props.msg}</div>
   }
 }
 
 </script>
+<style>
+.test {
+  color: red;
+}
+</style>

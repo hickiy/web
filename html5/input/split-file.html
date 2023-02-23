@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" id="input" />
+  <div>合并文件</div>
+  <input type="file" multiple id="input2">
+  <script>
+    function downloadFile(data, fileName) {
+      let url = '';
+      let isBolb = false;
+      const errMsg = '下载出错，文件数据无法识别！';
+
+      if (data instanceof Blob) {
+        isBolb = true;
+        url = window.URL.createObjectURL(data);
+      } else if (typeof data === 'string') {
+        // base64编码
+        url = data;
+      } else {
+        return;
+      }
+
+      if ('download' in document.createElement('a')) {
+        // 非IE下载
+        const tmpLink = document.createElement('a');
+        tmpLink.download = fileName || '';
+        tmpLink.style.display = 'none';
+        tmpLink.href = url;
+        document.body.appendChild(tmpLink);
+        tmpLink.click();
+        window.URL.revokeObjectURL(tmpLink.href); // 释放URL 对象
+        document.body.removeChild(tmpLink);
+      } else {
+        // IE10+下载
+        if (isBolb) {
+          window.navigator.msSaveBlob(data, fileName);
+        } else {
+          Message.error(errMsg);
+          return;
+        }
+      }
+    }
+    var input = document.getElementById('input');
+    var input2 = document.getElementById('input2');
+    input.onchange = function (ev) {
+      var file = ev.target.files[0];
+      console.log(file);
+      const file1 = file.slice(0, Math.round(file.size / 2), file.type);
+      const file2 = file.slice(Math.round(file.size / 2), file.size, file.type);
+
+      downloadFile(file1, '1' + file.name)
+      downloadFile(file2, '2' + file.name)
+    }
+    input2.onchange = function (ev) {
+      const file1 = ev.target.files[0];
+      const file2 = ev.target.files[1];
+      downloadFile(new Blob([file1, file2], { type: file1.type }), '名片.zip');
+    }
+  </script>
+</body>
+
+</html>

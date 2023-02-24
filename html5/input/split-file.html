@@ -10,6 +10,8 @@
 
 <body>
   <input type="file" id="input" />
+  <div>合并文件</div>
+  <input type="file" multiple id="input2">
   <script>
     function downloadFile(data, fileName) {
       let url = '';
@@ -47,13 +49,20 @@
       }
     }
     var input = document.getElementById('input');
+    var input2 = document.getElementById('input2');
     input.onchange = function (ev) {
       var file = ev.target.files[0];
       console.log(file);
-      const file1 = new Blob([file.slice(0, 139872)], { type: file.type });
-      const file2 = new Blob([file.slice(139872, 239871)], { type: file.type });
-      downloadFile(file1, '1' + file.name);
+      const file1 = file.slice(0, Math.round(file.size / 2), file.type);
+      const file2 = file.slice(Math.round(file.size / 2), file.size, file.type);
+
+      downloadFile(file1, '1' + file.name)
       downloadFile(file2, '2' + file.name)
+    }
+    input2.onchange = function (ev) {
+      const file1 = ev.target.files[0];
+      const file2 = ev.target.files[1];
+      downloadFile(new Blob([file1, file2], { type: file1.type }), '名片.zip');
     }
   </script>
 </body>

@@ -10,26 +10,32 @@
 
 <body>
   <input type="file" id="input" />
+  <progress id="progress" max="0" value="0"> </progress>
   <script>
     var input = document.getElementById('input');
     input.onchange = function (ev) {
       upload(ev.target.files[0])
     }
     function upload(file) {
+      var progress = document.getElementById('progress');
+      progress.setAttribute('max', file.size);
       var xhr = new XMLHttpRequest();
-      var url = 'https://apitest.ionrocking.com/brmgmt/file/upload';
-      // var url = 'http://10.10.7.101:8050/file/upload'
+      // var url = 'https://apitest.ionrocking.com/brmgmt/file/upload';
+      // var url = 'http://10.10.7.101:8050/file/upload';
+      var url = 'https://jsonplaceholder.typicode.com/posts/';
       var data = new FormData();
       data.append('file', file);
       xhr.onreadystatechange = function (ev) {
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status === 200) {
-          console.log('上传完毕---', JSON.parse(xhr.responseText).data, new Date());
+          console.log('上传完毕---', JSON.parse(xhr.responseText), new Date());
         }
       }
       xhr.upload.onprogress = function (ev) {
         console.log(`${file.name}--上传进度: total-${ev.total} ---- loaded-${ev.loaded}`, new Date());
+        progress.setAttribute('value', ev.loaded);
       }
       xhr.open('post', url);
+      xhr.setRequestHeader('Content-Type', 'multipart/form-data')
       xhr.send(data);
     }
   </script>

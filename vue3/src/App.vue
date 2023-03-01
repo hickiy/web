@@ -3,10 +3,10 @@
 </template>
 
 <script>
-  import HelloWorld from './components/hellow-world-ts.vue'
-  export default {
-    components: {
-      HelloWorld,
-    }
-  }
+import HelloWorld from "./components/hellow-world-ts.vue";
+export default {
+  components: {
+    HelloWorld,
+  },
+};
 </script>

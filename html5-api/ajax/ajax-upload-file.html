@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>upload file</title>
+</head>
+
+<body>
+  <input type="file" id="input" />
+  <script>
+    var input = document.getElementById('input');
+    input.onchange = function (ev) {
+      upload(ev.target.files[0])
+    }
+    function upload(file) {
+      var xhr = new XMLHttpRequest();
+      var url = 'https://apitest.ionrocking.com/brmgmt/file/upload';
+      // var url = 'http://10.10.7.101:8050/file/upload'
+      var data = new FormData();
+      data.append('file', file);
+      xhr.onreadystatechange = function (ev) {
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status === 200) {
+          console.log('上传完毕---', JSON.parse(xhr.responseText).data, new Date());
+        }
+      }
+      xhr.upload.onprogress = function (ev) {
+        console.log(`${file.name}--上传进度: total-${ev.total} ---- loaded-${ev.loaded}`, new Date());
+      }
+      xhr.open('post', url);
+      xhr.send(data);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>practice the transition group feature of vue </title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+  <style>
+    .wrap {
+      text-align: center;
+      border: 1px solid #eee;
+      margin-top: 80px;
+    }
+
+    .transition-group{
+      margin-top: -20px;
+    }
+
+    .list-complete-item {
+      transition: all 1s;
+    }
+
+    .list-complete-move:last-child{
+      transition-duration: 0.01s;
+      opacity: 0;
+    }
+
+    .list-complete-leave-active {
+      position: absolute;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="wrap">
+      <transition-group class="transition-group" name="list-complete" tag="p">
+        <div v-for="item in items" v-bind:key="item" class="list-complete-item">
+          {{ item }}
+        </div>
+      </transition-group>
+    </div>
+    <div style="text-align: center;">
+      <button @click="apply">apply</button>
+    </div>
+  </div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        items: [10, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        nextNum: 10
+      }
+    },
+    methods: {
+      apply: function () {
+        setInterval(() => {
+          this.items.push(this.items.shift());
+        }, 1000)
+      }
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" id="input" value="123">
+  <script>
+    // 获得焦点的情况下，按下enter键会触发click事件
+    var input = document.getElementById('input');
+    input.addEventListener('click', function(ev) {
+      console.log(ev);
+    }, false);
+  </script>
+</body>
+</html>

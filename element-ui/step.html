@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>el-table</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <el-steps :active="2" align-center finish-status="success">
+      <el-step title="步骤1" icon="el-icon-s-tools" description="这是一段很长很长很长的描述性文字"></el-step>
+      <el-step title="步骤2" description="这是一段很长很长很长的描述性文字"></el-step>
+      <el-step title="步骤3" description="这是一段很长很长很长的描述性文字"></el-step>
+      <el-step title="步骤4" description="这是一段很长很长很长的描述性文字"></el-step>
+    </el-steps>
+  </div>
+  <script>
+
+    var app = new Vue({
+      el: '#app',
+    }).$mount()
+  </script>
+</body>
+
+</html>

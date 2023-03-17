@@ -1,5 +1,4 @@
 <script lang="jsx">
-
 // this is a pseudo-code snippets
 
 // first method
@@ -21,10 +20,15 @@ export const composeApiWithJsx = {
   }
 };
 
-export default {};
+export default {
+  data() {
+    return {
+      name: '1212'
+    };
+  }
+};
 </script>
 
 <template></template>
 
-<style>
-</style>
+<style></style>

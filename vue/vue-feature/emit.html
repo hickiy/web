@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vite App</title>
-  <link rel="icon" href="./assets/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="./assets/index.css" />
+  <link rel="icon" href="../assets/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="../assets/index.css" />
 </head>
 
 <body>
@@ -15,21 +15,25 @@
   <script>
     const HelloWorld = {
       name: 'HelloWorld',
-      functional: true,
       props: {
         msg: {
           type: Array,
           default: [],
         },
       },
-      render: function (h, context) {
-        console.log(context)
-        return h('div', {}, [h('h1', {}, context.props.msg.length)])
+      render: function (h) {
+        return h('div', {}, [h('h1', {
+          on: {
+            click:() => {
+              this.$emit('click', '131212313513')
+            }
+          }
+        }, this.msg.length)])
       }
     }
     const app = new Vue({
       name: 'App',
-      template: '<div id="app"><img alt="Vue logo" src="./assets/logo.png"><HelloWorld :msg="testArray" @click="testClick"><div>1111</div></HelloWorld></div> ',
+      template: '<div id="app"><img alt="Vue logo" src="../assets/logo.png"><HelloWorld :msg="testArray" @click="testClick"><div>1111</div></HelloWorld></div> ',
       components: {
         HelloWorld
       },
@@ -39,8 +43,8 @@
         }
       },
       methods: {
-        testClick() {
-          console.log('testClick')
+        testClick(v) {
+          alert(v);
         }
       }
     }).$mount('#app');

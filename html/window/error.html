@@ -17,16 +17,21 @@
           }, 1000);
         });
       }
-      // window.onerror = function (message, source, lineno, colno, error) {
-      window.onerror = function(event) {
-        console.log(event);
+      // DOM0级错误全局处理
+      window.onerror = function(message, source, lineno, colno, error) {
+        console.log(message);
       };
-      
+
+      // DOM2级错误全局处理
       window.addEventListener("error", function (event) {
         console.log(event);
         event.preventDefault();
-        // event.stopPropagation();
-        // return false;
+      });
+
+      // Promise错误全局处理
+      window.addEventListener("unhandledrejection", function (event) {
+        console.log(event.message);
+        event.preventDefault();
       });
     </script>
   </body>

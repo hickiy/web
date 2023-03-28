@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>error</title>
+  </head>
+  <body>
+    <button onclick="butHandler()">error</button>
+    <script>
+      // 全局错误处理，无法捕获Promise错误
+      function butHandler() {
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject(new Error("error"));
+          }, 1000);
+        });
+      }
+      // window.onerror = function (message, source, lineno, colno, error) {
+      window.onerror = function(event) {
+        console.log(event);
+      };
+      
+      window.addEventListener("error", function (event) {
+        console.log(event);
+        event.preventDefault();
+        // event.stopPropagation();
+        // return false;
+      });
+    </script>
+  </body>
+</html>

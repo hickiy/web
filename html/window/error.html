@@ -7,30 +7,46 @@
     <title>error</title>
   </head>
   <body>
-    <button onclick="butHandler()">error</button>
+    <button onclick="normalError()">normal error</button>
+    <button onclick="promiseError()">promise error</button>
+    <button onclick="promiseErrorInAsyncFunction()">promise error in try cache statement block</button>
     <script>
-      // 全局错误处理，无法捕获Promise错误
-      function butHandler() {
+      function normalError() {
+        console.log(a);
+      }
+
+      function promiseError() {
         new Promise((resolve, reject) => {
           setTimeout(() => {
-            reject(new Error("error"));
-          }, 1000);
+            reject(b);
+          }, 500);
         });
       }
+
+      async function promiseErrorInAsyncFunction() {
+        try {
+          var res = await new Promise((resolve, reject) => {
+            setTimeout(() => {
+              reject('cancle');
+            }, 500);
+          });
+        } finally {
+        }
+      }
       // DOM0级错误全局处理
-      window.onerror = function(message, source, lineno, colno, error) {
-        console.log(message);
-      };
+      // window.onerror = function(message, source, lineno, colno, error) {
+      //   console.log(message);
+      // };
 
       // DOM2级错误全局处理
-      window.addEventListener("error", function (event) {
-        console.log(event);
+      window.addEventListener('error', function (event) {
+        console.log('error: ' + event.message);
         event.preventDefault();
       });
 
       // Promise错误全局处理
-      window.addEventListener("unhandledrejection", function (event) {
-        console.log(event.message);
+      window.addEventListener('unhandledrejection', function (event) {
+        console.log('unhandledrejection: ' + event.reason);
         event.preventDefault();
       });
     </script>

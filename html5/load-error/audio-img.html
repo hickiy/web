@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <audio src="audio.mp3"></audio>
+  <img src="img.png"> -->
+  <script>
+    new Audio('audio.mp3');
+    new Image().src = 'img.png';
+    window.addEventListener('error', function (event) {
+      console.log('error: ' + event.message);
+      event.preventDefault();
+    });
+  </script>
+</body>
+</html>

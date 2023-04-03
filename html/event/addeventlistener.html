@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>addEventListener</title>
+  </head>
+  <body>
+    <button id="btn">click</button>
+    <div id="div" style="height: 400px; overflow: scroll">
+      <p style="height: 500px">scroll</p>
+    </div>
+    <script>
+      var btn = document.getElementById('btn');
+      var eventHnadler = {
+        handleEvent: function (event) {
+          console.log(event.type);
+        }
+      };
+      btn.addEventListener('click', eventHnadler, { once: true });
+      var div = document.getElementById('div');
+      ['touchstart', 'touchmove', 'touchend', 'mousewheel'].forEach(function (type) {
+        div.addEventListener(type, eventHnadler,  { passive: false });
+      });
+    </script>
+  </body>
+</html>

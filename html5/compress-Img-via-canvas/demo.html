@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="../../utils/compressImg.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/love596310898/easy-tools@main/lib/easy-tools.umd.js"></script>
   <style>
     .wrap {
       display: flex;
@@ -45,7 +45,7 @@
     image = file;
   })
   btn.addEventListener('click', function () {
-    compressImage(image, 0.2, 1).then(function (blob) {
+    ofd.compressImage(image, 0.2, 400).then(function (blob) {
       console.log(blob);
       var size = (blob.size / 1024 / 1024).toFixed(2) + 'MB';
       resultSize.innerHTML += size;

@@ -1,4 +1,4 @@
-console.log('c runing');
+console.log('c is runing');
 export default {
   name: 'c'
 }

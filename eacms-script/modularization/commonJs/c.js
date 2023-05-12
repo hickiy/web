@@ -1,2 +1,2 @@
-console.log('c runing');
-module.exports = { name: 'c', }
+console.log('c is runing')
+exports.name = 'c'

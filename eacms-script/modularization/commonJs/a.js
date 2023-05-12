@@ -1,3 +1,6 @@
+const c = require('./c.js');
 const b = require('./b.js');
-console.log('a runing')
-module.exports = { name: 'a', }
+console.log(c == b)
+
+
+

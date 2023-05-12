@@ -1,39 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMD模块化</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/seajs/3.0.3/runtime.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CMD模块化</title>
-</head>
-<script src="https://cdn.bootcdn.net/ajax/libs/seajs/3.0.3/runtime.js"></script>
-
-<body>
-  <script>
-    console.log('sync code')
-    window.addEventListener('DOMContentLoaded', function () {
-      console.log('DOMContentLoaded')
-    })
-    window.addEventListener('load', function () {
-      console.log('onload');
-    })
-    window.setTimeout(function () {
-      console.log('setTimeout')
-    }, 0)
-  </script>
-  <script src="../deferAndAsync/defer.js" defer></script>
-  <script src="../deferAndAsync/async.js" async></script>
-  <script>
-    // seajs 的简单配置
-    seajs.config({
-      base: "./",
-    })
-    // 加载入口模块
-    seajs.use("./a", function (a) {
-      console.log(a)
-    })
-  </script>
-</body>
-
+  <body>
+    <script>
+      // seajs 的简单配置
+      seajs.config({
+        base: './'
+      });
+      // 加载入口模块
+      seajs.use('./a', function (a) {
+        console.log(a);
+      });
+    </script>
+  </body>
 </html>

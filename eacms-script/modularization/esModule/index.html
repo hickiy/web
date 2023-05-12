@@ -7,20 +7,6 @@
   <title>ES模块化</title>
 </head>
 <body>
-  <script>
-    console.log('sync code')
-    window.addEventListener('DOMContentLoaded', function() {
-      console.log('domcontentloaded');
-    })
-    window.addEventListener('load', function() {
-      console.log('onload');
-    })
-    window.setTimeout(function() {
-      console.log('setTimeout code')
-    }, 0)
-  </script>
-  <script src="./a.js" type="module"></script>
-  <script src="../deferAndAsync/defer.js" defer></script>
-  <script src="../deferAndAsync/async.js" async></script>
+  <script src="./a.mjs" type="module"></script>
 </body>
 </html>

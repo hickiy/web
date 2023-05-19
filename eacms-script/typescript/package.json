@@ -5,9 +5,5 @@
   "scripts": {
     "dev": "tsc -w"
   },
-  "author": "596310898@163.com",
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^4.0.2"
-  }
+  "author": "596310898@163.com"
 }

@@ -38,3 +38,5 @@ let arr3:[number, string] = [1, '222'] // 联合类型tuple
  */
 enum person {name, age} 
 let personName: number = person.name
+
+export {}

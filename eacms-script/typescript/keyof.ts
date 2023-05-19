@@ -13,3 +13,5 @@ let person: Person = {
     is: true,
 };
 let strings: Array<number | string | boolean> = pluck(person, ['name', 'age', 'is']); // ok, string[]
+
+export {}

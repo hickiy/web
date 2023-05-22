@@ -20,7 +20,7 @@
         progress.setAttribute('max', file.size);
         var xhr = new XMLHttpRequest();
         // var url = 'http://10.10.7.101:8050/file/upload';
-        var url = 'http://localhost:49000/file/upload';
+        var url = 'http://10.10.3.121:49000/file/upload';
         var data = new FormData();
         data.append('file', file);
         xhr.onreadystatechange = function (ev) {
@@ -31,6 +31,7 @@
         xhr.upload.onprogress = function (ev) {
           console.log(`${file.name}--上传进度: ${((ev.loaded / ev.total) * 100).toFixed(2)}%}`);
           progress.setAttribute('value', ev.loaded);
+          alert(`${file.name}--上传进度: ${((ev.loaded / ev.total) * 100).toFixed(2)}%}`)
         };
         xhr.open('post', url);
         xhr.send(data);

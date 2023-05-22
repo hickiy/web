@@ -1,4 +1,5 @@
 <!--index.wxml-->
 <view>
-  <web-view src="http://10.10.3.121:5500/html5/compress-Img-via-canvas/index.html"></web-view>
+  <!-- <button type="primary" bindtap="bindtap">测试文件选择</button> -->
+  <web-view src="http://10.10.3.121:5500/html/ajax/ajax-upload-file.html"/>
 </view>

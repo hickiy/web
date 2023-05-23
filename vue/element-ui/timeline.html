@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>customer the slider component</title>
+    <link href="https://cdn.jsdelivr.net/npm/element-plus/dist/index.min.css" rel="stylesheet" />
+    <!-- Import Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.global.min.js"></script>
+    <!-- Import component library -->
+    <script src="https://cdn.jsdelivr.net/npm/element-plus/dist/index.full.min.js"></script>
+    <!-- Import element-plus/icons-vue -->
+    <script src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue"></script>
+    <style>
+      .wrap {
+        width: 280px;
+        height: 100%;
+        background-color: #f5f5f5;
+        margin: 0 auto;
+        padding: 50px 30px 50px 86px;
+      }
+      .event-wrap {
+        margin: 10px 0;
+      }
+      .el-timeline-item__dot {
+        left: -2px;
+      }
+      .dot,
+      .icon {
+        cursor: pointer;
+      }
+      .dot {
+        z-index: 10;
+        width: 10px;
+        height: 10px;
+        border: 2px solid #dedfe0;
+        border-radius: 50%;
+        background-color: #ffffff;
+      }
+      .icon {
+        transition: all 0.5s;
+        transform: rotateZ(0deg);
+      }
+      .line-title {
+        padding-left: 40px;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+      }
+      .node-title {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+      }
+      .closed {
+        transform: rotateZ(180deg);
+      }
+      .event-wrap {
+        position: relative;
+      }
+      .event-slider {
+        position: absolute;
+        height: 100%;
+        width: 56px;
+        left: -56px;
+      }
+      .slider-dot {
+        cursor: pointer;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background-color: #c7c9cc;
+        border-radius: 50%;
+        left: 29px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .slider-icon {
+        display: none;
+        cursor: pointer;
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        background-image: url('../../assets/timeline-slider.webp');
+      }
+      .active .slider-dot {
+        background-color: #409eff;
+      }
+      .active .slider-icon {
+        display: block;
+      }
+      .active .el-card {
+        background-color: #409eff;
+        color: #fff;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="wrap" v-for="(item, index) in data" :key="index">
+        <div class="line-title">
+          <h3 style="color: #409eff; font-size: 28px; margin-right: 20px">{{item.title}}</h3>
+          <el-icon size="30">
+            <caret-top @click="item.expand = !item.expand" :class="['icon', item.expand ? '' : 'closed']" />
+          </el-icon>
+        </div>
+        <el-collapse-transition>
+          <el-timeline v-show="item.expand">
+            <el-timeline-item v-for="(node, index) in item.nodes" :key="index">
+              <template #dot>
+                <el-tooltip trigger="click" placement="left-start">
+                  <template #content>
+                    <div>充电</div>
+                    <div>131次</div>
+                    <div>换电</div>
+                    <div>131次</div>
+                  </template>
+                  <div class="dot"></div>
+                </el-tooltip>
+              </template>
+              <div class="node-title">
+                <div style="color: #4e5969; font-size: 14px">{{node.title}}</div>
+                <el-icon size="25">
+                  <caret-top @click="node.expand = !node.expand" :class="['icon', node.expand ? '' : 'closed']" />
+                </el-icon>
+              </div>
+              <el-collapse-transition>
+                <div v-show="node.expand">
+                  <div :class="['event-wrap', event.active ? 'active' : '']" v-for="(event, index) in node.events">
+                    <div class="event-slider">
+                      <div class="slider-dot" @click="eventActive(event)"></div>
+                      <div class="slider-icon"></div>
+                    </div>
+                    <el-card>
+                      <h5>{{event.name}}</h5>
+                      <span>{{event.time}}</span>
+                    </el-card>
+                  </div>
+                </div>
+              </el-collapse-transition>
+            </el-timeline-item>
+            <el-timeline-item>
+              <template #dot>
+                <div class="dot"></div>
+              </template>
+            </el-timeline-item>
+          </el-timeline>
+        </el-collapse-transition>
+      </div>
+    </div>
+    <script>
+      const { createApp, reactive } = Vue;
+      const app = createApp({
+        setup() {
+          const data = reactive([
+            {
+              title: 2023,
+              expand: true,
+              nodes: [
+                {
+                  title: '5月',
+                  expand: true,
+                  events: [
+                    {
+                      name: '100次换电',
+                      active: true,
+                      time: '2023 -03-05 15:12:07'
+                    },
+                    {
+                      name: '100次换电',
+                      time: '2023 -03-05 15:12:07'
+                    },
+                    {
+                      name: '100次换电',
+                      time: '2023 -03-05 15:12:07'
+                    },
+                    {
+                      name: '100次换电',
+                      time: '2023 -03-05 15:12:07'
+                    }
+                  ]
+                },
+                {
+                  title: '4月',
+                  expand: true,
+                  events: [
+                    {
+                      name: '100次换电',
+                      time: '2023 -03-05 15:12:07'
+                    },
+                    {
+                      name: '100次换电',
+                      time: '2023 -03-05 15:12:07'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]);
+          function eventActive(ev) {
+            data.forEach((line) => {
+              if (line.nodes.length) {
+                line.nodes.forEach((node) => {
+                  if (node.events.length) {
+                    node.events.forEach((event) => {
+                      if (event.active) event.active = false;
+                    });
+                  }
+                });
+              }
+            });
+            ev.active = true;
+          }
+          return {
+            data,
+            eventActive
+          };
+        }
+      });
+      app.use(ElementPlus);
+      console.log(ElementPlusIconsVue);
+      for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+        app.component(key, component);
+      }
+      app.mount('#app');
+    </script>
+  </body>
+</html>

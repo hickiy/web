@@ -12,9 +12,11 @@
     <script src="https://cdn.jsdelivr.net/npm/element-plus/dist/index.full.min.js"></script>
     <!-- Import element-plus/icons-vue -->
     <script src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/interact.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/api/styles/jsdoc-default.min.css" rel="stylesheet" />
     <style>
       .wrap {
-        width: 280px;
+        width: 450px;
         height: 100%;
         background-color: #f5f5f5;
         margin: 0 auto;
@@ -61,8 +63,9 @@
       }
       .event-slider {
         position: absolute;
-        height: 100%;
+        z-index: 11;
         width: 56px;
+        height: 100%;
         left: -56px;
       }
       .slider-dot {
@@ -77,21 +80,12 @@
         transform: translateY(-50%);
       }
       .slider-icon {
-        display: none;
-        cursor: pointer;
-        position: absolute;
-        left: -20px;
-        top: 50%;
-        transform: translateY(-50%);
         width: 48px;
         height: 48px;
         background-image: url('../../assets/timeline-slider.webp');
       }
       .active .slider-dot {
         background-color: #409eff;
-      }
-      .active .slider-icon {
-        display: block;
       }
       .active .el-card {
         background-color: #409eff;
@@ -110,7 +104,8 @@
           </el-icon>
         </div>
         <el-collapse-transition>
-          <el-timeline v-show="item.expand">
+          <el-timeline v-show="item.expand" style="position: relative">
+            <div class="slider-icon"></div>
             <el-timeline-item v-for="(node, index) in item.nodes" :key="index">
               <template #dot>
                 <el-tooltip trigger="click" placement="left-start">
@@ -131,10 +126,9 @@
               </div>
               <el-collapse-transition>
                 <div v-show="node.expand">
-                  <div :class="['event-wrap', event.active ? 'active' : '']" v-for="(event, index) in node.events">
+                  <div :class="['event-wrap', event.active ? 'active' : '']" v-for="(event, index) in node.events" @click="eventActive(event)">
                     <div class="event-slider">
-                      <div class="slider-dot" @click="eventActive(event)"></div>
-                      <div class="slider-icon"></div>
+                      <div class="slider-dot"></div>
                     </div>
                     <el-card>
                       <h5>{{event.name}}</h5>
@@ -154,7 +148,7 @@
       </div>
     </div>
     <script>
-      const { createApp, reactive } = Vue;
+      const { createApp, reactive, onMounted } = Vue;
       const app = createApp({
         setup() {
           const data = reactive([
@@ -216,6 +210,34 @@
             });
             ev.active = true;
           }
+          onMounted(() => {
+            let value = 0;
+            interact('.slider-icon').draggable({
+              startAxis: 'y',
+              lockAxis: 'start',
+              listeners: {
+                move(event) {
+                  value += event.dy;
+                  event.target.style.transform = `translateY(${value}px)`;
+                }
+              }
+            });
+            interact('.event-slider').dropzone({
+              accept: '.slider-icon',
+              checker: function (
+                dragEvent, // related dragmove or dragend
+                event, // Touch, Pointer or Mouse Event
+                dropped, // bool default checker result
+                dropzone, // dropzone Interactable
+                dropzoneElement, // dropzone element
+                draggable, // draggable Interactable
+                draggableElement // draggable element
+              ) {
+                // only allow drops into empty dropzone elements
+                console.log('1321313212');
+              }
+            });
+          });
           return {
             data,
             eventActive
@@ -223,7 +245,6 @@
         }
       });
       app.use(ElementPlus);
-      console.log(ElementPlusIconsVue);
       for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
         app.component(key, component);
       }

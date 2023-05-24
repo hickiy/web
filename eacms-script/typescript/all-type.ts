@@ -67,4 +67,4 @@ function createTable<T extends Card>(c: {new (): T}):T { //泛型继承类
 
 console.log(createTable(Box).nameed)
 
-export {}
+export default {}

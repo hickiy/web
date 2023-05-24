@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "outDir": "./eacms-script/typescript/build/",
-    "allowJs": false,
-    "target": "ES6",
-    "noImplicitThis": true
-  },
-  "include": ["./eacms-script/typescript/*"],
-}

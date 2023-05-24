@@ -1,6 +1,7 @@
 {
   "name": "learn-typescript",
   "version": "1.0.0",
+  "type": "module",
   "description": "this is typescript learn project",
   "scripts": {
     "dev": "tsc -w"

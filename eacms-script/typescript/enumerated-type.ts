@@ -23,6 +23,6 @@ interface Circle {
 }
 
 let c: Circle = {
-    kind: ShapeKind.Square,
+    kind: ShapeKind.Circle,
     radius: 100,
 }

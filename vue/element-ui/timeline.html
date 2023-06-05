@@ -81,13 +81,18 @@
         transform: translateY(-50%);
       }
       .slider-icon {
+        display: none;
         cursor: pointer;
         position: absolute;
         z-index: 15;
-        left: -5px;
+        left: -20px;
         width: 48px;
         height: 48px;
+        top: calc(50% - 24px);
         background-image: url('../../assets/timeline-slider.webp');
+      }
+      .active .slider-icon {
+        display: block;
       }
       .active .slider-dot {
         background-color: #409eff;
@@ -109,7 +114,6 @@
         </div>
         <el-collapse-transition>
           <el-timeline class="slider-wrap" v-show="item.expand" style="position: relative">
-            <div class="slider-icon"></div>
             <el-timeline-item v-for="(node, ni) in item.nodes" :key="ni">
               <template #dot>
                 <el-tooltip trigger="click" placement="left-start">
@@ -130,11 +134,12 @@
               </div>
               <el-collapse-transition>
                 <div v-show="node.expand">
-                  <div :class="['event-wrap', event.active ? 'active' : '']" v-for="(event, ei) in node.events" @click="eventActive(event)" :key="ei">
+                  <div :class="['event-wrap', event.active ? 'active' : '']" v-for="(event, ei) in node.events" :key="ei">
                     <div class="event-slider" :data-node-index="ni" :data-event-index="ei">
-                      <div class="slider-dot"></div>
+                      <div class="slider-icon"></div>
+                      <div class="slider-dot" @click="eventActive(event)"></div>
                     </div>
-                    <el-card>
+                    <el-card @click="eventActive(event)">
                       <h5>{{event.name}}</h5>
                       <span>{{event.time}}</span>
                     </el-card>
@@ -208,13 +213,6 @@
               ]
             }
           ]);
-          let value = 0;
-          let sliderWrap = null;
-          let sliderIcon = null;
-          function positionSliderIcon() {
-            var anchor = document.querySelector('.active .slider-dot');
-            sliderIcon.style.top = anchor.getBoundingClientRect().top - sliderWrap.getBoundingClientRect().top - value - 20 + 'px';
-          }
           function eventActive(ev) {
             data.forEach((line) => {
               if (line.nodes.length) {
@@ -228,35 +226,29 @@
               }
             });
             ev.active = true;
-            nextTick(positionSliderIcon);
           }
+          let value = 0;
           onMounted(() => {
-            // 挂载之后获取滑块容器及滑块
-            sliderWrap = document.querySelector('.slider-wrap');
-            sliderIcon = document.querySelector('.slider-icon');
-            // 初始滑块指示器块位置
-            positionSliderIcon();
-
             // 增加滑动动画
             interact('.slider-icon').draggable({
-              startAxis: 'y',
-              lockAxis: 'start',
               listeners: {
                 move(event) {
                   value += event.dy;
                   event.target.style.transform = `translateY(${value}px)`;
+                },
+                end(ev) {
+                  if (ev.relatedTarget) {
+                    const nodeIndex = ev.relatedTarget.getAttribute('data-node-index');
+                    const eventIndex = ev.relatedTarget.getAttribute('data-event-index');
+                    eventActive(data[0].nodes[nodeIndex].events[eventIndex]);
+                  }
+                  value = 0;
+                  ev.target.style.transform = `translateY(${value}px)`;
                 }
               }
             });
             interact('.event-slider').dropzone({
-              accept: '.slider-icon',
-              listeners: {
-                drop({ target }) {
-                  const nodeIndex = target.getAttribute('data-node-index');
-                  const eventIndex = target.getAttribute('data-event-index');
-                  eventActive(data[0].nodes[nodeIndex].events[eventIndex]);
-                }
-              }
+              accept: '.slider-icon'
             });
           });
           return {

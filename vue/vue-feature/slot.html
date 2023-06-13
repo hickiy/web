@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link rel="icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/index.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div>
+        <hello-world>
+          <div slot-scope="{content}">{{content}}</div>
+          <div slot="body" slot-scope="{content}">{{content}}</div>
+        </hello-world>
+        <br />
+        <hello-world>
+          <child slot="body" slot-scope="{content}" v-slot="{msg}">
+            <div>{{content}}</div>
+            <div>{{msg}}</div>
+          </child>
+        </hello-world>
+        <br />
+        <hello-world v-slot:body="{content}">
+          <div>{{content}}</div>
+          <child v-slot="{msg}">
+            <div>{{msg}}</div>
+          </child>
+        </hello-world>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js" type="module"></script>
+    <script type="module">
+      const HelloWorld = {
+        name: 'HelloWorld',
+        template: `<div>
+            <slot content="parent default"></slot>
+            <slot name="body" content="parent content"></slot>
+          </div>`
+      };
+      const child = {
+        template: '<div><slot msg="child default"></slot></div>'
+      };
+      const app = new Vue({
+        name: 'App',
+        components: {
+          HelloWorld,
+          child
+        }
+      }).$mount('#app');
+    </script>
+  </body>
+</html>

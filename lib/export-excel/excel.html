@@ -1,200 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
     <style>
-        table td {
-            font-size: 12px;
-            width: 200px;
-            height: 30px;
-            text-align: center;
-            background-color: #4f891e;
-            color: #ffffff;
-        }
+      table td {
+        font-size: 12px;
+        width: 200px;
+        height: 30px;
+        text-align: center;
+        background-color: #4f891e;
+        color: #ffffff;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <a download="table导出Excel" id="excelOut" href="#" rel="external nofollow" rel="external nofollow">table导出Excel</a>
     <table cellspacing="0" cellpadding="0" border="1" id="tableToExcel">
-        <thead>
-            <tr>
-                <td rowspan="2" style="background-color: #fff;color: #000;">责任单位</td>
-                <td colspan="4" style="background-color: #fff;color: #000;">公安部门 涉案工单</td>
-                <td colspan="4" style="background-color: #fff;color: #000;">工信部12321涉诈工单</td>
-                <td colspan="6" style="background-color: #fff;color: #000;">合计</td>
-            </tr>
-            <tr>
-                <td style="background-color: #b8cce4;color: #000;">当日案件数量</td>
-                <td style="background-color: #b8cce4;color: #000;">当日量占比</td>
-                <td style="background-color: #95b3d7;color: #000;">累计涉案案件数</td>
-                <td style="background-color: #95b3d7;color: #000;">累计量占比</td>
+      <thead>
+        <tr>
+          <td rowspan="2" style="background-color: #fff; color: #000">责任单位</td>
+          <td colspan="4" style="background-color: #fff; color: #000">公安部门 涉案工单</td>
+          <td colspan="4" style="background-color: #fff; color: #000">工信部12321涉诈工单</td>
+          <td colspan="6" style="background-color: #fff; color: #000">合计</td>
+        </tr>
+        <tr>
+          <td style="background-color: #b8cce4; color: #000">当日案件数量</td>
+          <td style="background-color: #b8cce4; color: #000">当日量占比</td>
+          <td style="background-color: #95b3d7; color: #000">累计涉案案件数</td>
+          <td style="background-color: #95b3d7; color: #000">累计量占比</td>
 
-                <td style="background-color: #fff;color: #000;">当日举报数</td>
-                <td style="background-color: #fff;color: #000;">当日量占比</td>
-                <td style="background-color: #d9d9d9;color: #000;">累计举报件数</td>
-                <td style="background-color: #d9d9d9;color: #000;">举报量占比</td>
+          <td style="background-color: #fff; color: #000">当日举报数</td>
+          <td style="background-color: #fff; color: #000">当日量占比</td>
+          <td style="background-color: #d9d9d9; color: #000">累计举报件数</td>
+          <td style="background-color: #d9d9d9; color: #000">举报量占比</td>
 
-                <td style="background-color:#fabf8f;color:#000">当日涉诈涉案量</td>
-                <td style="background-color:#fabf8f;color:#000">当月涉诈涉案量</td>
-                <td style="background-color:#fabf8f;color:#000">当月累计涉案预申诉量</td>
-                <td style="background-color:#fabf8f;color:#000">当月累计12321申诉量</td>
-                <td style="background-color:#fabf8f;color:#000">当月涉诈指标控制值完成情况</td>
-                <td style="background-color:#95b3d7;color:#e7180d">全省排名</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="background-color: #ffc7ce; color: #000">1</td>
-                <td style="background-color: #ffc7ce; color: #000">2</td>
-                <td style="background-color: #ffc7ce; color: #000">3</td>
-                <td style="background-color: #ffc7ce; color: #000">4</td>
-                <td style="background-color: #ffc7ce; color: #000">5</td>
-                <td style="background-color: #ffc7ce; color: #000">6</td>
-                <td style="background-color: #ffc7ce; color: #000">7</td>
-                <td style="background-color: #ffc7ce; color: #000">8</td>
-                <td style="background-color: #ffc7ce; color: #000">9</td>
-                <td style="background-color: #ffc7ce; color: #000">10</td>
-                <td style="background-color: #ffc7ce; color: #000">11</td>
-                <td style="background-color: #ffc7ce; color: #000">12</td>
-                <td style="background-color: #ffc7ce; color: #000">13</td>
-                <td style="background-color: #ffc7ce; color: #000">14</td>
-                <td style="background-color: #ffc7ce; color: #000">15</td>
-            </tr>
-            <tr>
-                <td style="background-color: #ffc7ce; color: #000">1</td>
-                <td style="background-color: #ffc7ce; color: #000">2</td>
-                <td style="background-color: #ffc7ce; color: #000">3</td>
-                <td style="background-color: #ffc7ce; color: #000">4</td>
-                <td style="background-color: #ffc7ce; color: #000">5</td>
-                <td style="background-color: #ffc7ce; color: #000">6</td>
-                <td style="background-color: #ffc7ce; color: #000">7</td>
-                <td style="background-color: #ffc7ce; color: #000">8</td>
-                <td style="background-color: #ffc7ce; color: #000">9</td>
-                <td style="background-color: #ffc7ce; color: #000">10</td>
-                <td style="background-color: #ffc7ce; color: #000">11</td>
-                <td style="background-color: #ffc7ce; color: #000">12</td>
-                <td style="background-color: #ffc7ce; color: #000">13</td>
-                <td style="background-color: #ffc7ce; color: #000">14</td>
-                <td style="background-color: #ffc7ce; color: #000">15</td>
-            </tr>
-            <tr>
-                <td style="background-color: #ffc7ce; color: #000">1</td>
-                <td style="background-color: #ffc7ce; color: #000">2</td>
-                <td style="background-color: #ffc7ce; color: #000">3</td>
-                <td style="background-color: #ffc7ce; color: #000">4</td>
-                <td style="background-color: #ffc7ce; color: #000">5</td>
-                <td style="background-color: #ffc7ce; color: #000">6</td>
-                <td style="background-color: #ffc7ce; color: #000">7</td>
-                <td style="background-color: #ffc7ce; color: #000">8</td>
-                <td style="background-color: #ffc7ce; color: #000">9</td>
-                <td style="background-color: #ffc7ce; color: #000">10</td>
-                <td style="background-color: #ffc7ce; color: #000">11</td>
-                <td style="background-color: #ffc7ce; color: #000">12</td>
-                <td style="background-color: #ffc7ce; color: #000">13</td>
-                <td style="background-color: #ffc7ce; color: #000">14</td>
-                <td style="background-color: #ffc7ce; color: #000">15</td>
-            </tr>
-            <tr>
-                <td style="background-color: #ffeb9c; color: #c9a247">1</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">2</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">3</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">4</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">5</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">6</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">7</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">8</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">9</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">10</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">11</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">12</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">13</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">14</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">15</td>
-            </tr>
-            <tr>
-                <td style="background-color: #ffeb9c; color: #c9a247">1</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">2</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">3</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">4</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">5</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">6</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">7</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">8</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">9</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">10</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">11</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">12</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">13</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">14</td>
-                <td style="background-color: #ffeb9c; color: #c9a247">15</td>
-            </tr>
-            <tr>
-                <td style="background-color: #c6efce; color: #000">1</td>
-                <td style="background-color: #c6efce; color: #000">2</td>
-                <td style="background-color: #c6efce; color: #000">3</td>
-                <td style="background-color: #c6efce; color: #000">4</td>
-                <td style="background-color: #c6efce; color: #000">5</td>
-                <td style="background-color: #c6efce; color: #000">6</td>
-                <td style="background-color: #c6efce; color: #000">7</td>
-                <td style="background-color: #c6efce; color: #000">8</td>
-                <td style="background-color: #c6efce; color: #000">9</td>
-                <td style="background-color: #c6efce; color: #000">10</td>
-                <td style="background-color: #c6efce; color: #000">11</td>
-                <td style="background-color: #c6efce; color: #000">12</td>
-                <td style="background-color: #c6efce; color: #000">13</td>
-                <td style="background-color: #c6efce; color: #000">14</td>
-                <td style="background-color: #c6efce; color: #000">15</td>
-            </tr>
-            <tr>
-                <td style="background-color: #fff; color: #000">1</td>
-                <td style="background-color: #fff; color: #000">2</td>
-                <td style="background-color: #fff; color: #000">3</td>
-                <td style="background-color: #fff; color: #000">4</td>
-                <td style="background-color: #fff; color: #000">5</td>
-                <td style="background-color: #fff; color: #000">6</td>
-                <td style="background-color: #fff; color: #000">7</td>
-                <td style="background-color: #fff; color: #000">8</td>
-                <td style="background-color: #fff; color: #000">9</td>
-                <td style="background-color: #fff; color: #000">10</td>
-                <td style="background-color: #fff; color: #000">11</td>
-                <td style="background-color: #fff; color: #000">12</td>
-                <td style="background-color: #fff; color: #000">13</td>
-                <td style="background-color: #c6efce; color: #000">14</td>
-                <td style="background-color: #fff; color: #000"></td>
-            </tr>
-        </tbody>
+          <td style="background-color: #fabf8f; color: #000">当日涉诈涉案量</td>
+          <td style="background-color: #fabf8f; color: #000">当月涉诈涉案量</td>
+          <td style="background-color: #fabf8f; color: #000">当月累计涉案预申诉量</td>
+          <td style="background-color: #fabf8f; color: #000">当月累计12321申诉量</td>
+          <td style="background-color: #fabf8f; color: #000">当月涉诈指标控制值完成情况</td>
+          <td style="background-color: #95b3d7; color: #e7180d">全省排名</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background-color: #ffc7ce; color: #000">1</td>
+          <td style="background-color: #ffc7ce; color: #000">2</td>
+          <td style="background-color: #ffc7ce; color: #000">3</td>
+          <td style="background-color: #ffc7ce; color: #000">4</td>
+          <td style="background-color: #ffc7ce; color: #000">5</td>
+          <td style="background-color: #ffc7ce; color: #000">6</td>
+          <td style="background-color: #ffc7ce; color: #000">7</td>
+          <td style="background-color: #ffc7ce; color: #000">8</td>
+          <td style="background-color: #ffc7ce; color: #000">9</td>
+          <td style="background-color: #ffc7ce; color: #000">10</td>
+          <td style="background-color: #ffc7ce; color: #000">11</td>
+          <td style="background-color: #ffc7ce; color: #000">12</td>
+          <td style="background-color: #ffc7ce; color: #000">13</td>
+          <td style="background-color: #ffc7ce; color: #000">14</td>
+          <td style="background-color: #ffc7ce; color: #000">15</td>
+        </tr>
+        <tr>
+          <td style="background-color: #ffc7ce; color: #000">1</td>
+          <td style="background-color: #ffc7ce; color: #000">2</td>
+          <td style="background-color: #ffc7ce; color: #000">3</td>
+          <td style="background-color: #ffc7ce; color: #000">4</td>
+          <td style="background-color: #ffc7ce; color: #000">5</td>
+          <td style="background-color: #ffc7ce; color: #000">6</td>
+          <td style="background-color: #ffc7ce; color: #000">7</td>
+          <td style="background-color: #ffc7ce; color: #000">8</td>
+          <td style="background-color: #ffc7ce; color: #000">9</td>
+          <td style="background-color: #ffc7ce; color: #000">10</td>
+          <td style="background-color: #ffc7ce; color: #000">11</td>
+          <td style="background-color: #ffc7ce; color: #000">12</td>
+          <td style="background-color: #ffc7ce; color: #000">13</td>
+          <td style="background-color: #ffc7ce; color: #000">14</td>
+          <td style="background-color: #ffc7ce; color: #000">15</td>
+        </tr>
+        <tr>
+          <td style="background-color: #ffc7ce; color: #000">1</td>
+          <td style="background-color: #ffc7ce; color: #000">2</td>
+          <td style="background-color: #ffc7ce; color: #000">3</td>
+          <td style="background-color: #ffc7ce; color: #000">4</td>
+          <td style="background-color: #ffc7ce; color: #000">5</td>
+          <td style="background-color: #ffc7ce; color: #000">6</td>
+          <td style="background-color: #ffc7ce; color: #000">7</td>
+          <td style="background-color: #ffc7ce; color: #000">8</td>
+          <td style="background-color: #ffc7ce; color: #000">9</td>
+          <td style="background-color: #ffc7ce; color: #000">10</td>
+          <td style="background-color: #ffc7ce; color: #000">11</td>
+          <td style="background-color: #ffc7ce; color: #000">12</td>
+          <td style="background-color: #ffc7ce; color: #000">13</td>
+          <td style="background-color: #ffc7ce; color: #000">14</td>
+          <td style="background-color: #ffc7ce; color: #000">15</td>
+        </tr>
+        <tr>
+          <td style="background-color: #ffeb9c; color: #c9a247">1</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">2</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">3</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">4</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">5</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">6</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">7</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">8</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">9</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">10</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">11</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">12</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">13</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">14</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">15</td>
+        </tr>
+        <tr>
+          <td style="background-color: #ffeb9c; color: #c9a247">1</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">2</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">3</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">4</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">5</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">6</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">7</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">8</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">9</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">10</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">11</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">12</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">13</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">14</td>
+          <td style="background-color: #ffeb9c; color: #c9a247">15</td>
+        </tr>
+        <tr>
+          <td style="background-color: #c6efce; color: #000">1</td>
+          <td style="background-color: #c6efce; color: #000">2</td>
+          <td style="background-color: #c6efce; color: #000">3</td>
+          <td style="background-color: #c6efce; color: #000">4</td>
+          <td style="background-color: #c6efce; color: #000">5</td>
+          <td style="background-color: #c6efce; color: #000">6</td>
+          <td style="background-color: #c6efce; color: #000">7</td>
+          <td style="background-color: #c6efce; color: #000">8</td>
+          <td style="background-color: #c6efce; color: #000">9</td>
+          <td style="background-color: #c6efce; color: #000">10</td>
+          <td style="background-color: #c6efce; color: #000">11</td>
+          <td style="background-color: #c6efce; color: #000">12</td>
+          <td style="background-color: #c6efce; color: #000">13</td>
+          <td style="background-color: #c6efce; color: #000">14</td>
+          <td style="background-color: #c6efce; color: #000">15</td>
+        </tr>
+        <tr>
+          <td style="background-color: #fff; color: #000">1</td>
+          <td style="background-color: #fff; color: #000">2</td>
+          <td style="background-color: #fff; color: #000">3</td>
+          <td style="background-color: #fff; color: #000">4</td>
+          <td style="background-color: #fff; color: #000">5</td>
+          <td style="background-color: #fff; color: #000">6</td>
+          <td style="background-color: #fff; color: #000">7</td>
+          <td style="background-color: #fff; color: #000">8</td>
+          <td style="background-color: #fff; color: #000">9</td>
+          <td style="background-color: #fff; color: #000">10</td>
+          <td style="background-color: #fff; color: #000">11</td>
+          <td style="background-color: #fff; color: #000">12</td>
+          <td style="background-color: #fff; color: #000">13</td>
+          <td style="background-color: #c6efce; color: #000">14</td>
+          <td style="background-color: #fff; color: #000"></td>
+        </tr>
+      </tbody>
     </table>
     <script>
-        window.onload = function () {
-            tableToExcel('tableToExcel', '涉案涉诈统计表（日）')
-        };
-        //base64转码
-        var base64 = function (s) {
-            return window.btoa(unescape(encodeURIComponent(s)));
-        };
-        //替换table数据和worksheet名字
-        var format = function (s, c) {
-            return s.replace(/{(\w+)}/g,
-                function (m, p) {
-                    return c[p];
-                });
-        };
-        function tableToExcel(tableid, sheetName) {
-            var uri = 'data:application/vnd.ms-excel;base64,';
-            var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"' +
-                'xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
-                + '<x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>'
-                + '</x:ExcelWorkbook></xml><![endif]-->' +
-                '</head><body ><table class="excelTable">{table}</table></body></html>';
-                
-            if (!tableid.nodeType) tableid = document.getElementById(tableid);
-            var ctx = { worksheet: sheetName || 'Worksheet', table: tableid.innerHTML };
-            document.getElementById("excelOut").href = uri + base64(format(template, ctx));
-        };
+      window.onload = function () {
+        tableToExcel('tableToExcel', '涉案涉诈统计表（日）');
+      };
+      //base64转码
+      var base64 = function (s) {
+        return window.btoa(unescape(encodeURIComponent(s)));
+      };
+      //替换table数据和worksheet名字
+      var format = function (s, c) {
+        return s.replace(/{(\w+)}/g, function (m, p) {
+          return c[p];
+        });
+      };
+      function tableToExcel(tableid, sheetName) {
+        var uri = 'data:application/vnd.ms-excel;base64,';
+        var template =
+          '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"' +
+          'xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>' +
+          '<x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>' +
+          '</x:ExcelWorkbook></xml><![endif]-->' +
+          '</head><body ><table class="excelTable">{table}</table>\<\/body\>\<\/html\>';
+        if (!tableid.nodeType) tableid = document.getElementById(tableid);
+        var ctx = { worksheet: sheetName || 'Worksheet', table: tableid.innerHTML };
+        document.getElementById('excelOut').href = uri + base64(format(template, ctx));
+      }
     </script>
-</body>
-
+  </body>
 </html>

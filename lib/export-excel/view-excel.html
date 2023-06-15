@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+  </head>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      display: block;
+      margin-bottom: 1em;
+    }
+    table thead,
+    table tr:nth-child(2n) {
+      background-color: rgba(0, 0, 0, .04);
+    }
+    table tr {
+      border-top: 1px solid #dadde1;
+    }
+    table td {
+      color: inherit;
+      text-align: center;
+    }
+    table td,
+    table th {
+      border: 1px solid #dadde1;
+      padding: 0.75rem;
+    }
+  </style>
+  <body>
+    <div id="TableContainer"></div>
+    <script>
+      (async () => {
+        /* replace with the URL of the file */
+        const URL_TO_DOWNLOAD = '/assets/demo.xlsx';
+        const ab = await (await fetch(URL_TO_DOWNLOAD)).arrayBuffer();
+
+        /* Parse file and get first worksheet */
+        const wb = XLSX.read(ab);
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+
+        /* Generate HTML */
+        var output = document.getElementById('TableContainer');
+        output.innerHTML = XLSX.utils.sheet_to_html(ws);
+      })();
+    </script>
+  </body>
+</html>

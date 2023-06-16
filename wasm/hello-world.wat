@@ -5,10 +5,10 @@
   ;;import js:mem as memory
   (import "js" "mem" (memory 1))
   ;;export main
-  (data (i32.const 0) "Hello, world!\38") 
+  (data (i32.const 0) "Hello, world!\n\37\38\a0\a1\a2")
     (func (export "main")
       i32.const 0 ;; memory offset
-      i32.const 40 ;; memory length
+      i32.const 19 ;; memory length
       call $js_print ;; function to call
     )
 )

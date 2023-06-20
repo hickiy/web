@@ -6,10 +6,13 @@
 
 	<title>Svelte app</title>
 	<link rel='icon' type='image/png' href='/assets/svelte.png'>
-	<link rel='stylesheet' href='/build/bundle.css'>
-	<script defer src='./build/bundle.js'></script>
 </head>
-
+<script type="module">
+	import App from './build/index.js'
+	const app = new App({
+		target: document.body,
+	});
+</script>
 <body>
 </body>
 </html>

@@ -1,5 +1,0 @@
-<!--index.wxml-->
-<view>
-  <!-- <button type="primary" bindtap="bindtap">测试文件选择</button> -->
-  <web-view src="http://10.10.3.121:5500/html/ajax/ajax-upload-file.html"/>
-</view>

@@ -2,21 +2,21 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "a interesting personal blog",
+  title: "Hickey",
   description: "A interesting personal blog",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Demo', link: '/markdown-examples' }
+      { text: '首页', link: '/' },
+      { text: '样例', link: '/markdown-examples' }
     ],
 
     sidebar: [
       {
-        text: 'Demo',
+        text: '样例',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: 'Markdown 样例', link: '/markdown-examples' },
+          { text: '运行时的API', link: '/api-examples' }
         ]
       }
     ],

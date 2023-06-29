@@ -28,6 +28,7 @@
   "homepage": "https://github.com/love596310898/love596310898.github.io#readme",
   "devDependencies": {
     "@algolia/client-search": ">=4.9.1 <6.0.0",
+    "@types/node": "^20.3.2",
     "search-insights": ">= 1 < 3",
     "vitepress": "1.0.0-beta.3"
   },

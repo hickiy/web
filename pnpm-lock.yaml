@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@algolia/client-search': '>=4.9.1 <6.0.0'
+  '@types/node': ^20.3.2
   search-insights: '>= 1 < 3'
   vitepress: 1.0.0-beta.3
   vue: ^3.3.4
@@ -11,8 +12,9 @@ dependencies:
 
 devDependencies:
   '@algolia/client-search': 4.18.0
+  '@types/node': 20.3.2
   search-insights: 2.6.0
-  vitepress: 1.0.0-beta.3_bgl5q4zoo2plfzwtawaf5ixkxu
+  vitepress: 1.0.0-beta.3_ekuno4iaalzlfa6pusmvths4a4
 
 packages:
 
@@ -414,6 +416,10 @@ packages:
   /@jridgewell/sourcemap-codec/1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
 
+  /@types/node/20.3.2:
+    resolution: {integrity: sha512-vOBLVQeCQfIcF/2Y7eKFTqrMnizK5lRNQ7ykML/5RuwVXVWxYkgwS7xbt4B6fKCUPgbSL5FSsjHQpaGQP/dQmw==}
+    dev: true
+
   /@types/web-bluetooth/0.0.17:
     resolution: {integrity: sha512-4p9vcSmxAayx72yn70joFoL44c9MO/0+iVEBIQXe3v2h2SiAsEIo/G5v6ObFWvNKRFjbrVadNf9LqEEZeQPzdA==}
     dev: true
@@ -425,7 +431,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.3.9
+      vite: 4.3.9_@types+node@20.3.2
       vue: 3.3.4
     dev: true
 
@@ -730,7 +736,7 @@ packages:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
 
-  /vite/4.3.9:
+  /vite/4.3.9_@types+node@20.3.2:
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -755,6 +761,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.3.2
       esbuild: 0.17.19
       postcss: 8.4.24
       rollup: 3.25.3
@@ -762,7 +769,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/1.0.0-beta.3_bgl5q4zoo2plfzwtawaf5ixkxu:
+  /vitepress/1.0.0-beta.3_ekuno4iaalzlfa6pusmvths4a4:
     resolution: {integrity: sha512-GR5Pvr/o343NN1M4Na1shhDYZRrQbjmLq7WE0lla0H8iDPAsHE8agTHLWfu3FWx+3q2KA29sv16+0O9RQKGjlA==}
     hasBin: true
     dependencies:
@@ -777,7 +784,7 @@ packages:
       mark.js: 8.11.1
       minisearch: 6.1.0
       shiki: 0.14.3
-      vite: 4.3.9
+      vite: 4.3.9_@types+node@20.3.2
       vue: 3.3.4
     transitivePeerDependencies:
       - '@algolia/client-search'

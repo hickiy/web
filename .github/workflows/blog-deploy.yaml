@@ -27,4 +27,6 @@ jobs:
           ARGS: '-rlgoDzvc -i'
           SCRIPT_BEFORE: |
             sudo su root
+            cd /root/www
+            pwd
             whoami

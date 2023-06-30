@@ -23,11 +23,12 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           SOURCE: ./docs/.vitepress/dist/*
-          TARGET: /root/www/dist
+          TARGET: ./dist
           ARGS: '-rlgoDzvc -i'
-          SCRIPT_BEFORE: |
+          SCRIPT_AFTER: |
             sudo su root
             cd /root/www
             pwd
             whoami
             rm -rf dist
+            mv /home/admin/dist ./

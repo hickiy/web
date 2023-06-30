@@ -26,5 +26,5 @@ jobs:
           TARGET: ${{ secrets.TARGET_DIR }}
           ARGS: '-rlgoDzvc -i'
           SCRIPT_BEFORE: |
-            ls -al
             sudo su root
+            w

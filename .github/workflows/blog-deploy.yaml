@@ -1,0 +1,30 @@
+name: Deploy blog to Amazon ECS
+on:
+  workflow_dispatch:
+  push:
+    branches: ['master']
+
+jobs:
+  build-and-deploy:
+    name: build the blog and deploy to Amazon ECS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        # install dependencies
+      - name: Install dependencies and build
+        run: npx pnpm i && npm run docs:build
+        # upload to Amazon ECS
+      - name: deploy file to server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: ${{ secrets.LOCAL_PATH }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+          ARGS: '-rlgoDzvc -i'
+          SCRIPT_BEFORE: |
+            ls -al
+            sudo su root

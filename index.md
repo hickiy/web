@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: 查看博客
-      link: /markdown-examples
-    - theme: alt
-      text: 开始交流
-      link: /api-examples
+      link: /deploy/nginx/location.md
+    # - theme: alt
+    #   text: 开始交流
+    #   link: /api-examples
 
 features:
   - title: 技术交流

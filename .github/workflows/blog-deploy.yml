@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v3
         # install dependencies
       - name: Install dependencies and build
-        run: npx pnpm i && npm run docs:build
+        run: npx pnpm i && npm run build
         # upload to Amazon ECS
       - name: deploy file to server
         uses: easingthemes/ssh-deploy@main
@@ -22,13 +22,19 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SOURCE: ./docs/.vitepress/dist/*
-          TARGET: ./dist
+          SOURCE: .vitepress/dist ./blog.conf
+          TARGET: ./
           ARGS: '-rlgoDzvc -i'
           SCRIPT_AFTER: |
+            rm /blog -rf
+            cp ./dist ./blog -rf
             sudo su root
             cd /root/www
             pwd
-            whoami
-            rm -rf dist
-            mv /home/admin/dist ./
+            rm ./blog -rf
+            mv /home/admin/blog ./
+            cd /etc/nginx/conf.d
+            pwd
+            rm ./blog.conf
+            mv /home/admin/blog.conf ./
+            systemctl restart nginx

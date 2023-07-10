@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/blog/',
+  outDir: '.vitepress/blog',
   title: 'hickey blog',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

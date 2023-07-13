@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>explor alpine</title>
+    <script>
+      // 生成一个web component
+      // 1. 创建一个类
+      class MyComponent extends HTMLElement {
+        constructor() {
+          super();
+          this.attachShadow({ mode: 'open' });
+        }
+        connectedCallback() {
+          this.shadowRoot.innerHTML = `
+          <div x-data=\"\{ name: \'web component\' \}\">
+            <input type="text" x-model="name" />
+            <h1 x-text=\"name\"></h1>
+          </div
+        `;
+        }
+      }
+
+      // 2. 注册一个自定义元素
+      customElements.define('my-component', MyComponent);
+    </script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/alpinejs/3.12.0/cdn.js" defer></script>
+  </head>
+  <body>
+    <div x-data="{ name: 'abc' }">
+      <input type="text" x-model="name" />
+      <p>Username: <strong x-text="name"></strong></p>
+    </div>
+    <my-component></my-component>
+  </body>
+</html>

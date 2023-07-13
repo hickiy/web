@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>explor alpine</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/alpinejs/3.12.0/cdn.js" defer></script>
+  </head>
+  <body>
+    <div x-data="{ name: 'abc' }">
+      <input type="text" x-model="name" />
+      <p>Username: <strong x-text="name"></strong></p>
+    </div>
+    <template id="mirror">
+      <div x-data="{ name: 'web component' }">
+        <input type="text" x-model="name" />
+        <h1 x-text="name"></h1>
+      </div>
+    </template>
+    <script>
+      const body = document.querySelector('body');
+      const template = document.querySelector('#mirror');
+      const mirrorNode = template.content.cloneNode(true);
+      body.appendChild(mirrorNode);
+    </script>
+  </body>
+</html>

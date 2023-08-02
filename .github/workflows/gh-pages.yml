@@ -1,4 +1,4 @@
-name: build and deploy to gh-pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -20,8 +20,8 @@ jobs:
         run: npm install
       - name: Build with npm
         run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          name: my-blog
-          path: /
+          branch: gh-pages
+          folder: .vitepress/dist

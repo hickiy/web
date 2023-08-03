@@ -4,6 +4,7 @@ export default defineConfig({
   base: '/learning-web/',
   outDir: '.vitepress/dist',
   title: 'hickey blog',
+  head: [['link', { rel: 'icon', href: '/favicon.jpg' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/favicon.jpg',

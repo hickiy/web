@@ -1,2 +1,1 @@
-# love596310898.github.io
-learn demo
+an prectice project for learning web technologe

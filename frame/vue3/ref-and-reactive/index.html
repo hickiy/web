@@ -13,12 +13,18 @@
       const { ref, reactive, h } = Vue;
       const App = {
         setup(props, { emit, expose }) {
-          const count = ref(0);
-          const countObj = ref({ int: 0 });
-          const countObj2 = reactive({ int: 0 });
-          console.log(count, countObj, countObj2);
+          let count = ref(0);
+          console.log(count);
+          let countObj = ref({ int: 0 });
+          console.log(countObj);
+          let countObj2 = reactive({ int: 0, obj3: { name: '我是内部的proxy' } });
+          console.log(countObj2);
+          let { obj3 } = countObj2;
+          console.log(obj3);
+          obj3 = { name: '我已经失去响应性' };
+          console.log(obj3);
           return () => {
-            return h('div', {}, [countObj.value.int, h('button', { onClick: () => countObj.value.int++ }, 'add')]);
+            return h('div', {}, [count.value, h('button', { onClick: () => count.value++ }, 'add')]);
           };
         }
       };

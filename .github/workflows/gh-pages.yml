@@ -21,7 +21,7 @@ jobs:
       - name: Build with npm
         run: npm run build
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+        uses: actions/upload-artifact@v2
         with:
-          branch: gh-pages
-          folder: .vitepress/dist
+          name: hickey-homepage
+          path: .vitepress/dist

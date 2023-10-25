@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">获取地理位置信息</button>
+    <script>
+      getGeo = () => {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var latitude = position.coords.latitude; // 纬度
+          var longitude = position.coords.longitude; // 经度
+          var speed = position.coords.speed; // 速度
+          var accuracy = position.coords.accuracy; // 精度
+          console.log(latitude, longitude, speed, accuracy);
+        });
+      };
+      document.getElementById("btn").addEventListener("click", getGeo);
+    </script>
+  </body>
+</html>

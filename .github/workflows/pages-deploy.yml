@@ -32,4 +32,4 @@ jobs:
         id: deploy_to_pages
         with: 
           build_path: .vitepress/dist
-          public_base_path: /learning-web/
+          public_base_path: /web/

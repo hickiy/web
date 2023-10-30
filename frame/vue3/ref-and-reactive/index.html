@@ -10,21 +10,40 @@
   <body>
     <div id="app"></div>
     <script>
-      const { ref, reactive, h } = Vue;
+      const { ref, reactive, h, toRefs } = Vue;
+      /* 
+      * 解包: 
+      * ref 用于创建一个响应式的数据，它在模板中可以自动解包，但是在js中需要通过.value来获取值
+      * reactive: 用于创建一个响应式的对象，他在模板中与js中使用方法一致
+      * 在这个方面，reactive比ref更加方便
+      * 
+      * 重新赋值：
+      * ref 通过.value来重新赋值, ref 重新赋值不会丢失响应式
+      * reactive 重新赋值会丢失响应性
+      * 在这个方面，ref比reactive更加方便，官方推荐使用ref，也主要是因为ref的重新赋值不会丢失响应性
+      * 
+      * 解构：
+      * ref 解构会丢失响应性
+      * reactive 解构也会丢失响应性
+      * 在这个方面，ref和reactive一样，都需要依赖toRefs来解决
+      */
       const App = {
         setup(props, { emit, expose }) {
-          let count = ref(0);
+          let refV = ref(0);
+          let refO = ref({ count: 0 });
+          let reactiveV = reactive({ count: 0 });
+          let { count } = toRefs(reactiveV);
+          console.log(refV);
+          console.log(refO);
+          console.log(reactiveV);
           console.log(count);
-          let countObj = ref({ int: 0 });
-          console.log(countObj);
-          let countObj2 = reactive({ int: 0, obj3: { name: '我是内部的proxy' } });
-          console.log(countObj2);
-          let { obj3 } = countObj2;
-          console.log(obj3);
-          obj3 = { name: '我已经失去响应性' };
-          console.log(obj3);
           return () => {
-            return h('div', {}, [count.value, h('button', { onClick: () => count.value++ }, 'add')]);
+            return [
+              h('div', {}, [refV.value, h('button', { onClick: () => refV.value++ }, 'ref')]),
+              h('div', {}, [refO.value.count, h('button', { onClick: () => refO.value.count++ }, 'refObj')]),
+              h('div', {}, [reactiveV.count, h('button', { onClick: () => reactiveV.count++ }, 'reactive')]),
+              h('div', {}, [count.value, h('button', { onClick: () => count.value++ }, 'reactiveDestructring')])
+            ];
           };
         }
       };

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>el-descriptions</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/theme-chalk/index.css" rel="stylesheet" />
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/index.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <el-descriptions :column="3">
+        <el-descriptions-item label="活动名">活动一</el-descriptions-item>
+        <el-descriptions-item label="活动名">活动一</el-descriptions-item>
+        <el-descriptions-item label="活动名">活动一</el-descriptions-item>
+        <el-descriptions-item label="活动名">活动一</el-descriptions-item>
+        <el-descriptions-item label="活动名">活动一</el-descriptions-item>
+        <!-- <el-descriptions-item label="活动名">活动一</el-descriptions-item> -->
+        <el-descriptions-item :span="3" label="活动名">活动一</el-descriptions-item>
+      </el-descriptions>
+    </div>
+  </body>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+        };
+      },
+    }).$mount();
+  </script>
+</html>

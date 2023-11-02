@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>white space</title>
+</head>
+<body>
+  <div>00&nbsp;&nbsp;22     33</div>
+  <script>
+    var div = document.createElement('div');
+    div.innerHTML = '00&nbsp;&nbsp;22      33';
+    document.body.appendChild(div);
+  </script>
+</body>
+</html>

@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>white space</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/theme-chalk/index.css" rel="stylesheet" />
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/index.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vite App</title>
-  <link rel="icon" href="./assets/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="./assets/index.css" />
-  <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-</head>
-
-<body>
-  <div id="app">
-    <el-form :model="form" :rules="rules">
-      <el-form-item label="用户名称" prop="name">
-        <el-input v-model="form.name" placeholder="请输入用户名"></el-input>
-      </el-form-item>
-    </el-form>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <body>
+    <div id="app">
+      <div>00&nbsp;&nbsp;11   22</div>
+      <div>{{"00&nbsp;&nbsp;11     22"}}</div>
+      <div>{{url}}</div>
+    </div>
+  </body>
   <script>
-    const app = new Vue({
-      name: 'App',
+    var app = new Vue({
+      el: '#app',
       data() {
         return {
-          form: {
-            name: ''
-          },
-          rules: {
-            name: [{ required: false, message: '请输入用户名', trigger: 'blur' }, { pattern: /\D+/, message: '请输入正确的用户名', tirgger: 'blur' }]
-          }
+          url: '00\xa0\u00a011   22'
+        };
+      },
+      methods: {
+        keyup(ev) {
+          console.log(this.url);
+          ev.preventDefault();
         }
       }
-    }).$mount('#app');
+    }).$mount();
   </script>
-</body>
-
 </html>

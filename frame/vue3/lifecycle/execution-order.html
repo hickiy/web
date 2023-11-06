@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>life cycle execution order</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.12/index.css" rel="stylesheet" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.12/index.full.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <el-button @click="openDialog">打开子页面弹窗</el-button>
+      <child ref="child"></child>
+    </div>
+    <script>
+      const { ref, getCurrentInstance, toDisplayString, h, onBeforeMount, onMounted, nextTick } = Vue;
+      const app = Vue.createApp({
+        name: 'app',
+        components: {
+          child: {
+            template: `<el-dialog v-model="visible" ref="dialog">
+              <div>{{name}}</div>
+            </el-dialog>`,
+            setup(props, { expose }) {
+              const dialog = ref(null);
+              const visible = ref(false);
+              const instance = getCurrentInstance();
+              onBeforeMount(() => {
+                console.log('child beforeMount');
+                console.log('child dialog', instance.refs.dialog, dialog.value);
+              });
+              onMounted(() => {
+                console.log('child mounted');
+                console.log('child dialog', instance.refs.dialog, dialog.value);
+              });
+              function init() {
+                visible.value = true;
+                console.log('child init');
+                nextTick(() => {
+                  console.log('child dialog', instance.refs.dialog, dialog.value);
+                });
+              }
+              return {
+                init,
+                name,
+                visible,
+                dialog
+              };
+            }
+          }
+        },
+        data() {
+          return {
+            name: 'open dialog'
+          };
+        },
+        beforeCreate() {
+          console.log('beforeCreate');
+        },
+        created() {
+          console.log('created');
+        },
+        beforeMount() {
+          console.log('beforeMount');
+        },
+        mounted() {
+          console.log('mounted');
+        },
+        beforeUpdate() {
+          console.log('beforeUpdate');
+        },
+        updated() {
+          console.log('updated');
+        },
+        beforeUnmount() {
+          console.log('beforeUnmount');
+        },
+        unmounted() {
+          console.log('unmounted');
+        },
+        methods: {
+          openDialog() {
+            this.$refs.child.init();
+          }
+        }
+      });
+      app.use(ElementPlus);
+      app.mount('#app');
+    </script>
+  </body>
+</html>

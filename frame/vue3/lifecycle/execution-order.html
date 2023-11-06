@@ -25,6 +25,7 @@
             setup(props, { expose }) {
               const dialog = ref(null);
               const visible = ref(false);
+              const name = ref('child');
               const instance = getCurrentInstance();
               onBeforeMount(() => {
                 console.log('child beforeMount');
@@ -82,6 +83,7 @@
         methods: {
           openDialog() {
             this.$refs.child.init();
+            console.log(this.$refs.child.$ == this.$refs.child._)
           }
         }
       });

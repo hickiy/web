@@ -20,6 +20,7 @@
         components: {
           child: {
             setup(props, { expose }) {
+              console.log(props);
               const name = ref('child');
               // expose({ name });
               return {

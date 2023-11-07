@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test unbeforeload event</title>
+</head>
+<body>
+  
+  <a href="http://localhost:8080">测试离开</a>
+  <script>
+    /* safari测试，刷新必然会进入两个断点
+    * edge测试，刷新会执行两个事件的回调函数，但是断点无效
+    * chrome测试 刷新会执行两个事件的回调函数，但是断点无效
+    */
+    window.addEventListener('beforeunload', function (e) {
+      debugger
+      console.log('beforeunload');
+    });
+    window.addEventListener('unload', function (e) {
+      debugger
+      console.log('unload');
+    });
+  </script>
+</body>
+</html>

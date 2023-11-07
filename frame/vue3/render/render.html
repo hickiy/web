@@ -12,23 +12,56 @@
       <!-- <div>{{name}}</div> -->
     </div>
     <script>
-      const { ref, h } = Vue;
+      const { ref, h, getCurrentInstance } = Vue;
+
+      const child = {
+        name: 'child',
+        emits: {
+          keydown: (e) => {
+            console.log(e);
+            return false;
+          }
+        },
+        setup(props, ctx) {
+          console.log(props, ctx, getCurrentInstance());
+          const name = ref('child');
+          return (data, caches) => {
+            console.log(data, caches);
+            return h(
+              'div',
+              {
+                onClick: () => {
+                  ctx.emit('keydown', 'test');
+                }
+              },
+              name.value
+            );
+          };
+        }
+      };
+
       const app = Vue.createApp({
         name: 'app',
         // 使用选项模板字符串
         // template: `<div>{{name}}</div>`,
         setup(props, { expose }) {
           const name = ref('app');
-          return {
-            name
-          };
+          // return {
+          //   name
+          // };
           // 使用setup直接返回render函数
-          // return () => h('div', name.value);
-        },
-        // 直接手动指定一个render函数
-        render() {
-          return h('div', this.name);
+          return () => {
+            return h(child, {
+              onKeydown: (e) => {
+                console.log(e);
+              }
+            });
+          };
         }
+        // 直接手动指定一个render函数
+        // render() {
+        //   return h('div', this.name);
+        // }
       });
       app.mount('#app');
     </script>

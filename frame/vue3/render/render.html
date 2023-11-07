@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue setup</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 可以直接使用 html 模板 -->
+      <!-- <div>{{name}}</div> -->
+    </div>
+    <script>
+      const { ref, h } = Vue;
+      const app = Vue.createApp({
+        name: 'app',
+        // 使用选项模板字符串
+        // template: `<div>{{name}}</div>`,
+        setup(props, { expose }) {
+          const name = ref('app');
+          return {
+            name
+          };
+          // 使用setup直接返回render函数
+          // return () => h('div', name.value);
+        },
+        // 直接手动指定一个render函数
+        render() {
+          return h('div', this.name);
+        }
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

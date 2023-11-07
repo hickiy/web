@@ -8,10 +8,14 @@ import { ref, h } from 'vue';
 
 export default {
   __name: 'setup',
+  props: ['count'],
+  emits: ['update:count'],
   setup(__props, { expose: __expose }) {
-    __expose();
-
     const count = ref(1);
+
+    __expose({
+      count
+    });
 
     const __returned__ = { count, ref, h };
     Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true });

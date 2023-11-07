@@ -4,8 +4,13 @@
 </template>
 
 <script setup>
-import { ref, h } from 'vue';
+import { ref, h, defineExpose, defineProps, defineEmits } from 'vue';
 const count = ref(1);
+defineEmits(['update:count']);
+defineProps(['count']);
+defineExpose({
+  count
+});
 </script>
 
 <!-- <script>

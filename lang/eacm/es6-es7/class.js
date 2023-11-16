@@ -10,21 +10,27 @@
  * 将类的构造器或者构造函数当作普通函数直接调用时内部的new.target属性值是undefined，在类的构造器或者构造函数之外的使用new.target属性会报错
  */
 class ES6 {
-  constructor() { // 类中的构造器中this指向类的实例对象
+  constructor() {
+    // 类中的构造器中this指向类的实例对象
     console.log(new.target === ES6); // 在类的构造函数内 new.target 指向类自身
     this.name = 'es6'; // 定义实例属性
   }
 
-  prop = 'prop' // 定义实例属性 定义在返回的实例对象上
+  prop = 'prop'; // 定义实例属性 定义在返回的实例对象上
 
-  static state = '111111' // 类静态属性，定义在类的构造函数身上
+  static state = '111111'; // 类静态属性，定义在类的构造函数身上
 
-  callMe() { // 定义继承方法 定义在类的prototype对象上  this指向实例自身
+  callMe() {
+    // 定义继承方法 定义在类的prototype对象上  this指向实例自身
     console.log(this, 'im a instance of es6 class');
   }
 
-  static callMe() { // 静态方法 定义在构造函数上 this指向类自身
+  static callMe() {
+    // 静态方法 定义在构造函数上 this指向类自身
     console.log(this, 'the static method of class is calling');
   }
+  className = 'ES6'; // 实例属性
 }
-console.log(new ES6());
+
+const instance = new ES6();
+console.log(instance.name, instance.className);

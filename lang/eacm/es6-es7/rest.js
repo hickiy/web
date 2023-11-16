@@ -11,28 +11,37 @@
 
 // 对于存取器属性的rest使用
 /**
-  * rest运算符对于属性的赋值特点
-  * 原始类型是值传递，引用类型是引用传递
-  * 对与存取器属性，传递的是get方法获取的值
-  */
-const a = {
-  get n() {
-    return '获取属性';
-  },
-};
-Object.defineProperty(a, 'i', {
-  value: 1,
-  configurable: true,
-  writable: true,
-  enumerable: false,
-});
-const b = new Set([1, 2]);
-const c = new Map([[0, 1], [1, 2]]);
-const d = [3, 4];
-const e = {
-  name: 'b', ...a, ...b, ...c, ...d,
-};
-const f = [...b, ...c];
-global.console.log(a, b, c, d);
-global.console.log(e);
-global.console.log(f);
+ * rest运算符对于属性的赋值特点
+ * 原始类型是值传递，引用类型是引用传递
+ * 对与存取器属性，传递的是get方法获取的值
+ */
+// const a = {
+//   get n() {
+//     return '获取属性';
+//   }
+// };
+// Object.defineProperty(a, 'i', {
+//   value: 1,
+//   configurable: true,
+//   writable: true,
+//   enumerable: false
+// });
+// const b = new Set([1, 2]);
+// const c = new Map([
+//   [0, 1],
+//   [1, 2]
+// ]);
+// const d = [3, 4];
+// const e = {
+//   name: 'b',
+//   ...a,
+//   ...b,
+//   ...c,
+//   ...d
+// };
+// const f = [...b, ...c];
+// global.console.log(a, b, c, d);
+// global.console.log(e);
+// global.console.log(f);
+
+console.log(...['1', '2', '3']);

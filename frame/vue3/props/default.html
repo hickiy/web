@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue props default</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{name}}</div>
+      <child :say-name="sayName"></child>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <script>
+      'use strict';
+      // 对于render来说，expose不能代替return向render提供数据
+      // 对与父组件引用子组件的值来说，return可以代替expose向父组件提供数据
+      const { ref, onMounted, getCurrentInstance, toDisplayString, h } = Vue;
+      const app = Vue.createApp({
+        name: 'app',
+        components: {
+          child: {
+            props: ['sayName'],
+            setup(props, { expose }) {
+              const name = ref('child');
+              return {
+                name,
+                sayName: props.sayName
+              };
+            },
+            template: `<button @click="sayName(name)">{{name}}</button>`
+          }
+        },
+        props: {
+          sayName: {
+            default(...args) {
+              const instance = getCurrentInstance();
+              console.log(this, instance, args);
+              return (...params) => {
+                console.log(this, instance, ...params);
+              };
+            }
+          },
+          sayName1: {
+            type: Function,
+            default(...args) {
+              const instance = getCurrentInstance();
+              console.log(this, instance, ...args);
+            }
+          }
+        },
+        setup(props, { expose }) {
+          const name = ref('app');
+          return {
+            name,
+            sayName: props.sayName
+          };
+        }
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

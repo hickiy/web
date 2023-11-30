@@ -1,65 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link rel="icon" href="../assets/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../assets/index.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vite App</title>
-  <link rel="icon" href="../assets/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="../assets/index.css" />
-</head>
-
-<body>
-  <div id="app"></div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script>
-    const HelloWorld = {
-      name: 'HelloWorld',
-      template: '<div><h1>{{ msg.length }}</h1><button @click="push">push</button><p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p></div>',
-      props: {
-        msg: {
-          type: Array,
-          default: [],
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const HelloWorld = {
+        name: 'HelloWorld',
+        template:
+          '<div><h1>{{ msg.length }}</h1><button @click="push">push</button><p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p></div>',
+        props: {
+          msg: {
+            type: Array,
+            default: []
+          },
+          fun: {
+            type: Function
+          }
         },
-        fun: {
-          type: Function
-        },
-      },
-      methods: {
-        push() {
-          this.msg.push(3)
-          console.log(this);
-          this.fun()
+        methods: {
+          push() {
+            this.msg.push(3);
+            this.fun(111);
+          }
         }
-      }
-    }
-    function noop() {
-      console.log(this, 'noop run')
-      return () => {
-        console.log(this, 'inner run');
-      }
-    }
-    const app = new Vue({
-      name: 'App',
-      template: '<div id="app"><img alt="Vue logo" src="../assets/logo.png"><HelloWorld :msg="testArray" :fun="fun" /></div> ',
-      components: {
-        HelloWorld
-      },
-      props: {
-        noop: {
-          default: noop,
+      };
+      const app = new Vue({
+        name: 'App',
+        template: '<div id="app"><img alt="Vue logo" src="../../../public/vue.png"><HelloWorld :msg="testArray" :fun="fun" /></div> ',
+        components: {
+          HelloWorld
         },
-        fun: {
-          default: noop
+        props: {
+          noop: {
+            default(...args) {
+              console.log(this, args);
+            }
+          },
+          fun: {
+            type: Function,
+            default(...args) {
+              console.log(this, args);
+            }
+          }
         },
-      },
-      data() {
-        return {
-          testArray: [1, 2],
+        data() {
+          return {
+            testArray: [1, 2]
+          };
         }
-      },
-    }).$mount('#app');
-  </script>
-</body>
-
+      }).$mount('#app');
+    </script>
+  </body>
 </html>

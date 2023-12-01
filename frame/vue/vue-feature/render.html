@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            msg: 'Hello World',
+            info: {
+              name: 'zhangsan'
+            }
+          };
+        },
+        render(h) {
+          console.log('app render', this);
+          return h('div', [
+            h(
+              'button',
+              {
+                on: {
+                  click: () => {
+                    this.msg = 'Hello World1111111';
+                    this.info.name = 'lisi';
+                  }
+                }
+              },
+              this.info.name
+            ),
+            h('Welcome'),
+            h('HelloWorld', {
+              props: {
+                msg: this.msg
+              }
+            })
+          ]);
+        },
+        components: {
+          HelloWorld: {
+            props: {
+              msg: {
+                type: String,
+                default: ''
+              }
+            },
+            render(h) {
+              console.log('helloworld render');
+              return h(
+                'button',
+                {
+                  on: {
+                    click: () => {
+                      this.msg = 'Hello World22222';
+                    }
+                  }
+                },
+                this.msg
+              );
+            }
+          },
+          Welcome: {
+            render(h) {
+              console.log('welcome render');
+              return h(
+                'div',
+                {
+                  style: {
+                    color: 'yellow'
+                  }
+                },
+                'Hello'
+              );
+            }
+          }
+        }
+      }).$mount('#app');
+    </script>
+  </body>
+</html>

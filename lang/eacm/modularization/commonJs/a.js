@@ -1,6 +1,9 @@
-const c = require('./c.js');
-const b = require('./b.js');
-console.log(c == b)
-
-
-
+var info = {
+  value: 1
+};
+module.exports = {
+  info,
+  add() {
+    info.value++;
+  }
+};

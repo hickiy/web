@@ -1,2 +1,3 @@
-console.log('c is runing')
-exports.name = 'c'
+var a = require('./a');
+var b = require('./b');
+console.log(a.info == b.info);

@@ -6,12 +6,12 @@
  */
 
 // 封闭对象新增属性时definedProerty方法的返回值差别
-// const obj = { test: 'preventDefault' };
-// Reflect.preventExtensions(obj);
-// const result = Object.defineProperty(obj, 'name', {
-//   value: 'sam',
-//   enumerable: true,
-//   writable: true,
-//   configurable: false,
-// });
-// console.log(result);
+const obj = { test: 'preventDefault' };
+Reflect.preventExtensions(obj);
+const result = Object.defineProperty(obj, 'name', {
+  value: 'sam',
+  enumerable: true,
+  writable: true,
+  configurable: false,
+});
+console.log(result);

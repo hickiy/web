@@ -1,3 +1,2 @@
-// import und from './index';
-var umd = require('./index');
+import und from './index.js';
 console.log(und);

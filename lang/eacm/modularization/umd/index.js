@@ -7,10 +7,9 @@ const doSomeThing = () => {
   else if (typeof define === 'function' && define.amd) define([], factory);
   else if (typeof exports === 'object') exports['namespace'] = factory();
   else root['namespace'] = factory();
-})(typeof self !== 'undefined' ? self : this, function () {
+})(Function('return this')(), function () {
   'use strict';
   return {
     doSomeThing
   };
 });
-// export default doSomeThing;

@@ -1,15 +1,8 @@
-'use strict';
-var getGlobal = () => {
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-  throw new Error('unable to locate global object');
-};
+function getGlobal() {
+  // 'use strict';
+  // return this;
+  // return Function('return this')();
+  return (0, eval)('this');
+}
 var globals = getGlobal();
 console.log(globals);

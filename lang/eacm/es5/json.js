@@ -1,35 +1,41 @@
 /* JSON序列化注意事项 */
 /**
- * RegExp Error 序列化后是一个空对象（node 10.0.15 环境下）
- * undefined 属性值为在序列化后会被省略掉
- * NaN infinity -infinity 序列化后的值时null
- * Date 序列化后的值是 IOS格式的日期字符串， 反序列化后不能解析为时间对象。
- * 只能够序列化对象的可枚举自有属性
  * 接受第二个参数，类似与对数据库操作时的投影，只序列化/反序列化第二个参数指定的属性list
  */
 const obj = {
-  nan: NaN,
-  max: Infinity,
-  min: -Infinity,
-  reg: /\.\s/,
-  date: new Date(),
-  err: new Error('测试错误'),
-  notDefined: undefined,
-  null: null,
-  string: '...',
-  number: 1,
-  boolen: true,
-  object: { property: 'object' },
-  array: ['elment', Symbol('symbol'), function () { console.log('function'); }, undefined],
-  symbol: Symbol('symbol'),
-  fun: function fun() { console.log('function'); },
+  nan: NaN, // null
+  max: Infinity, // null
+  min: -Infinity, // null
+  reg: /\.\s/, // {}
+  date: new Date(), // 2023-12-19T02:55:00.754Z
+  err: new Error('测试错误'), // {}
+  notDefined: undefined, // 将被忽略
+  null: null, // null
+  string: '...', // '...'
+  number: 1, // 1
+  boolen: true, // true
+  object: { property: 'object' }, // { property: 'object' }
+  array: [
+    'elment', // 'elment'
+    Symbol('symbol'), // null
+    function () {
+      console.log('function');
+    }, // null
+    undefined // null
+  ],
+  symbol: Symbol('symbol'), // 将被忽略
+  fun: function fun() {
+    console.log('function');
+  } // 将被忽略
 };
+
 Object.defineProperty(obj, 'intorate', {
-  value: 'intorate',
+  value: 'intorate', // 被忽略，因为不可枚举
   configurable: true,
   enumerable: false,
-  writable: true,
+  writable: true
 });
+
 const ojbStr = JSON.stringify(obj);
 const extypalObj = JSON.parse(ojbStr);
 global.console.log(ojbStr, '\n\n', extypalObj);

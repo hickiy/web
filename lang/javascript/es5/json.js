@@ -7,8 +7,10 @@ const obj = {
   max: Infinity, // null
   min: -Infinity, // null
   reg: /\.\s/, // {}
-  date: new Date(), // 2023-12-19T02:55:00.754Z
+  set: new Set([1, 2, 3]), // {}
+  map: new Map([['key', 'value']]), // {}
   err: new Error('测试错误'), // {}
+  date: new Date(), // 2023-12-19T02:55:00.754Z
   notDefined: undefined, // 将被忽略
   null: null, // null
   string: '...', // '...'

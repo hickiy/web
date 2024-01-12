@@ -1,31 +1,15 @@
 {
-  "name": "hickey-blog",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "a personal blog for share the learning comprehend ",
-  "main": "index.html",
-  "directories": {
-    "doc": "doc"
-  },
+  "description": "hickey's blog",
+  "main": "index.md",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vitepress dev",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
+    "build": "vitepress build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/love596310898/love596310898.github.io.git"
-  },
-  "keywords": [
-    "web",
-    "frontend"
-  ],
+  "keywords": [],
   "author": "hickey",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/love596310898/love596310898.github.io/issues"
-  },
-  "homepage": "https://github.com/love596310898/love596310898.github.io#readme",
+  "license": "ISC",
   "devDependencies": {
     "@algolia/client-search": ">=4.9.1 <6.0.0",
     "@types/node": "^20.3.2",

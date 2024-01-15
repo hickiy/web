@@ -3,28 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vue computed</title>
+    <title>Vite App</title>
   </head>
 
   <body>
     <div id="app"></div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.js"></script>
     <script type="module">
       const app = (window.$vm = new Vue({
         name: 'App',
         data() {
           return {
-            a: 0
+            a: 1
           };
-        },
-        render(h) {
-          console.log('render run', this);
-          return h('button', { on: { click: this.increment } }, this.b);
         },
         computed: {
           b() {
-            return this.a * 0;
+            console.log('computed b run');
+            return this.a;
           }
+        },
+        watch: {
+          b(n, o) {
+            console.log('watcher b run');
+          }
+        },
+        render(h) {
+          console.log('render run', this);
+          return h('button', { on: { click: this.increment } }, 'update state' + this.b);
         },
         methods: {
           increment() {

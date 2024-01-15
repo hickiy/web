@@ -1,4 +1,4 @@
-## nginx 配置
+# 代理示例
 
 ```nginx
 proxy_cache_path /var/www/jsdelivr.cache levels=2:2 use_temp_path=off keys_zone=jsdelivr:50m inactive=180d max_size=500m;

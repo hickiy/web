@@ -11,12 +11,14 @@
     <div id="app"></div>
     <script>
       new Vue({
+        name: 'App',
         data() {
           return {
-            msg: 'Hello World',
-            info: {
-              name: 'zhangsan'
-            }
+            referer: {
+              name: 'Hello World',
+              address: 'Beijing'
+            },
+            simple: 'Zhang Shang'
           };
         },
         render(h) {
@@ -27,55 +29,59 @@
               {
                 on: {
                   click: () => {
-                    this.msg = 'Hello World1111111';
-                    this.info.name = 'lisi';
+                    // this.referer = {
+                    //   msg: 'Hello World1111'
+                    // };
+                    // this.simple = 'Li Si';
+                    // this.$set(this.referer, 'age', 18);
+                    this.$delete(this.referer, 'address');
                   }
                 }
               },
-              this.info.name
+              'update state'
             ),
-            h('Welcome'),
             h('HelloWorld', {
               props: {
-                msg: this.msg
+                referer: this.referer
+              }
+            }),
+            h('Welcome', {
+              props: {
+                simple: this.simple
               }
             })
           ]);
         },
         components: {
           HelloWorld: {
-            props: {
-              msg: {
-                type: String,
-                default: ''
-              }
-            },
+            name: 'HelloWorld',
+            props: ['referer'],
             render(h) {
               console.log('helloworld render');
               return h(
-                'button',
+                'div',
                 {
-                  on: {
-                    click: () => {
-                      this.msg = 'Hello World22222';
-                    }
+                  style: {
+                    color: 'pink'
                   }
                 },
-                this.msg
+                this.referer.name
               );
             }
           },
           Welcome: {
+            name: 'Welcome',
+            props: ['simple'],
             render(h) {
               console.log('welcome render');
               return h(
                 'div',
                 {
                   style: {
-                    color: 'yellow'
+                    color: 'red'
                   }
                 },
-                'Hello'
+                this.simple
               );
             }
           }

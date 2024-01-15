@@ -15,7 +15,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '部署', link: '/deploy/nginx/location.md', activeMatch: '/deploy/' },
-      { text: '框架', link: '/frame/vue/source.md', activeMatch: '/frame/' }
+      { text: '框架', link: '/frame/vue/init-instance.md', activeMatch: '/frame/' }
     ],
     sidebar: {
       '/deploy/': [
@@ -31,7 +31,8 @@ export default defineConfig({
         {
           text: 'vue',
           items: [
-            { text: '源码理解', link: '/frame/vue/source.md' },
+            { text: '初始化实例', link: '/frame/vue/init-instance.md' },
+            { text: '初始化状态', link: '/frame/vue/init-state.md' },
             { text: '语法风格指南', link: '/frame/vue/vue.md' }
           ]
         }

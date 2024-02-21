@@ -7,17 +7,16 @@
     "dev": "vitepress dev",
     "build": "vitepress build"
   },
-  "keywords": [],
   "author": "hickey",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@algolia/client-search": ">=4.9.1 <6.0.0",
     "@types/node": "^20.3.2",
     "@vue/compiler-sfc": "^3.3.4",
+    "sass": "^1.71.1",
     "search-insights": ">= 1 < 3",
-    "vitepress": "1.0.0-beta.3"
-  },
-  "dependencies": {
+    "vite": "^5.1.3",
+    "vitepress": "1.0.0-beta.3",
     "vue": "^3.3.4"
   }
 }

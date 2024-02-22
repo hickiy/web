@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>el-table</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/theme-chalk/index.css" rel="stylesheet" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/index.js"></script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+      }
+      #app {
+        height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <dialog-component :show.sync="show"></dialog-component>
+      <el-button @click="show = true">12312312</el-button>
+    </div>
+  </body>
+  <script>
+    var dialogComponent = {
+      // template: `<el-dialog :visible="show" @update:visible="(v) => $emit('update:show', v)" title="Hello world"></el-dialog>`
+      template: `<el-dialog :visible.sync="visible" title="Hello world"></el-dialog>`,
+      props: {
+        show: {
+          type: Boolean,
+          default: false
+        }
+      },
+      computed: {
+        visible: {
+          get() {
+            return this.show;
+          },
+          set(v) {
+            this.$emit('update:show', v);
+          }
+        }
+      }
+    };
+    var app = new Vue({
+      el: '#app',
+      components: {
+        dialogComponent
+      },
+      data() {
+        return {
+          show: false
+        };
+      }
+    });
+  </script>
+</html>

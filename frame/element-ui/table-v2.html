@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>el-table</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/theme-chalk/index.css" rel="stylesheet" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/index.js"></script>
+    <style type="text/css">
+      /*定义全局滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 12px;
+      }
+
+      /*定义滑块*/
+      ::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background-color: #9093994d;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+      }
+      #app {
+        height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div style="background-color: pink; height: 50px">111111</div>
+      <el-table :border="true" :data="data" height="100%">
+        <el-table-column align="center" label="名字" prop="name"></el-table-column>
+        <el-table-column align="center" label="状态" prop="status"></el-table-column>
+      </el-table>
+      <div style="background-color: pink; height: 50px">1111</div>
+    </div>
+  </body>
+  <script>
+    var Table = ELEMENT.Table;
+    var ElTable = {
+      name: Table.name,
+      extends: Table,
+      render(h) {
+        return h(
+          'div',
+          {
+            style: {
+              display: 'flex',
+              flexFlow: 'column nowrap',
+              overflow: 'hidden',
+              flex: 1
+            }
+          },
+          [h('div', { style: { height: '50px', backgroundColor: 'yellow' } }, '111111'), Table.render.call(this, h)]
+        );
+      }
+    };
+    var app = new Vue({
+      el: '#app',
+      components: {
+        ElTable
+      },
+      data() {
+        return {
+          data: new Array(20).fill({ name: '王昱元', status: 'married' })
+        };
+      }
+    }).$mount();
+  </script>
+</html>

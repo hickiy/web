@@ -26,3 +26,4 @@ dist-ssr
 
 # for build results
 dist
+**/build

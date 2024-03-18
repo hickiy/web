@@ -15,7 +15,7 @@ if (1 && true); // true
 if (1 || false); // true
 
 /**
- * 比较运算的隐式类型转换
+ * 关系运算的隐式类型转换
  * js中比较运算，隐式类型转换的目标是number类型
  * 当进行相等比较运算时，转换目标任然是number类型，但是null和undefined除外
  */

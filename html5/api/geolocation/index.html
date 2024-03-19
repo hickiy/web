@@ -7,6 +7,7 @@
   </head>
   <body>
     <button id="btn">获取地理位置信息</button>
+    <div id="info"></div>
     <script>
       getGeo = () => {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -14,7 +15,34 @@
           var longitude = position.coords.longitude; // 经度
           var speed = position.coords.speed; // 速度
           var accuracy = position.coords.accuracy; // 精度
-          console.log(latitude, longitude, speed, accuracy);
+          var altitude = position.coords.altitude; // 海拔
+          var altitudeAccuracy = position.coords.altitudeAccuracy; // 海拔精度
+          var heading = position.coords.heading; // 方向
+          var timestamp = position.timestamp; // 时间戳
+          document.getElementById("info").innerHTML =
+            "纬度：" +
+            latitude +
+            "<br>" +
+            "经度：" +
+            longitude +
+            "<br>" +
+            "速度：" +
+            speed +
+            "<br>" +
+            "精度：" +
+            accuracy +
+            "<br>" +
+            "海拔：" +
+            altitude +
+            "<br>" +
+            "海拔精度：" +
+            altitudeAccuracy +
+            "<br>" +
+            "方向：" +
+            heading +
+            "<br>" +
+            "时间戳：" +
+            timestamp;
         });
       };
       document.getElementById("btn").addEventListener("click", getGeo);

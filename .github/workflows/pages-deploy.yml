@@ -1,35 +1,42 @@
 name: Vite Github Pages Deploy
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
-  # Allows you to run this workflow manually from the Actions tab
+    branches: ['main']
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
-  pages: write
+  pages: write # to deploy to Pages
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deploy_to_pages.outputs.github_pages_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
-      - name: Vite Github Pages Deployer
-        uses: skywarth/vite-github-pages-deployer@master
-        id: deploy_to_pages
-        with: 
-          build_path: .vitepress/dist
-          public_base_path: /web/
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
+      - name: make a directory
+        run: |
+          mkdir -p .vitepress/temp/blog
+          mv .vitepress/dist/* .vitepress/temp/blog
+          mv ./index.html .vitepress/temp
+          find . -maxdepth 1 -type d ! -name . ! -name .git ! -name .github ! -name .vitepress ! -name node_modules  -exec mv {} .vitepress/temp \;
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          name: github-pages
+          path: .vitepress/temp
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

@@ -1,4 +1,4 @@
-use std::fmt::{self, Display, Formatter};
+use std::fmt::{Display, Formatter, Result};
 
 struct City {
     name: &'static str,
@@ -7,7 +7,7 @@ struct City {
 }
 
 impl Display for City {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> Result {
         let lat_c = if self.lat >= 0.0 { 'N' } else { 'S' };
         let lon_c = if self.lon >= 0.0 { 'E' } else { 'W' };
 
@@ -32,7 +32,7 @@ struct Color {
 }
 
 impl Display for Color {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> Result {
         write!(
             f,
             "RGB ({}, {}, {}) 0x{:02X}{:02X}{:02X}",

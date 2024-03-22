@@ -1,3 +1,10 @@
+/**
+ * typeof
+ * 可以区分基本类型的类型，null除外
+ * 对于引用类型，可以区分是否为函数
+ * null与除函数外的引用类型都返回object
+ */
+
 const arr = [1, NaN, Infinity, -Infinity, 'string', true, undefined, null, {}, [], (function () { global.console.log(); }), new Set(), new Map(), Symbol('test')];
 
 const typeOfWay = () => {
@@ -5,6 +12,7 @@ const typeOfWay = () => {
     global.console.log(i, typeof i);
   });
 };
+typeOfWay();
 /**
   * 1 'number'
   * NaN 'number'
@@ -21,12 +29,15 @@ const typeOfWay = () => {
   * Map {} 'object'
   * Symbol(test) 'symbol'
  */
+
+
 const toStringWay = () => {
   arr.forEach((i) => {
     const type = Object.prototype.toString.call(i);
     global.console.log(i, type);
   });
 };
+toStringWay();
 /**
  * 1 '[object Number]'
  * NaN '[object Number]'
@@ -43,5 +54,3 @@ const toStringWay = () => {
  * Map {} '[object Map]'
  * Symbol(test) '[object Symbol]'
  */
-typeOfWay();
-toStringWay();

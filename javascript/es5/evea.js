@@ -15,3 +15,12 @@
 console.log(eval('this')); // exports
 console.log(eval("'use strict'; this")); // exports
 console.log((0, eval)("'use strict'; this")); // global
+
+
+
+/**
+ * 这种方式可以获取到全局对象，不受严格模式影响，并且在浏览器和Node环境下都有效
+ * 是一种通用的获取全局对象的方法
+ */
+console.log((0, eval)('this')); // global
+console.log((0, eval)("'use strict'; this")); // global

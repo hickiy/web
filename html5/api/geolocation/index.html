@@ -8,44 +8,55 @@
   <body>
     <button id="btn">获取地理位置信息</button>
     <div id="info"></div>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=Hv51OkEaOn2CPZAxzVLi3ZGB9l3r7sfo"></script>
     <script>
       getGeo = () => {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          var latitude = position.coords.latitude; // 纬度
-          var longitude = position.coords.longitude; // 经度
-          var speed = position.coords.speed; // 速度
-          var accuracy = position.coords.accuracy; // 精度
-          var altitude = position.coords.altitude; // 海拔
-          var altitudeAccuracy = position.coords.altitudeAccuracy; // 海拔精度
-          var heading = position.coords.heading; // 方向
-          var timestamp = position.timestamp; // 时间戳
-          document.getElementById("info").innerHTML =
-            "纬度：" +
-            latitude +
-            "<br>" +
-            "经度：" +
-            longitude +
-            "<br>" +
-            "速度：" +
-            speed +
-            "<br>" +
-            "精度：" +
-            accuracy +
-            "<br>" +
-            "海拔：" +
-            altitude +
-            "<br>" +
-            "海拔精度：" +
-            altitudeAccuracy +
-            "<br>" +
-            "方向：" +
-            heading +
-            "<br>" +
-            "时间戳：" +
-            timestamp;
-        });
+        var info = document.getElementById('info');
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            var longitude = position.coords.longitude; // 经度
+            var latitude = position.coords.latitude; // 纬度
+
+            var convertor = new BMapGL.Convertor();
+            // 定义需要转换的点
+            var pointArr = [];
+            var gpsPoint = new BMapGL.Point(longitude, latitude);
+            pointArr.push(gpsPoint);
+            // 转换坐标
+            convertor.translate(pointArr, 1, 5, function (data) {
+              var lng = data.points[0].lng;
+              var lat = data.points[0].lat;
+              var myGeo = new BMapGL.Geocoder();
+              myGeo.getLocation(new BMapGL.Point(lng, lat), function (result) {
+                if (result) {
+                  info.innerHTML =
+                    '经度:' +
+                    longitude +
+                    '<br>纬度:' +
+                    latitude +
+                    '<br>您所在的省份：' +
+                    result.addressComponents.province +
+                    '<br>您所在的城市：' +
+                    result.addressComponents.city +
+                    '<br><br><br><br>result: ' +
+                    JSON.stringify(result);
+                } else {
+                  info.innerHTML = '无法获取信息';
+                }
+              });
+            });
+          },
+          function error(err) {
+            info.innerHTML = '错误：' + err.message;
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0,
+          }
+        );
       };
-      document.getElementById("btn").addEventListener("click", getGeo);
+      document.getElementById('btn').addEventListener('click', getGeo);
     </script>
   </body>
 </html>

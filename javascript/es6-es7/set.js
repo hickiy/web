@@ -17,5 +17,5 @@ global.console.log(arr);
  * weakSet 类与Set 类相似，但是weakSet的成员只能是对象
  * weakSet 对成员的引用都是弱引用，不计入gc引用机制
  * weakSet 通常用来存储Dom对象，防止Dom从页面移除时 导致的内存泄露
- * weakSet 由于保存的时弱引用对象，随时可能被gc 所以其不可迭代(不具备迭代接口，Set原生具有迭代接口)
+ * weakSet 由于保存的是弱引用对象，随时可能被gc 所以其不可迭代(不具备迭代接口，Set原生具有迭代接口)
  */

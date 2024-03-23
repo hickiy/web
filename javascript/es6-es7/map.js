@@ -1,6 +1,6 @@
 /**
  * map是键值对解构的对象，不同与objest的是其键可以是引用类型，实际上map是值与值得对应关系，object是值与key得对应关系
- * map得key可以是引用类型，判断key是否存在时，是做全等（===）运算  NaN例外 在map中NaN与自身相等
+ * map的key可以是引用类型，判断key是否存在时，是做全等（===）运算  NaN例外 在map中NaN与自身相等
  * map实例基础方法 set（增加） 、get（获取） 、has（是否存在） 、delete（删除） clear（清空）
  * map实例属性 zize（map的实例的大小）
  * map类部署了interator接口 可使用keys 、 values、 entries 获取迭代器  也可使用forEach 直接迭代
@@ -20,7 +20,7 @@ global.console.log(arr);
  * weakMap 类与Map类相似，但是weakMap得key只能是对象
  * weakMap 对key的引用都是弱引用，不计入gc引用机制
  * weakMap 通常用来存储Dom对象，防止Dom从页面移除时 导致的内存泄露
- * weakMap 由于保存的时弱引用对象，随时可能被gc 所以其不可迭代(不具备迭代接口，Set原生具有迭代接口)
+ * weakMap 由于保存的时弱引用对象，随时可能被gc 所以其不可迭代(不具备迭代接口，Map原生具有迭代接口)
  */
 // const value = [1, 2];
 // const o = {name: 'n1'}

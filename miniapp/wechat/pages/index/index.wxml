@@ -6,5 +6,5 @@
   <!-- 在webview中，navigator.geolocation api 默认被禁用 -->
   <!-- 在webview中使用 window.parent.postMassage api与小程序进行通信，实现地理位置获取 -->
   <!-- 在webview中接入wx-js-sdk，通过授权校验，可以在h5中直接调用地理位置获取api，实现地理位置获取-->
-  <!-- <web-view src="http://127.0.0.1:5500/web/api/geolocation/index.html" /> -->
+  <!-- <web-view src="https://caijinbo.top/web/html5/api/geolocation/index.html" /> -->
 </view>

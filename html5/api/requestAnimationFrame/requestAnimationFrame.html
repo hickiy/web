@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="viwer"></div>
+    <script>
+      // requestAnimationFrame
+      // 用于在下次重绘之前更新动画
+      // 会在浏览器下次重绘之前执行回调函数
+      // 会返回一个整数，表示请求的编号
+      // 用于取消动画
+      // 会返回一个整数，表示请求的编号
+      // 用于取消动画
+      const startTime = Date.now();
+      let count = 0;
+      function draw() {
+        const currentTime = Date.now();
+        if (currentTime - startTime < 1000) {
+          requestAnimationFrame(draw);
+          count++;
+        } else {
+          var viwer = document.getElementById("viwer");
+          viwer.innerHTML = '1秒内的绘制次数：' + count;
+        }
+      }
+      draw();
+    </script>
+  </body>
+</html>

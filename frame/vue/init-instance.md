@@ -165,9 +165,10 @@ export function initMixin(Vue: typeof Component) {
 
 - initState
 
-  - initData
   - initProps
+  - initSetup
   - initMethods
+  - initData
   - initComputed
   - initWatch
 

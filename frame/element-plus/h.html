@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>h</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      var h = Vue.h;
+      var app = Vue.createApp({
+        // template: `<el-button>hello element</el-button>` // render as a button
+
+        // render() {
+        //   return h('el-button', null, 'a button'); // not render as a button
+        // }
+
+        // render() {
+        //   return h(ElementPlus.ElButton, null, 'a button'); // render as a button
+        // },
+
+        // setup() {
+        //   return () => h('el-button', null, 'a button'); // not render as a button
+        // },
+        setup() {
+          return () => h(ElementPlus.ElButton, null, 'a button'); // render as a button
+        }
+      });
+      app.use(ElementPlus);
+      app.mount('#app');
+    </script>
+  </body>
+</html>

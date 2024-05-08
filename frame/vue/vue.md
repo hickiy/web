@@ -124,7 +124,7 @@ export default defineComponent({
 
 ### 在使用 Composition API, 使用 setup 标记时,使用方法如下
 
-#### 使用 template 标签
+#### 使用 template
 
 ```vue
 <template>
@@ -143,10 +143,10 @@ const state = reactive({
 <style scoped lang="scss"></style>
 ```
 
-#### 使用 render 函数 + jsx
+#### 使用 setup + tsx
 
 ```vue
-<script setup lang="ts">
+<script setup lang="tsx">
 import { reactive } from 'vue';
 type State = {
   msg: string;

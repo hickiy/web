@@ -11,7 +11,15 @@
   <body>
     <div id="app">
       <div style="height: 200px; width: 200px">
-        <el-upload drag :on-change="change" list-type="text" :auto-upload="false" action="/" v-model:file-list="fileList">
+        <el-upload
+          drag
+          list-type="text"
+          :auto-upload="true"
+          action="/"
+          v-model:file-list="fileList"
+          :before-upload="beforeUpload"
+          :on-change="onChange"
+        >
           <el-icon class="el-icon--upload">+</el-icon>
           <div class="el-upload__text">点击或拖拽上传收款记录</div>
         </el-upload>
@@ -26,10 +34,14 @@
           };
         },
         methods: {
-          // when remove a file, this function will not be triggered
-          // at element-ui, it will be triggered
-          change(file, fileList) {
-            console.log(this.fileList);
+          // when auto-upload is false, before-upload will not be called
+          beforeUpload(file, fileList) {
+            console.log('beforeUpload');
+            return true;
+          },
+          // when removing files, on-change will not be called
+          onChange(file, fileList) {
+            console.log('handlerChange');
           }
         }
       });

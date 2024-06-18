@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        background: rgba(240, 163, 163, 0.4);
+        border: 1px solid pink;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .description {
+        font-size: 10px;
+      }
+      #c {
+        z-index: 3;
+        will-change: filter;
+      }
+      #d {
+        position: absolute;
+        top: 240px;
+        left: 20px;
+        z-index: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="a" class="box">A</div>
+    <div id="b" class="box">
+      B
+      <div class="description">z-index:2</div>
+    </div>
+    <div id="c" class="box">
+      C
+      <div class="description">z-index:3</div>
+      <div class="description">transform: translateZ(0)</div>
+    </div>
+    <div id="d" class="box">
+      D
+      <div class="description">z-index:4</div>
+    </div>
+  </body>
+</html>

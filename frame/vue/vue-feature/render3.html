@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script>
+      const HelloWorld = {
+        name: 'HelloWorld',
+        render(h) {
+          console.log('helloworld render');
+          return h(
+            'div',
+            {
+              style: {
+                color: 'pink'
+              }
+            },
+            'Hello World'
+          );
+        }
+      };
+      new Vue({
+        name: 'App',
+        data() {
+          return {
+            text: 'change text'
+          };
+        },
+        render(h) {
+          console.log('app render');
+          return h('div', [
+            h(
+              'button',
+              {
+                on: {
+                  click: () => {
+                    this.text = 'change text' + Math.random();
+                  }
+                }
+              },
+              this.text
+            ),
+            h(HelloWorld, {})
+          ]);
+        }
+      }).$mount('#app');
+    </script>
+  </body>
+</html>

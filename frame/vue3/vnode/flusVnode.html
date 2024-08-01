@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue setup</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 可以直接使用 html 模板 -->
+      <!-- <div>{{name}}</div> -->
+    </div>
+    <script>
+      const { ref, h, getCurrentInstance } = Vue;
+
+      const child = {
+        name: 'child',
+        props: {
+          name: String
+        },
+        data() {
+          return {};
+        },
+        render() {
+          console.log('child render');
+          console.log('this:', this);
+          return h('div', {}, this.name);
+        }
+      };
+      let oldChildVnode = null;
+      const app = Vue.createApp({
+        name: 'app',
+        data() {
+          return {
+            name: 'app'
+          };
+        },
+        render() {
+          const chaildVnode = h(child, { name: 'child' });
+          if (oldChildVnode) {
+            setTimeout(() => {
+              console.log(chaildVnode.props == oldChildVnode.props);
+              console.log('oldChildVnode:', oldChildVnode);
+              console.log('chaildVnode:', chaildVnode);
+            });
+          }
+          oldChildVnode = chaildVnode;
+          return [
+            h('div', {}, [
+              h(
+                'button',
+                {
+                  onClick: () => {
+                    this.name = 'app' + Math.random();
+                  }
+                },
+                'click' + this.name
+              ),
+              chaildVnode
+            ])
+          ];
+        }
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

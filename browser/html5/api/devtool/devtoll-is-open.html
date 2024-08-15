@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试开发工具是否打开</title>
+  </head>
+  <body>
+    <script>
+      setInterval(function () {
+        const start = new Date().getTime();
+        debugger;
+        const end = new Date().getTime();
+        if (end - start > 100) {
+          window.location = 'about:blank';
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

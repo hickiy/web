@@ -1,0 +1,53 @@
+/* Logo 字体 */
+@font-face {
+  font-family: 'iconfont logo';
+  src: url('https://at.alicdn.com/t/font_985780_km7mi63cihi.eot?t=1545807318834');
+  src: url('https://at.alicdn.com/t/font_985780_km7mi63cihi.eot?t=1545807318834#iefix') format('embedded-opentype'),
+    url('https://at.alicdn.com/t/font_985780_km7mi63cihi.woff?t=1545807318834') format('woff'),
+    url('https://at.alicdn.com/t/font_985780_km7mi63cihi.ttf?t=1545807318834') format('truetype'),
+    url('https://at.alicdn.com/t/font_985780_km7mi63cihi.svg?t=1545807318834#iconfont') format('svg');
+}
+
+/* 页面布局 */
+.main {
+  padding: 30px 100px;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.icon_lists {
+  overflow: hidden;
+  color: #333;
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon_lists li {
+  width: 100px;
+  text-align: center;
+  list-style: none !important;
+  cursor: default;
+}
+
+.icon_lists li .code-name {
+  line-height: 1.2;
+}
+
+.icon_lists .icon {
+  display: block;
+  font-size: 42px;
+  margin: 10px auto;
+}
+
+.icon_lists .icon-svg {
+  font-size: 42px;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.icon_lists li .name,
+.icon_lists li .code-name {
+  color: #666;
+}

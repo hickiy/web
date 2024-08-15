@@ -1,142 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>el-upload</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>el-table</title>
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-  <!-- 引入组件库 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <style type="text/css">
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+      body {
+        height: 100vh;
+      }
 
-    body {
-      height: 100vh;
-    }
+      #app {
+        padding: 80px;
+        height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+      }
+    </style>
+  </head>
 
-    #app {
-      padding: 80px;
-      height: 100%;
-      display: flex;
-      flex-flow: column nowrap;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="app">
-    <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" multiple :file-list="fileList"
-      list-type="picture-card" :on-preview="handlePreview" :on-remove="handleRemove" :before-upload="beforeUpload">
-      <el-button size="small" type="primary">点击上传</el-button>
-      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-    </el-upload>
-  </div>
-</body>
-<script>
-  var Upload = ELEMENT.Upload;
-
-  function beforeUpload() {
-    console.log(this)
-  }
-
-  var ElUpload = {
-    mixins: [Upload],
-    props: {
-      beforeUpload: {
-        default() {
-          return beforeUpload.bind(this);
+  <body>
+    <div id="app">
+      <el-upload action="/" :auto-upload="false" :file-list="fileList" :before-upload="beforeUpload" :on-change="onChange">
+        <el-button size="small" type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
+    </div>
+  </body>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        fileList: []
+      },
+      methods: {
+        // when auto-upload is false, before-upload will not be called
+        beforeUpload(file, fileList) {
+          console.log('beforeUpload');
+          return true;
         },
-      },
-    },
-    render(h) {
-
-      function file() {
-        return h('div', '1111')
+        // when removing files, on-change will not be called
+        onChange(file, fileList) {
+          console.log('handlerChange');
+        }
       }
-
-      this.$scopedSlots.file = file;
-      return Upload.render.call(this, h)
-      // plan two
-      // extends: Upload,
-      // render(h) {
-      //   this.$scopedSlots.file = file;
-      //   Object.defineProperty(Object.getPrototypeOf(this), 'beforeUpload', {
-      //     configurable: true,
-      //     enumerable: true,
-      //     get() {
-      //       return beforeUpload.bind(this);
-      //     }
-      //   })
-      //   return Upload.render.call(this, h)
-      // },
-
-
-      // plan three
-      // extends: Upload,
-      // beforeCreate() {
-      //   this.$options.props.beforeUpload = {
-      //     type: Function,
-      //     default: beforeUpload.bind(this)
-      //   }
-      // },
-      // render(h) {
-      //   this.$scopedSlots.file = file;
-      //   return Upload.render.call(this, h)
-      // },
-
-
-      // plan four
-      // extends: Upload,
-      // render(h) {
-      //   console.log(this.$parent.$children[0]);
-      //   const ctx = { props: this.$options.propsData };
-      //   ctx.props.beforeUpload = () => beforeUpload.call(this.$children[0]);
-      //   ctx.scopedSlots = { file };
-      //   return h(Upload, ctx, this.$options._renderChildren);
-      // },
-
-
-      // plan fvie
-      // functional: true,
-      // render(h, context) {
-      //   const ctx = Object.create(Object.getPrototypeOf(context));
-      //   Object.keys(context).forEach(key => {
-      //     ctx[key] = context[key]
-      //   })
-      //   ctx.props.beforeUpload = function () { beforeUpload.bind(this.$parent) };
-      //   ctx.scopedSlots.file = file;
-      //   console.log(ctx);
-      //   return h(Upload, ctx, ctx.children)
-      // },
-    }
-  }
-
-  var app = new Vue({
-    el: '#app',
-    components: { ElUpload },
-    data: {
-      fileList: [{ name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }, { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }],
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      beforeUpload(file, fileList) {
-        console.log(file)
-        file.url = 'abc'
-      }
-    }
-  }).$mount()
-</script>
-
+    }).$mount();
+  </script>
 </html>

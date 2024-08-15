@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <object type="image/svg+xml" data="./bound.svg" width="100" height="100"></object>
+    <embed src="./bound.svg" type="">
+    <iframe src="./bound.svg" width="100" height="100"></iframe>
+    <img src="./bound.svg" alt="" width="100" height="100" />
+    <!-- 以上四种方式都无法引用内部的图形 -->
+    <svg width="100" height="100">
+      <use xlink:href="#icon-404" style="font-size: 18px;" />
+    </svg>
+  </body>
+</html>

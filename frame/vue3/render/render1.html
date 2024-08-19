@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vue setup</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    const { ref, shallowRef, reactive, shallowReactive, h, getCurrentInstance } = Vue;
+
+    const child = {
+      name: 'child',
+      props: {
+        names: {
+          type: Object,
+          default: () => { }
+        }
+      },
+      setup(props, ctx) {
+        return (data, caches) => {
+          console.log('child: rerender');
+          return h('div', props.names.join(','));
+        };
+      }
+    };
+
+    const app = Vue.createApp({
+      name: 'app',
+      setup(props, { expose }) {
+        let propsData = ref({
+          names: ['a', 'b', 'c']
+        });
+        return () => {
+          console.log('app: rerender');
+          return h('div', {}, [h('button', {
+            onClick: () => {
+              propsData.value = {
+                names: ['d', 'e', 'f']
+              };
+            }
+          }, 'change propsData'), h('button', {
+            onClick: () => {
+              propsData.value.names = ['g', 'h', 'i'];
+            }
+          }, 'change names'), h(child, {
+            names: propsData.value.names
+          })]);
+        };
+      }
+    });
+    app.mount('#app');
+  </script>
+</body>
+
+</html>

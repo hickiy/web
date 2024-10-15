@@ -33,7 +33,7 @@ export default defineConfig({
           items: [
             { text: '初始化实例', link: '/frame/vue2/init-instance.md' },
             { text: '初始化状态', link: '/frame/vue2/init-state.md' },
-            { text: '语法风格指南', link: '/frame/vue/vue.md' }
+            { text: '语法风格指南', link: '/frame/vue2/vue.md' }
           ]
         }
       ]

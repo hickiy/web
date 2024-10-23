@@ -1,3 +1,8 @@
+# ignore all of no have extension file
+*
+!*/
+!*.*
+
 # Logs
 logs
 *.log
@@ -31,4 +36,7 @@ temp
 **/build
 **/*.exe
 **/*.pdb
-*
+
+
+# for typescript build
+/lang/typescript/*.js

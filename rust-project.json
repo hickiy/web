@@ -1,0 +1,12 @@
+{
+  "sysroot": "/Users/hickey/.rustup/toolchains/stable-aarch64-apple-darwin",
+  "crates": [
+    {
+      "name": "restacean",
+      "path": "./lang.rs/",
+      "root_module": "./lang.rs/bin/hello.rs",
+      "edition": "2021",
+      "deps": []
+    }
+  ]
+}

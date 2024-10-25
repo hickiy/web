@@ -1,16 +1,7 @@
 // read the file of the wasm module
 const fs = require('fs');
 const path = require('path');
-const { start } = require('repl');
 const url = path.resolve(__dirname, './fib.wasm');
-const wasmByte = fs.readFileSync(url);
-WebAssembly.instantiate(wasmByte).then((results) => {
-  var instance = results.instance;
-  console.time('fib by wasm');
-  var fib = instance.exports.fib(41);
-  console.log(fib);
-  console.timeEnd('fib by wasm');
-});
 
 function fib(n) {
   if (typeof n !== 'number' || n < 1) {
@@ -20,9 +11,20 @@ function fib(n) {
   return fib(n - 1) + fib(n - 2);
 }
 
-console.time('fib');
-console.log(fib(41));
-console.timeEnd('fib');
+function compare(n) {
+  const wasmByte = fs.readFileSync(url);
+  WebAssembly.instantiate(wasmByte).then((results) => {
+    var instance = results.instance;
+    console.time('fib by wasm');
+    instance.exports.fib(n);
+    console.timeEnd('fib by wasm');
+    console.time('fib by js');
+    fib(n);
+    console.timeEnd('fib by js');
+  });
+}
+
+compare(44);
 
 // 证明了 wasm 在计算密集型的场景下，性能优于 js
 // 翻译为英语：wasm is faster than js in compute-intensive scenarios

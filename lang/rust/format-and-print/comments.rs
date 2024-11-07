@@ -1,30 +1,25 @@
 
 fn main() {
-  // This is an example of a line comment.
-  // There are two slashes at the beginning of the line.
-  // And nothing written after these will be read by the compiler.
+  // 这是行注释的例子
+  // 注意有两个斜线在本行的开头
+  // 在这里面的所有内容都不会被编译器读取
 
   // println!("Hello, world!");
 
-  // Run it. See? Now try deleting the two slashes, and run it again.
+  // 请运行一下，你看到结果了吗？现在请将上述语句的两条斜线删掉，并重新运行。
 
   /*
-   * This is another type of comment, a block comment. In general,
-   * line comments are the recommended comment style. But block comments
-   * are extremely useful for temporarily disabling chunks of code.
-   * /* Block comments can be /* nested, */ */ so it takes only a few
-   * keystrokes to comment out everything in this main() function.
-   * /*/*/* Try it yourself! */*/*/
+   * 这是另外一种注释——块注释。一般而言，行注释是推荐的注释格式，
+   * 不过块注释在临时注释大块代码特别有用。/* 块注释可以 /* 嵌套, */ */
+   * 所以只需很少按键就可注释掉这些 main() 函数中的行。/*/*/* 自己试试！*/*/*/
    */
 
   /*
-  Note: The previous column of `*` was entirely for style. There's
-  no actual need for it.
+  注意，上面的例子中纵向都有 `*`，这只是一种风格，实际上这并不是必须的。
   */
 
-  // You can manipulate expressions more easily with block comments
-  // than with line comments. Try deleting the comment delimiters
-  // to change the result:
-  let x = 5 +  90 + 5;
+  // 观察块注释是如何简单地对表达式进行修改的，行注释则不能这样。
+  // 删除注释分隔符将会改变结果。
+  let x = 5 + /* 90 + */ 5;
   println!("Is `x` 10 or 100? x = {}", x);
 }

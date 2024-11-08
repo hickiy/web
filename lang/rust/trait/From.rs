@@ -20,6 +20,5 @@ fn main() {
   let integer: u8 = decimal as u8;
   let character = integer as char;
   let my_char = MyChar::from(character);
-
   println!("\nCasting: {} -> {} -> {} -> {:b}", decimal, integer, character, my_char);
 }

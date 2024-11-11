@@ -11,11 +11,18 @@ var compactObject = function (obj) {
     if (value) {
       if (value instanceof Object) {
         let newVal = compactObject(value);
-        isArray ? result.push(newVal) : (result[key] = newVal);
+        if (newVal) {
+          isArray ? result.push(newVal) : (result[key] = newVal);
+        }
       } else {
         isArray ? result.push(value) : (result[key] = value);
       }
     }
+  }
+  if (isArray && result.length === 0) {
+    return null;
+  } else if (!isArray && Object.keys(result).length === 0) {
+    return null;
   }
   return result;
 };

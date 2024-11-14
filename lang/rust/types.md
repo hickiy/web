@@ -7,6 +7,7 @@
 - 布尔类型（boolean type）：`bool`
 - 字符类型（character type）：`char`
 - 字符串类型（string type）：`&str`、`String`
+- 单元类型（unit type）：`()`
 - 数组（array）：`[T; N]`
 - 元组（tuple）：`(T1, T2, T3, ...)`
 - 指针（pointer）：`*const T`、`*mut T`
@@ -17,7 +18,6 @@
 - 结构体（struct）：`struct Point { x: i32, y: i32 }`
 - 元组结构体（tuple struct）：`struct Color(i32, i32, i32)`
 - 单元结构体（unit struct）：`struct Empty`
-- 单元类型（unit type）：`()`
 
 
 ## 抽象类型 （abstract type） 通过特性（trait）来定义，可以用于多种具体类型

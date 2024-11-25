@@ -1,20 +1,38 @@
-/*数组去重*/
-
 const arr = [1, 2, 3, 4, 5, 5, 5, 5, 5];
-// 第一种
-function removeDuplicate(arr) {
+
+// 利用indexOf去重
+function indexOf(arr) {
   let res = [];
   for (item of arr) {
-    if (res.indexOf(item) == -1) {
-      res.push(item);
-    }
+    res.indexOf(item) == -1 && res.push(item);
   }
   return res;
 }
-console.log(removeDuplicate(arr)); // [1,2,3,4,5]
+// console.log(indexOf(arr));
 
-// 第二种
-console.log([...new Set(arr)]); // [1,2,3,4,5]
+// 利用filter去重
+function filter(arr) {
+  return arr.filter((i, index) => arr.indexOf(i, index + 1) == -1);
+}
+// console.log(filter(arr));
 
-// 第三种
-console.log(arr.filter((i, index) => arr.slice(index + 1, arr.length).indexOf(i) === -1)); // [1,2,3,4,5]
+// 利用set的特性进行去重
+function set(arr) {
+  return Array.from(new Set(arr));
+}
+// console.log(set(arr));
+
+
+// 以上三种方法都是基于新数组的去重方法，下面是基于原数组的去重方法
+// 基于splice的原址去重的方法
+function splice(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let dupIndex = arr.indexOf(arr[i], i + 1);
+    if (dupIndex >= 0) {
+      arr.splice(dupIndex, 1);
+      i--;
+    }
+  }
+}
+splice(arr);
+console.log(arr);

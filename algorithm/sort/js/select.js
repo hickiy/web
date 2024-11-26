@@ -9,7 +9,10 @@ function selectionSort(arr) {
         minimum = i;
       }
     }
-    [arr[j], arr[minimum]] = [arr[minimum], arr[j]];
+    let temp = arr[j];
+    arr[j] = arr[minimum];
+    arr[minimum] = temp;
   }
   return arr;
 }
+console.log(selectionSort(arr)); // [0, 1, 2, 3, 5, 21, 37, 66, 79, 88]

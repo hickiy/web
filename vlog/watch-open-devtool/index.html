@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Watch Open DevTool</title>
+</head>
+
+<body>
+  <h1>Watch Open DevTool</h1>
+  <p>Open DevTool and watch the console.</p>
+  <script>
+    (function () {
+      var isConsoleOpen = false;
+      var element = {};
+      Object.defineProperty(element, 'id', {
+        get: function () {
+          console.log('DevTool is open');
+          isConsoleOpen = true;
+        }
+      });
+      setInterval(function () {
+        console.log(element);
+        if (isConsoleOpen) {
+          window.location.href = 'https://baidu.com'; // 替换为你想跳转的页面
+        }
+      }, 1000);
+    })();
+  </script>
+</body>
+
+</html>

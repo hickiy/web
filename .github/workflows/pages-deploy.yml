@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir -p .vitepress/temp/blog
           mv .vitepress/dist/* .vitepress/temp/blog
-          find * -type d ! -name .* ! -name node_modules -exec mv {} .vitepress/temp \;
+          find . -maxdepth 1 -type d ! -name '.*' ! -name 'node_modules' -exec mv {} .vitepress/temp \;
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

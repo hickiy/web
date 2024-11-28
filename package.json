@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "hickey's blog",
   "main": "index.md",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build"

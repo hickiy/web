@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>web component</title>
+  <style>
+    h1 {
+      color: red;
+    }
+  </style>
+  <script>
+    // 生成一个web component
+    // 1. 创建一个类
+    class MyComponent extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.innerHTML = `
+          <div>123123123</div>
+        `;
+      }
+    }
+
+    // 2. 注册一个自定义元素
+    customElements.define('my-component', MyComponent);
+  </script>
+</head>
+
+<body>
+  <my-component></my-component>
+</body>
+
+</html>

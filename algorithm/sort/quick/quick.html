@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>快速排序动画</title>
+  <title>快速排序递归演示</title>
   <style>
     body {
       height: 100vh;
@@ -28,7 +28,12 @@
       text-align: center;
       color: white;
       line-height: 20px;
-      transition: left 0.5s ease;
+      transition: left 0.5s ease, border 0.5s ease;
+    }
+    #recursionInfo {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #555;
     }
     #startBtn {
       padding: 10px 20px;
@@ -37,14 +42,15 @@
   </style>
 </head>
 <body>
-  <h2>快速排序动画（柱状图交换效果）</h2>
+  <h2>快速排序递归演示</h2>
   <div id="container"></div>
+  <div id="recursionInfo">递归信息将在此显示</div>
   <button id="startBtn">开始排序</button>
   
   <script>
-    // 配置数据及参数
     const container = document.getElementById('container');
     const startBtn = document.getElementById('startBtn');
+    const recursionInfo = document.getElementById('recursionInfo');
     const barWidth = 40;
     const gap = 20;
     let bars = [];
@@ -63,6 +69,7 @@
         container.appendChild(bar);
         bars.push(bar);
       }
+      recursionInfo.textContent = '递归信息将在此显示';
     }
 
     // 延时函数
@@ -70,64 +77,78 @@
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    // 更新所有柱子的left坐标
+    // 更新柱子位置
     function updatePositions() {
       for (let i = 0; i < bars.length; i++) {
         bars[i].style.left = (i * (barWidth + gap)) + 'px';
       }
     }
 
-    // 交换两个柱子在数组中的位置，并更新位置动画
+    // 交换两个柱子并动画展示
     async function swap(i, j) {
-      // 高亮交换的柱子
       bars[i].style.backgroundColor = 'red';
       bars[j].style.backgroundColor = 'red';
       await sleep(600);
-
-      // 交换数组内的对象
       let temp = bars[i];
       bars[i] = bars[j];
       bars[j] = temp;
       updatePositions();
       await sleep(600);
-
-      // 还原颜色
       bars[i].style.backgroundColor = 'steelblue';
       bars[j].style.backgroundColor = 'steelblue';
     }
 
-    // 快速排序的分区函数（使用Lomuto分区方式）
+    // 分区函数（Lomuto法），动画中展示pivot选中效果
     async function partition(low, high) {
-      // 选取最后一个元素作为pivot，并高亮显示
       let pivotVal = parseInt(bars[high].textContent);
       bars[high].style.backgroundColor = 'orange';
       await sleep(600);
       let i = low - 1;
       for (let j = low; j < high; j++) {
-        // 高亮当前比较的柱子
         bars[j].style.backgroundColor = 'yellow';
         await sleep(600);
         if (parseInt(bars[j].textContent) < pivotVal) {
           i++;
           await swap(i, j);
         } else {
-          // 恢复颜色没有参与交换的柱子
           bars[j].style.backgroundColor = 'steelblue';
         }
       }
-      // 交换pivot到正确的位置
       await swap(i + 1, high);
-      // 恢复pivot的颜色
       bars[i + 1].style.backgroundColor = 'steelblue';
       return i + 1;
     }
 
-    // 递归实现快速排序
-    async function quickSort(low, high) {
+    // 给指定区间的柱子添加边框高亮显示
+    function highlightSubarray(low, high, color) {
+      for (let i = low; i <= high; i++) {
+        bars[i].style.border = `3px solid ${color}`;
+      }
+    }
+
+    // 清除指定区间柱子的高亮边框
+    function clearHighlight(low, high) {
+      for (let i = low; i <= high; i++) {
+        bars[i].style.border = 'none';
+      }
+    }
+
+    // 递归实现快速排序，并展示递归调用信息
+    async function quickSort(low, high, depth = 0) {
       if (low < high) {
+        recursionInfo.textContent = `深度 ${depth}: 排序区间 [${low}, ${high}]`;
+        highlightSubarray(low, high, 'orange');
+        await sleep(600);
         let pi = await partition(low, high);
-        await quickSort(low, pi - 1);
-        await quickSort(pi + 1, high);
+        clearHighlight(low, high);
+        await quickSort(low, pi - 1, depth + 1);
+        await quickSort(pi + 1, high, depth + 1);
+      } else if (low === high) {
+        // 单个元素也标记一下，表示已归位
+        recursionInfo.textContent = `深度 ${depth}: 单个元素 ${bars[low].textContent} 已归位`;
+        bars[low].style.border = '3px solid green';
+        await sleep(600);
+        bars[low].style.border = 'none';
       }
     }
 
@@ -136,10 +157,10 @@
       startBtn.disabled = true;
       init();
       await quickSort(0, bars.length - 1);
+      recursionInfo.textContent = '排序完成！';
       startBtn.disabled = false;
     });
 
-    // 初始化页面
     init();
   </script>
 </body>

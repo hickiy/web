@@ -25,28 +25,27 @@ o % 小o (Little o)
 \exists % 存在
 ```
 
-在编程中，可以使用Unicode字符来表示这些符号。例如，在Python中：
-  
-```python
-# 大O (Big O)
+在编程中，可以使用Unicode字符来表示这些符号。例如，在js中
+```javascript
+// 大O (Big O)
 big_o = 'O'
-# 小o (Little o)
+// 小o (Little o)
 little_o = 'o'
-# 大欧米伽 (Omega)
+// 大欧米伽 (Omega)
 omega_upper = '\u03A9'
-# 小欧米伽 (Little omega)
+// 小欧米伽 (Little omega)
 omega_lower = '\u03C9'
-# 大西塔 (Theta)
+// 大西塔 (Theta)
 theta_upper = '\u0398'
-# 小西塔 (Little theta)
+// 小西塔 (Little theta)
 theta_lower = '\u03B8'
-# 西格玛 (Sigma)
+// 西格玛 (Sigma)
 sigma = '\u03A3'
-# 埃普西龙 (Epsilon)
+// 埃普西龙 (Epsilon)
 epsilon = '\u03B5'
-# 属于
+// 属于
 belongs_to = '\u2208'
-# 存在
+// 存在
 exists = '\u2203'
 ```
 

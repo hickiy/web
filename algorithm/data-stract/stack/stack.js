@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-classes-per-file */
-/* eslint-disable no-unused-expressions */
 const LinkedList = require('./linkedList');
 
 class StakeByArray {

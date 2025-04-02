@@ -1,8 +1,9 @@
+<!-- filepath: E:\learn\web\algorithm\sort\merge\merge.html -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>快速排序递归演示</title>
+  <title>归并排序递归演示</title>
   <style>
     body {
       height: 100vh;
@@ -28,7 +29,7 @@
       text-align: center;
       color: white;
       line-height: 20px;
-      transition: left 0.5s ease, border 0.5s ease;
+      transition: left 0.5s ease, background-color 0.5s ease;
     }
     #recursionInfo {
       margin-bottom: 20px;
@@ -42,7 +43,7 @@
   </style>
 </head>
 <body>
-  <h2>快速排序递归演示</h2>
+  <h2>归并排序递归演示</h2>
   <div id="container"></div>
   <div id="recursionInfo">递归信息将在此显示</div>
   <button id="startBtn">开始排序</button>
@@ -54,6 +55,7 @@
     const barWidth = 40;
     const gap = 20;
     let bars = [];
+    // 初始的随机数据
     let values = [250, 100, 200, 300, 150, 50, 275, 125, 175, 225];
 
     // 初始化柱状图
@@ -77,46 +79,11 @@
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    // 更新柱子位置
+    // 更新柱子位置（通过 left 属性实现水平移动动画）
     function updatePositions() {
       for (let i = 0; i < bars.length; i++) {
         bars[i].style.left = (i * (barWidth + gap)) + 'px';
       }
-    }
-
-    // 交换两个柱子并动画展示
-    async function swap(i, j) {
-      bars[i].style.backgroundColor = 'red';
-      bars[j].style.backgroundColor = 'red';
-      await sleep(600);
-      let temp = bars[i];
-      bars[i] = bars[j];
-      bars[j] = temp;
-      updatePositions();
-      await sleep(600);
-      bars[i].style.backgroundColor = 'steelblue';
-      bars[j].style.backgroundColor = 'steelblue';
-    }
-
-    // 分区函数（Lomuto法），动画中展示pivot选中效果
-    async function partition(low, high) {
-      let pivotVal = parseInt(bars[high].textContent);
-      bars[high].style.backgroundColor = 'orange';
-      await sleep(600);
-      let i = low - 1;
-      for (let j = low; j < high; j++) {
-        bars[j].style.backgroundColor = 'yellow';
-        await sleep(600);
-        if (parseInt(bars[j].textContent) < pivotVal) {
-          i++;
-          await swap(i, j);
-        } else {
-          bars[j].style.backgroundColor = 'steelblue';
-        }
-      }
-      await swap(i + 1, high);
-      bars[i + 1].style.backgroundColor = 'steelblue';
-      return i + 1;
     }
 
     // 给指定区间的柱子添加边框高亮显示
@@ -133,18 +100,66 @@
       }
     }
 
-    // 递归实现快速排序，并展示递归调用信息
-    async function quickSort(low, high, depth = 0) {
+    // 合并函数，动画展示归并过程（由高度变化改为位置移动）
+    async function merge(low, mid, high) {
+      recursionInfo.textContent = `合并区间 [${low}, ${mid}] 和 [${mid+1}, ${high}]`;
+      highlightSubarray(low, high, 'orange');
+      await sleep(1000);
+
+      let mergedBars = [];
+      let left = low, right = mid + 1;
+
+      // 收集两个有序子区间的柱子（直接比较柱子的文本值）
+      while (left <= mid && right <= high) {
+        let leftVal = parseInt(bars[left].textContent);
+        let rightVal = parseInt(bars[right].textContent);
+        if (leftVal <= rightVal) {
+          mergedBars.push(bars[left]);
+          left++;
+        } else {
+          mergedBars.push(bars[right]);
+          right++;
+        }
+      }
+      while (left <= mid) {
+        mergedBars.push(bars[left]);
+        left++;
+      }
+      while (right <= high) {
+        mergedBars.push(bars[right]);
+        right++;
+      }
+
+      // 将合并后的柱子放回原数组，并依次改变它们的位置来展示移动动画
+      for (let i = low; i <= high; i++) {
+        mergedBars[i - low].style.backgroundColor = 'green';
+        bars[i] = mergedBars[i - low];
+        await sleep(300);
+      }
+
+      // 根据新的数组顺序更新柱子的位置，实现移动效果
+      updatePositions();
+      await sleep(600);
+
+      // 恢复柱子颜色为默认
+      for (let i = low; i <= high; i++) {
+        bars[i].style.backgroundColor = 'steelblue';
+      }
+
+      clearHighlight(low, high);
+    }
+
+    // 递归实现归并排序，并展示递归调用信息
+    async function mergeSort(low, high, depth = 0) {
       if (low < high) {
         recursionInfo.textContent = `深度 ${depth}: 排序区间 [${low}, ${high}]`;
-        highlightSubarray(low, high, 'orange');
-        await sleep(600);
-        let pi = await partition(low, high);
-        clearHighlight(low, high);
-        await quickSort(low, pi - 1, depth + 1);
-        await quickSort(pi + 1, high, depth + 1);
+        highlightSubarray(low, high, 'purple');
+        await sleep(1000);
+        let mid = Math.floor((low + high) / 2);
+        await mergeSort(low, mid, depth + 1);
+        await mergeSort(mid + 1, high, depth + 1);
+        await merge(low, mid, high);
       } else if (low === high) {
-        // 单个元素也标记一下，表示已归位
         recursionInfo.textContent = `深度 ${depth}: 单个元素 ${bars[low].textContent} 已归位`;
         bars[low].style.border = '3px solid green';
         await sleep(600);
@@ -156,7 +171,7 @@
     startBtn.addEventListener('click', async () => {
       startBtn.disabled = true;
       init();
-      await quickSort(0, bars.length - 1);
+      await mergeSort(0, bars.length - 1);
       recursionInfo.textContent = '排序完成！';
       startBtn.disabled = false;
     });

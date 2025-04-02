@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@algolia/client-search": ">=4.9.1 <6.0.0",
+    "crypto": "^1.0.1",
     "sass": "^1.71.1",
     "search-insights": ">= 1 < 3",
+    "util": "^0.12.5",
     "vue": "^3.3.4"
   },
   "devDependencies": {

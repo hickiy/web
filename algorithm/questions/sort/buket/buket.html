@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>桶排序演示</title>
+  <style>
+    body {
+      height: 100vh;
+      font-family: sans-serif;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    #container {
+      position: relative;
+      width: 600px;
+      height: 300px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+    #bucketsContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .bucket {
+      position: relative;
+      width: 110px;
+      height: 300px;
+      border: 1px dashed #999;
+      margin: 0 5px;
+      padding-top: 20px;
+      text-align: center;
+    }
+    .bucket-title {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .bar {
+      position: absolute;
+      bottom: 0;
+      width: 40px;
+      background-color: steelblue;
+      text-align: center;
+      color: white;
+      line-height: 20px;
+      transition: all 0.5s ease;
+    }
+    /* 当bar在桶内时采用静态定位 */
+    .bucket .bar {
+      position: static;
+      margin: 5px auto;
+      transition: none;
+    }
+    #info {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #555;
+    }
+    #startBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>桶排序演示</h2>
+  <div id="container"></div>
+  <div id="bucketsContainer"></div>
+  <div id="info">算法信息将在此显示</div>
+  <button id="startBtn">开始排序</button>
+  
+  <script>
+    const container = document.getElementById('container');
+    const bucketsContainer = document.getElementById('bucketsContainer');
+    const info = document.getElementById('info');
+    const startBtn = document.getElementById('startBtn');
+    const barWidth = 40;
+    const gap = 20;
+    let bars = [];
+    // 初始数组
+    let values = [125, 50, 100, 150, 75, 25, 137.5, 62.5, 87.5, 112.5];
+    // 桶参数
+    const bucketCount = 5;
+    let buckets = [];
+
+    // 延时函数
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // 初始化主容器中的柱状图
+    function init() {
+      container.innerHTML = '';
+      bars = [];
+      // 按原顺序创建bar（使用绝对定位）
+      for (let i = 0; i < values.length; i++) {
+        const bar = document.createElement('div');
+        bar.classList.add('bar');
+        bar.style.height = values[i] + 'px';
+        bar.style.left = (i * (barWidth + gap)) + 'px';
+        bar.textContent = values[i];
+        container.appendChild(bar);
+        bars.push(bar);
+      }
+      info.textContent = '点击“开始排序”后进行桶排序演示';
+      // 清空桶区域
+      bucketsContainer.innerHTML = '';
+      buckets = [];
+    }
+
+    // 创建桶容器（为空，放置分配后的bar）
+    function createBuckets() {
+      for (let i = 0; i < bucketCount; i++) {
+        const bucket = document.createElement('div');
+        bucket.classList.add('bucket');
+        bucket.id = 'bucket-' + i;
+        const title = document.createElement('div');
+        title.classList.add('bucket-title');
+        title.textContent = `桶 ${i}`;
+        bucket.appendChild(title);
+        bucketsContainer.appendChild(bucket);
+        buckets.push(bucket);
+      }
+    }
+
+    // 将bars从主容器分配到各个桶中（动画模拟）
+    async function distributeToBuckets() {
+      info.textContent = '将元素分配到各个桶中...';
+      // 计算最小值与最大值
+      let min = Math.min(...values);
+      let max = Math.max(...values);
+      let interval = Math.ceil((max - min + 1) / bucketCount);
+      for (let i = 0; i < bars.length; i++) {
+        let val = parseInt(bars[i].textContent);
+        let bucketIndex = Math.floor((val - min) / interval);
+        // 高亮当前选择的bar
+        bars[i].style.backgroundColor = 'orange';
+        await sleep(600);
+        // 移动bar到对应桶（改为静态定位，依赖于桶内的流式排列）
+        container.removeChild(bars[i]);
+        // 重置样式
+        bars[i].style.position = 'static';
+        bars[i].style.left = 'auto';
+        bars[i].style.transition = 'none';
+        // 添加到桶
+        buckets[bucketIndex].appendChild(bars[i]);
+        // 恢复颜色
+        bars[i].style.backgroundColor = 'steelblue';
+        await sleep(600);
+      }
+    }
+
+    // 对单个桶内执行简单的插入排序动画
+    async function sortBucket(bucket) {
+      let bucketBars = Array.from(bucket.querySelectorAll('.bar'));
+      if (bucketBars.length <= 1) return; // 无需排序
+      info.textContent = `正在对 ${bucket.querySelector('.bucket-title').textContent} 内的元素排序`;
+      for (let i = 1; i < bucketBars.length; i++) {
+        let keyVal = parseInt(bucketBars[i].textContent);
+        let j = i - 1;
+        while (j >= 0 && parseInt(bucketBars[j].textContent) > keyVal) {
+          // 高亮比较中的元素
+          bucketBars[j].style.backgroundColor = 'yellow';
+          bucketBars[j + 1].style.backgroundColor = 'yellow';
+          await sleep(600);
+          // 交换位置（在DOM中交换节点顺序）
+          bucket.insertBefore(bucketBars[j + 1], bucketBars[j]);
+          bucketBars = Array.from(bucket.querySelectorAll('.bar'));
+          // 恢复颜色
+          bucketBars[j].style.backgroundColor = 'steelblue';
+          bucketBars[j + 1].style.backgroundColor = 'steelblue';
+          j--;
+          await sleep(600);
+        }
+      }
+      await sleep(600);
+    }
+
+    // 对所有桶进行排序
+    async function sortBuckets() {
+      for (let i = 0; i < buckets.length; i++) {
+        await sortBucket(buckets[i]);
+      }
+    }
+
+    // 将各个桶内的排序结果合并回主容器
+    async function combineBuckets() {
+      info.textContent = '合并各个桶中的元素到主容器...';
+      // 清空主容器，为合并做好准备
+      container.innerHTML = '';
+      // 合并所有桶中的bar到一个数组
+      let sortedBars = [];
+      for (let i = 0; i < buckets.length; i++) {
+        let bucketBars = Array.from(buckets[i].querySelectorAll('.bar'));
+        sortedBars = sortedBars.concat(bucketBars);
+      }
+      // 恢复bar的绝对定位和初始样式
+      for (let i = 0; i < sortedBars.length; i++) {
+        let bar = sortedBars[i];
+        bar.style.position = 'absolute';
+        bar.style.transition = 'all 0.5s ease';
+        bar.style.left = (i * (barWidth + gap)) + 'px';
+        container.appendChild(bar);
+        await sleep(400);
+      }
+    }
+
+    // 桶排序整体动画
+    async function bucketSortAnimation() {
+      startBtn.disabled = true;
+      // 重新初始化主容器与桶区
+      init();
+      createBuckets();
+      await sleep(800);
+      await distributeToBuckets();
+      await sleep(800);
+      await sortBuckets();
+      await sleep(800);
+      await combineBuckets();
+      info.textContent = '排序完成！';
+      startBtn.disabled = false;
+    }
+
+    startBtn.addEventListener('click', async () => {
+      await bucketSortAnimation();
+    });
+
+    // 初始加载
+    init();
+  </script>
+</body>
+</html>

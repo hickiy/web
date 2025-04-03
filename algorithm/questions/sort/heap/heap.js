@@ -1,5 +1,3 @@
-// filepath: e:\learn\web\algorithm\questions\sort\heap\heap.js
-
 /**
  * 堆排序算法。
  *

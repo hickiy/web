@@ -94,12 +94,12 @@
     async function swap(i, j) {
       bars[i].style.backgroundColor = 'red';
       bars[j].style.backgroundColor = 'red';
-      await sleep(600);
+      await sleep(2000);
       let temp = bars[i];
       bars[i] = bars[j];
       bars[j] = temp;
       updatePositions();
-      await sleep(600);
+      await sleep(2000);
       bars[i].style.backgroundColor = 'steelblue';
       bars[j].style.backgroundColor = 'steelblue';
     }
@@ -113,12 +113,12 @@
       // 高亮当前父节点
       bars[i].style.backgroundColor = 'orange';
       recursionInfo.textContent = `堆化: 当前节点 ${bars[i].textContent}`;
-      await sleep(600);
+      await sleep(2000);
 
       if (left < n) {
         bars[left].style.backgroundColor = 'yellow';
         recursionInfo.textContent = `比较左子 ${bars[left].textContent} vs 当前最大 ${bars[largest].textContent}`;
-        await sleep(600);
+        await sleep(2000);
         if (parseInt(bars[left].textContent) > parseInt(bars[largest].textContent)) {
           largest = left;
         }

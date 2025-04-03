@@ -1,5 +1,4 @@
-// filepath: E:\learn\web\algorithm\questions\sort\redix\radix.js
-let arr = [170, 45, 75, 90, 802, 24, 2, 66];
+let arr = [170, 45, 75, 90, 180, 24, 2, 66];
 
 /**
  * 基数排序算法（LSD - 最低有效位优先）。

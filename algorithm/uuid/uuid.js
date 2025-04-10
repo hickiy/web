@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 function generateUUID() {
   let d = new Date().getTime();

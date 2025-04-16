@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>红黑树动画演示</title>
+  <style>
+    body { background: #f8f8f8; font-family: sans-serif; }
+    #tree { width: 100vw; height: 80vh; }
+    .node circle { stroke: #333; stroke-width: 2px; }
+    .node text { font-size: 16px; font-weight: bold; }
+    .link { stroke: #888; stroke-width: 2px; }
+    #controls { margin: 20px 0; }
+    #controls input { width: 60px; }
+    #log { background: #fff; border: 1px solid #ccc; padding: 8px; height: 100px; overflow-y: auto; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>红黑树动画演示</h2>
+  <div id="controls">
+    <input type="number" id="value" placeholder="数值">
+    <button onclick="insert()">插入</button>
+    <button onclick="reset()">重置</button>
+  </div>
+  <svg id="tree"></svg>
+  <div id="log"></div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script>
+    // 红黑树节点定义
+    class Node {
+      constructor(value, color = 'red', parent = null) {
+        this.value = value;
+        this.color = color;
+        this.left = null;
+        this.right = null;
+        this.parent = parent;
+      }
+    }
+
+    // 红黑树实现
+    class RedBlackTree {
+      constructor() {
+        this.root = null;
+        this.log = [];
+      }
+
+      insert(value) {
+        let newNode = new Node(value);
+        if (!this.root) {
+          newNode.color = 'black';
+          this.root = newNode;
+          this.logStep(`插入根节点 ${value}，颜色设为黑色`);
+          return;
+        }
+        let parent = null, cur = this.root;
+        while (cur) {
+          parent = cur;
+          if (value < cur.value) cur = cur.left;
+          else cur = cur.right;
+        }
+        newNode.parent = parent;
+        if (value < parent.value) parent.left = newNode;
+        else parent.right = newNode;
+        this.logStep(`插入红色节点 ${value}`);
+        this.fixInsert(newNode);
+      }
+
+      fixInsert(node) {
+        while (node !== this.root && node.parent.color === 'red') {
+          let parent = node.parent;
+          let grandparent = parent.parent;
+          if (!grandparent) break;
+          if (parent === grandparent.left) {
+            let uncle = grandparent.right;
+            if (uncle && uncle.color === 'red') {
+              parent.color = uncle.color = 'black';
+              grandparent.color = 'red';
+              this.logStep(`父节点和叔叔节点都是红色，变色并向上调整`);
+              node = grandparent;
+            } else {
+              if (node === parent.right) {
+                node = parent;
+                this.rotateLeft(node);
+                this.logStep(`左旋节点 ${node.value}`);
+              }
+              parent.color = 'black';
+              grandparent.color = 'red';
+              this.rotateRight(grandparent);
+              this.logStep(`右旋节点 ${grandparent.value}`);
+            }
+          } else {
+            let uncle = grandparent.left;
+            if (uncle && uncle.color === 'red') {
+              parent.color = uncle.color = 'black';
+              grandparent.color = 'red';
+              this.logStep(`父节点和叔叔节点都是红色，变色并向上调整`);
+              node = grandparent;
+            } else {
+              if (node === parent.left) {
+                node = parent;
+                this.rotateRight(node);
+                this.logStep(`右旋节点 ${node.value}`);
+              }
+              parent.color = 'black';
+              grandparent.color = 'red';
+              this.rotateLeft(grandparent);
+              this.logStep(`左旋节点 ${grandparent.value}`);
+            }
+          }
+        }
+        this.root.color = 'black';
+      }
+
+      rotateLeft(x) {
+        let y = x.right;
+        x.right = y.left;
+        if (y.left) y.left.parent = x;
+        y.parent = x.parent;
+        if (!x.parent) this.root = y;
+        else if (x === x.parent.left) x.parent.left = y;
+        else x.parent.right = y;
+        y.left = x;
+        x.parent = y;
+      }
+
+      rotateRight(x) {
+        let y = x.left;
+        x.left = y.right;
+        if (y.right) y.right.parent = x;
+        y.parent = x.parent;
+        if (!x.parent) this.root = y;
+        else if (x === x.parent.right) x.parent.right = y;
+        else x.parent.left = y;
+        y.right = x;
+        x.parent = y;
+      }
+
+      logStep(msg) {
+        this.log.push(msg);
+        updateLog();
+      }
+    }
+
+    // 可视化部分
+    const tree = new RedBlackTree();
+    const svg = d3.select("#tree");
+    const width = window.innerWidth, height = 500;
+    svg.attr("width", width).attr("height", height);
+
+    function treeData(root) {
+      if (!root) return null;
+      return {
+        name: root.value,
+        color: root.color,
+        children: [treeData(root.left), treeData(root.right)].filter(Boolean)
+      };
+    }
+
+    function update() {
+      svg.selectAll("*").remove();
+      if (!tree.root) return;
+      const root = d3.hierarchy(treeData(tree.root));
+      const treeLayout = d3.tree().size([width - 40, height - 60]);
+      treeLayout(root);
+
+      // 连线
+      svg.selectAll('.link')
+        .data(root.links())
+        .enter()
+        .append('line')
+        .attr('class', 'link')
+        .attr('x1', d => d.source.x + 20)
+        .attr('y1', d => d.source.y + 40)
+        .attr('x2', d => d.target.x + 20)
+        .attr('y2', d => d.target.y + 40);
+
+      // 节点
+      const node = svg.selectAll('.node')
+        .data(root.descendants())
+        .enter()
+        .append('g')
+        .attr('class', 'node')
+        .attr('transform', d => `translate(${d.x + 20},${d.y + 40})`);
+
+      node.append('circle')
+        .attr('r', 22)
+        .attr('fill', d => d.data.color === 'red' ? '#e74c3c' : '#222');
+
+      node.append('text')
+        .attr('dy', 6)
+        .attr('text-anchor', 'middle')
+        .attr('fill', '#fff')
+        .text(d => d.data.name);
+    }
+
+    function insert() {
+      const val = parseInt(document.getElementById('value').value);
+      if (isNaN(val)) return;
+      tree.insert(val);
+      update();
+      document.getElementById('value').value = '';
+    }
+
+    function reset() {
+      tree.root = null;
+      tree.log = [];
+      update();
+      updateLog();
+    }
+
+    function updateLog() {
+      const logDiv = document.getElementById('log');
+      logDiv.innerHTML = tree.log.map(msg => `<div>${msg}</div>`).join('');
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    update();
+  </script>
+</body>
+</html>

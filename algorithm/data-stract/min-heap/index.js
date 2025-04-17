@@ -2,7 +2,7 @@
  * 最小堆实现类
  * 最小堆中，每个节点的值都小于或等于其子节点的值
  */
-export default class MinHeap {
+class MinHeap {
   constructor() {
     this.heap = [];
   }

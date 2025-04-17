@@ -1,5 +1,3 @@
-import djb2Hash from '../../hash/DJB2.js';
-
 // 使用分离链表法（链表）解决冲突的哈希表实现
 
 // 链表节点类
@@ -18,9 +16,19 @@ class HashTable {
     this.size = size;
   }
 
+  djb2Hash(str, size) {
+    let hash = 5381;
+    for (let i = 0; i < str.length; i++) {
+      // hash = hash * 33 + 当前字符的ASCII码
+      hash = ((hash << 5) + hash) + str.charCodeAt(i); // hash * 33 + ch
+    }
+    // 取模操作，确保哈希值在指定范围内
+    return hash % size;
+  }
+
   // 插入或更新键值对
   set(key, value) {
-    const index = djb2Hash(key, this.size);
+    const index = this.djb2Hash(key, this.size);
     // 如果该桶没有链表，则创建一个
     if (!this.buckets[index]) {
       this.buckets[index] = new ListNode(key, value);
@@ -42,7 +50,7 @@ class HashTable {
 
   // 根据键获取值
   get(key) {
-    const index = djb2Hash(key, this.size);
+    const index = this.djb2Hash(key, this.size);
     let node = this.buckets[index];
     // 遍历该桶的链表
     while (node) {
@@ -56,7 +64,7 @@ class HashTable {
 
   // 删除键值对
   remove(key) {
-    const index = djb2Hash(key, this.size);
+    const index = this.djb2Hash(key, this.size);
     let node = this.buckets[index];
     let prev = null;
     // 遍历链表查找要删除的节点

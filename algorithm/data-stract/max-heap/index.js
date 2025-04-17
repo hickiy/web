@@ -2,7 +2,7 @@
  * 最大堆实现类
  * 最大堆中，每个节点的值都大于或等于其子节点的值
  */
-export default class MaxHeap {
+class MaxHeap {
   constructor() {
     this.heap = [];
   }

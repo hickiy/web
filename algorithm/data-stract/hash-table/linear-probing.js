@@ -1,4 +1,5 @@
-import bkdrHash from '../../hash/BKDR.js';
+
+
 /**
  * 基于开放寻址法（线性探测）的哈希表实现
  * 支持 put、get、remove 基本操作
@@ -14,13 +15,23 @@ class OpenAddressingHashTable {
     this.count = 0;
   }
 
+  bkdrHash(str, size, seed = 31) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      // hash = hash * seed + 当前字符的ASCII码
+      hash = hash * seed + str.charCodeAt(i);
+    }
+    // 取模操作，确保哈希值在指定范围内
+    return hash % size;
+  }
+
   // 插入或更新键值对
   put(key, value) {
     if (this.count / this.size > 0.7) {
       // 负载因子超过0.7时扩容
       this._resize(this.size * 2);
     }
-    let idx = bkdrHash(key, this.size);
+    let idx = this.bkdrHash(key, this.size);
     // 线性探测：如果当前位置被占用且不是同一个key，则向后查找
     while (
       this.table[idx] !== undefined &&
@@ -42,7 +53,7 @@ class OpenAddressingHashTable {
 
   // 获取指定key的值
   get(key) {
-    let idx = bkdrHash(key, this.size);
+    let idx = this.bkdrHash(key, this.size);
     let startIdx = idx;
     // 线性探测查找
     while (this.table[idx] !== undefined) {
@@ -61,7 +72,7 @@ class OpenAddressingHashTable {
 
   // 删除指定key的键值对
   remove(key) {
-    let idx = bkdrHash(key, this.size);
+    let idx = this.bkdrHash(key, this.size);
     let startIdx = idx;
     while (this.table[idx] !== undefined) {
       if (

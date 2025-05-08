@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Union-Find 可视化演示</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; }
+    .container { max-width: 800px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+    .nodes { display: flex; justify-content: center; margin: 24px 0; }
+    .node {
+      width: 40px; height: 40px; border-radius: 50%; background: #4f8ef7; color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+      margin: 0 12px; position: relative; transition: background 0.3s;
+    }
+    .node.root { background: #43b97f; }
+    .arrow {
+      position: absolute; top: 50%; left: 100%; width: 40px; height: 2px; background: #aaa;
+      transform: translateY(-50%);
+    }
+    .arrow-head {
+      position: absolute; right: -6px; top: 50%; width: 0; height: 0;
+      border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+      border-left: 8px solid #aaa; transform: translateY(-50%);
+    }
+    .controls { text-align: center; margin-bottom: 16px; }
+    button { margin: 0 8px; padding: 8px 16px; font-size: 16px; }
+    .explain { background: #f1f8e9; padding: 12px; border-radius: 6px; margin-bottom: 16px; }
+    .parent-label { font-size: 12px; color: #333; position: absolute; top: 44px; left: 50%; transform: translateX(-50%); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Union-Find（并查集）数据结构动画演示</h2>
+    <div class="explain" id="explain">
+      并查集是一种用于处理集合合并及查询的高效数据结构。主要操作有：<b>find</b>（查找根节点）和<b>union</b>（合并两个集合）。
+    </div>
+    <div class="controls">
+      <button onclick="stepUnion(0, 1)">Union(0, 1)</button>
+      <button onclick="stepUnion(1, 2)">Union(1, 2)</button>
+      <button onclick="stepUnion(3, 4)">Union(3, 4)</button>
+      <button onclick="stepUnion(2, 4)">Union(2, 4)</button>
+      <button onclick="stepFind(4)">Find(4)</button>
+      <button onclick="reset()">重置</button>
+    </div>
+    <div class="nodes" id="nodes"></div>
+  </div>
+  <script>
+    // 初始化并查集
+    let n = 6;
+    let parent = [];
+    let explainText = [
+      "初始时，每个节点自成一个集合，parent[i]=i。",
+      "执行 Union(0, 1)：将0和1合并，1的根指向0。",
+      "执行 Union(1, 2)：将1和2合并，2的根指向0（路径压缩后）。",
+      "执行 Union(3, 4)：将3和4合并，4的根指向3。",
+      "执行 Union(2, 4)：将2和4合并，4的根指向0（路径压缩后）。",
+      "执行 Find(4)：查找4的根节点，路径压缩后4直接指向0。"
+    ];
+    let explainStep = 0;
+
+    function reset() {
+      parent = [];
+      for (let i = 0; i < n; i++) parent[i] = i;
+      explainStep = 0;
+      update();
+      document.getElementById('explain').innerHTML = explainText[0];
+    }
+
+    function find(x, animate = false) {
+      if (parent[x] !== x) {
+        if (animate) highlightNode(x, "#fbc02d");
+        let root = find(parent[x], animate);
+        if (parent[x] !== root) {
+          parent[x] = root;
+          if (animate) setTimeout(update, 500);
+        }
+        return root;
+      }
+      if (animate) highlightNode(x, "#43b97f");
+      return x;
+    }
+
+    function union(x, y) {
+      let rootX = find(x);
+      let rootY = find(y);
+      if (rootX !== rootY) parent[rootY] = rootX;
+    }
+
+    function stepUnion(x, y) {
+      union(x, y);
+      explainStep++;
+      update();
+      document.getElementById('explain').innerHTML = explainText[explainStep];
+    }
+
+    function stepFind(x) {
+      find(x, true);
+      explainStep = 5;
+      setTimeout(() => {
+        update();
+        document.getElementById('explain').innerHTML = explainText[explainStep];
+      }, 600);
+    }
+
+    function highlightNode(idx, color) {
+      let node = document.getElementById('node-' + idx);
+      if (node) node.style.background = color;
+      setTimeout(() => { if (node) node.style.background = parent[idx] === idx ? "#43b97f" : "#4f8ef7"; }, 400);
+    }
+
+    function update() {
+      let nodesDiv = document.getElementById('nodes');
+      nodesDiv.innerHTML = '';
+      for (let i = 0; i < n; i++) {
+        let node = document.createElement('div');
+        node.className = 'node' + (parent[i] === i ? ' root' : '');
+        node.id = 'node-' + i;
+        node.innerText = i;
+        // 父节点标签
+        let label = document.createElement('div');
+        label.className = 'parent-label';
+        label.innerText = 'parent: ' + parent[i];
+        node.appendChild(label);
+        nodesDiv.appendChild(node);
+      }
+      // 绘制箭头
+      for (let i = 0; i < n; i++) {
+        if (parent[i] !== i) {
+          let from = document.getElementById('node-' + i);
+          let to = document.getElementById('node-' + parent[i]);
+          let arrow = document.createElement('div');
+          arrow.className = 'arrow';
+          arrow.style.left = '40px';
+          arrow.style.width = Math.abs(parent[i] - i) * 52 + 'px';
+          arrow.style.background = '#aaa';
+          let arrowHead = document.createElement('div');
+          arrowHead.className = 'arrow-head';
+          arrow.appendChild(arrowHead);
+          from.appendChild(arrow);
+        }
+      }
+    }
+
+    reset();
+  </script>
+</body>
+</html>

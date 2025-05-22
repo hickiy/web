@@ -7,7 +7,7 @@ function fib1(n) {
   if (typeof n !== 'number' || n < 1) {
     throw new TypeError('fibonacci: argument "n" expect a "number" gt(>) zero');
   }
-  if (n === 1 || n === 2) return 1;
+  if (n < 3) return 1;
   return fib1(n - 1) + fib1(n - 2);
 }
 
@@ -16,7 +16,7 @@ function fib2(n) {
   if (typeof n !== 'number' || n < 1) {
     throw new TypeError('fibonacci: argument "n" expect a "number" gt(>) zero');
   }
-  if (n === 1 || n === 2) return 1;
+  if (n < 3) return 1;
   let first = 1;
   let second = 1;
   let next = first + second;
@@ -89,17 +89,9 @@ function fib5(n) {
 
 // test used time
 function tester(method, n) {
-  console.time(method.name);
+  console.time('计算耗时');
   console.log(`第${n}位斐波那契数是：${method(n)}`);
-  console.timeEnd(method.name, '\n');
+  console.timeEnd('计算耗时');
 }
-
 tester(fib1, 40);
 
-tester(fib2, 40);
-
-tester(fib3, 40);
-
-tester(fib4, 40);
-
-tester(fib5, 40);

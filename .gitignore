@@ -41,6 +41,5 @@ temp
 # for typescript build
 /lang/typescript/*.js
 
-# for python build and .venv
-__pycache__/
-.venv/
+# for rust build
+/lang/rust/target

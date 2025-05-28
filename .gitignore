@@ -43,3 +43,4 @@ temp
 
 # for rust build
 /lang/rust/target
+/lang/rust/target/*

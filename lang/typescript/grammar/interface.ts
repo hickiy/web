@@ -1,4 +1,3 @@
-
  /**
  * 对象接口
  * readonly定义与普通声明的区别在于，前者是作为属性使用的场景，后者是用作为变量使用的场景
@@ -10,8 +9,8 @@
 interface labelledValue {
     readonly size: number, //必传且只读属性
     label: number, // 必传参数
-    age?: number, // 可选的参数
-    [index: string]: number, // 字符串索引签名相当与告诉typescript 字符类型的索引（key）对应的值必须是number类型
+    age?: number | undefined, // 可选的参数
+    [index: string]: number | undefined, // 字符串索引签名相当与告诉typescript 字符类型的索引（key）对应的值必须是number类型
     [index: number]: any, // 数字索引签名相当于告诉typescirpt 数字类型的索引（key）对应的返回值是any类型
   }
 
@@ -72,11 +71,6 @@ interface Square extends Shape { // 接口继承其他接口
 interface PenStroke extends Shape, Square { //继承多个接口
   penWidth: number;
 }
-let square1 = {} as PenStroke; // 类型断言 as写法， 这里可以直接赋值一个字面量对象定义属性而后修改属性，使用类型断言赋值一个不符合接口类型定义的字面量空对象给他，目的是为了 后续进行属性定义
-let square2 = <PenStroke>{}; // 类型断言 尖括号写法
-square1.color = "blue";  // 定义属性
-square1.sideLength = 10; // 定义属性
-square1.penWidth = 100 // 定义属性
 
 
 /**
@@ -88,12 +82,7 @@ interface Counter {
   reset(): void;
 }
 
-function getCounter(): Counter { // 这了声明返回值符合Counter接口
-  let counter = function (start: number) { return start } as Counter;
-  counter.interval = 123;
-  counter.reset = function () { };
-  return counter;
-}
+
 
 /**
  * 接口继承类
@@ -107,10 +96,3 @@ interface SelectableControl extends Control { // 接口继承类， 当前接口
   select(): void;
 }
 
-class Button extends Control implements SelectableControl { // Control的字类Button可以实现 SelectableControl接口
-  select() { }
-}
-
-class ButtonText implements SelectableControl { // ButtonText 类无法实现 SelectableControl接口 因为其不存在私有属性state
-  select() { }
-}

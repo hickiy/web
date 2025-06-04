@@ -1,5 +1,5 @@
 // 受保护的成员 protected
-class Person1 {
+class Person {
     protected name: string; // 定义受保护的属性
     protected constructor(name: string) { this.name = name; } // 定义受保护的构造器
 }

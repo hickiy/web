@@ -1,8 +1,8 @@
 struct User {
-    active: bool,
-    username: String,
-    email: String,
-    sign_in_count: u64,
+    active: bool,         // 1 字节（但会有对齐填充）
+    username: String,     // 24 字节（String 在 64 位系统上通常是 24 字节：3 个 usize 字段）
+    email: String,        // 24 字节
+    sign_in_count: u64,   // 8 字节
 }
 
 fn main() {

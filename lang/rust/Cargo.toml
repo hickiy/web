@@ -3,8 +3,10 @@ name = "hello_rust"
 version = "1.0.0"
 edition = "2024"
 
-
 [[bin]]
 name = "hello_rust"
 path = "main.rs"
+
+[lib]
+path = "lib.rs"
 

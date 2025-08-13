@@ -497,6 +497,10 @@ a:hover { color: #04F; }
 
 .hero.is-active .demo { display: none; }
 
+.hero.is-active {
+  margin: 0 auto;
+}
+
 .thumbnails{margin-top: 10px;}
 .thumbnails:after {
   content: '';

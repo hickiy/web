@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 新增：保证根与 body 高度、去除默认 margin */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 将 body 作为 scroll container，开启平滑滚动与 snap 行为 */
+    .container {
+      height: 100vh;
+      overflow-y: auto;
+      /* 使其成为滚动容器 */
+      scroll-snap-type: y mandatory;
+      /* 垂直且强制对齐 */
+      scroll-behavior: smooth;
+      /* 可选：平滑滚动体验 */
+    }
+
+    /* 子项全屏并对齐起始位置；示例把第二屏设置为 always */
+    .container>div {
+      scroll-snap-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div style="background: lightblue;height: 100vh;">
+      <h1>Scroll down</h1>
+    </div>
+    <div style="background: lightcoral; height: 80vh; scroll-snap-stop: always;">
+      <h1>Keep scrolling</h1>
+    </div>
+    <div style="background: lightgreen;height: 60vh;">
+      <h1>Almost there</h1>
+    </div>
+    <div style="background: lightgoldenrodyellow;height: 100vh;">
+      <h1>You made it!</h1>
+    </div>
+  </div>
+</body>
+
+</html>

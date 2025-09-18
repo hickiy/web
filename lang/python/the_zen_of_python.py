@@ -1,0 +1,1 @@
+import this; copyright(); credits(); exit()

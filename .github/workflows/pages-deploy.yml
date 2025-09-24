@@ -26,16 +26,11 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: make a directory
-        run: |
-          mkdir -p .vitepress/temp/blog
-          mv .vitepress/dist/* .vitepress/temp/blog
-          find . -maxdepth 1 -type d ! -name '.*' ! -name 'node_modules' -exec mv {} .vitepress/temp \;
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           name: github-pages
-          path: .vitepress/temp
+          path: .vitepress/dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3

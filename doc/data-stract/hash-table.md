@@ -12,7 +12,7 @@ $$
 $$
 
 **伪代码：**
-```pseudo
+```txt
 function insert(key, value):
   index = h(key)
   table[index].append((key, value))
@@ -39,7 +39,7 @@ $$
 $$
 
 **伪代码：**
-```pseudo
+```txt
 function insert(key, value):
   for i = 0 to m-1:
     index = (h(key) + i) mod m
@@ -71,7 +71,7 @@ $$
 $$
 
 **伪代码：**
-```pseudo
+```txt
 function insert(key, value):
   for i = 0 to m-1:
     index = (h(key) + c1 * i + c2 * i * i) mod m
@@ -103,7 +103,7 @@ $$
 $$
 
 **伪代码：**
-```pseudo
+```txt
 function insert(key, value):
   for i = 0 to m-1:
     index = (h1(key) + i * h2(key)) mod m

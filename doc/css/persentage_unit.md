@@ -1,6 +1,12 @@
 # CSS 百分比参考系速查（哪些百分比相对于什么计算）
 
-本文按类别梳理常见 CSS 属性中的百分比值如何解析（相对于谁计算），并标注易踩坑点与小例子。
+本文按类别梳理常见 CSS 属性中的百分比值如- m- mask-position / mask-size（百分比）
+	- 与 background-position/size 类似，基于遮罩定位区域。
+- object-position（替换元素，如 `<img>`/`<video>`）
+	- 基准：替换内容在元素内容盒内的"剩余空间"。与 background-position 的百分比语义相同。position / mask-size（百分比）
+	- 与 background-position/size 类似，基于遮罩定位区域。
+- object-position（替换元素，如 `<img>`/`<video>`）
+	- 基准：替换内容在元素内容盒内的"剩余空间"。与 background-position 的百分比语义相同。相对于谁计算），并标注易踩坑点与小例子。
 
 提示：多数“尺寸相关”的百分比依赖包含块（containing block）。文中涉及“包含块”“定位区域”等术语均以常规块级布局为前提，特殊布局另有说明。
 
@@ -53,7 +59,7 @@
 	- 基准：背景定位区域的对应轴尺寸（不涉及图片本身尺寸）。
 - mask-position / mask-size（百分比）
 	- 与 background-position/size 类似，基于遮罩定位区域。
-- object-position（替换元素，如 <img>/<video>）
+- object-position（替换元素，如 `<img>`/`<video>`）
 	- 基准：替换内容在元素内容盒内的“剩余空间”。与 background-position 的百分比语义相同。
 
 ## 4. 字体与文本排版

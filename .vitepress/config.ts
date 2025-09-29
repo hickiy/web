@@ -7,7 +7,7 @@ export default defineConfig({
   head: [['link', { rel: 'icon', href: '/web/favicon.jpg' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/web/favicon.jpg',
+    logo: '/favicon.jpg',
     siteTitle: 'Hickey',
     search: {
       provider: 'local'

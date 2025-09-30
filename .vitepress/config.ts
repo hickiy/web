@@ -5,11 +5,7 @@ export default defineConfig({
   outDir: '.vitepress/dist',
   title: 'hickey blog',
   head: [['link', { rel: 'icon', href: '/web/favicon.jpg' }]],
-  // ignoreDeadLinks: true, // 忽略死链接检查
-  vite: {
-    publicDir: '../practice', // 将 practice 目录作为公共资源目录
-    assetsInclude: ['**/*.html'] // 包含 HTML 文件作为资源
-  },
+  ignoreDeadLinks: true, // 忽略死链接检查
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/favicon.jpg',

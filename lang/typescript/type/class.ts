@@ -17,7 +17,7 @@ class Animal {
 // 只读属性
 class Dog {
     readonly name: String  // 第一种 直接已属性限定符声明，然后在构造函数内对其赋值
-    constructor(name) {
+    constructor(name: string) {
         this.name = name
     }
 }

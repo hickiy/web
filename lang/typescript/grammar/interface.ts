@@ -37,13 +37,13 @@ interface searchFunc{
  * 类的构造函数最为类的静态部分要单独验证
  */
 interface ClockConstructor {
-  new (hour: number, minute: number); 
+  new (hour: number, minute: number): ClockInterface; 
 }
 
 
 class Clock implements ClockInterface { // 定义一个类使用类的接口
   constructor (h: number, m: number) { }
-  currentTime: Date;
+  currentTime!: Date;
   setTime(){}
 }
 

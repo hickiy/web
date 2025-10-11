@@ -28,8 +28,8 @@ let myIdentity2: GenericIdentityFn2<number> = identity; // 显示声明泛型类
 
 // 泛型类
 class Machine <T> {  // 定义泛型类
-    name: T;
-    add: (x:T,y:T) => T
+    name!: T;
+    add!: (x:T,y:T) => T
 }
 
 let machine1 = new Machine<number>() // 生成实例时  显示指定泛型的类型
@@ -55,7 +55,7 @@ class Card {     // 定义类
     nameed: string = '桌子'
 }
 class Box extends Card {
-    height:number
+    height!: number;
     constructor(name: string = '盒子') {
         super()
         this.nameed = name

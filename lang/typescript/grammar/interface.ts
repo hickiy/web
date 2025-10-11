@@ -35,11 +35,17 @@ interface ClockInterface {
 }
 
 class Clock implements ClockInterface { // 定义一个类使用类的接口
+<<<<<<< HEAD
   constructor(h: number, m: number) {
     this.currentTime = new Date();
   }
   currentTime: Date;
   setTime(d: Date) { }
+=======
+  constructor (h: number, m: number) { }
+  currentTime!: Date;
+  setTime(){}
+>>>>>>> 9f8e0df (typescript: fix type declaration error)
 }
 
 /**

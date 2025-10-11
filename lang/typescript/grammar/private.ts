@@ -5,8 +5,8 @@ class Rois {
 }
 
 class Rhino extends Rois { // 继承Rois类， 同时继承私有成员
-    constructor(name: string) { super(name); }  // 利用超类构造函数 包装字类实例
-    age: number
+    constructor(name: string) { super(name) }  // 利用超类构造函数 包装字类实例
+    age!: number; // 声明公有属性
 }
 
 class Employee {

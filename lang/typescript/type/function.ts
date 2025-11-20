@@ -22,7 +22,7 @@ function test(firstName: string, lasteName = 'jojo', age:number, address?:string
 let suits = ["hearts", "spades", "clubs", "diamonds"];
 function pickCard(x: {suit: string; card: number; }[]): number; // 第一种重载 接受一个对象数组  返回一个number
 function pickCard(x: number): {suit: string; card: number; }; // 第二种重载方式 接受一个number  返回一个对象
-function pickCard(x): any { // 函数定义  注意：这里不是声明函数重载
+function pickCard(x: Array<{suit: string; card: number; }> | number): any { // 函数定义  注意：这里不是声明函数重载
     // Check to see if we're working with an object/array
     // if so, they gave us the deck and we'll pick the card
     if (typeof x == "object") {

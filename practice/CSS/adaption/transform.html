@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    /* 以设计稿宽度为准（例：1920px） */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+      font-family: sans-serif;
+      overflow-x: hidden;
+    }
+
+    #app {
+      width: 1920px;
+      height: 919px;
+      transform-origin: 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    header {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+    }
+  </style>
+
+  <div id="app">
+    <header>Transform-scale 适配示例（设计宽度：1920px）</header>
+    <p>使用 transform: scale() 按设计宽度缩放整体 UI；改变浏览器宽度观察效果。</p>
+    <p>可修改 baseWidth 以匹配你的设计稿宽度。</p>
+    <button>示例按钮</button>
+  </div>
+
+  <script>
+    (function () {
+      var baseWidth = 1920; // 设计稿宽度
+      var app = document.getElementById('app');
+
+      function applyScale() {
+        var s = window.innerWidth / baseWidth;
+        // 如果不希望放大（只缩小），可使用：s = Math.min(s, 1);
+        app.style.transform = 'scale(' + s + ')';
+      }
+
+      window.addEventListener('resize', applyScale);
+      applyScale();
+    })();
+  </script>
+</body>
+
+</body>
+
+</html>

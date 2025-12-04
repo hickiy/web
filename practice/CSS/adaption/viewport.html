@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document</title>
+</head>
+<style>
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+  }
+
+  .content {
+    width: 1920px;
+    height: 100vh;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+  }
+</style>
+
+<body>
+  <div class="content">
+    123123123123
+  </div>
+</body>
+<script>
+  // JavaScript to dynamically set the viewport width to 1920px
+  const metaViewport = document.querySelector('meta[name="viewport"]');
+  console.log(document.documentElement.clientWidth, window.devicePixelRatio);
+  metaViewport.setAttribute('content', 'width=1920 , initial-scale=' + document.documentElement.clientWidth / 1920);
+</script>
+
+</html>

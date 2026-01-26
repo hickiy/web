@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>羿动年会抽奖活动</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100vh;
+      min-height: 480px;
+      display: grid;
+      grid-template-rows: 1.6fr 12% 1.1fr;
+      justify-content: stretch;
+      justify-items: center;
+      align-content: stretch;
+      align-items: center;
+      background: center center / 100% 100% url('./bg.png') no-repeat;
+    }
+
+    .content {
+      font-size: 60px;
+      color: #fff;
+      align-self: flex-end;
+    }
+
+    #btn {
+      width: 191px;
+      height: 70px;
+      align-self: center;
+      background-image: url('./按钮.png');
+      background-size: 191px 70px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 70px;
+      font-size: 20px;
+      color: #fff;
+      align-self: flex-start;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <span id="name">待定</span>
+  </div>
+  <div></div>
+  <div id="btn">开始抽奖</div>
+  <script type="text/javascript">
+    // 
+    var staffNmaes = [
+      '陈亮', '陈成', '汪明帅', '刘春艳', '孟凡熙', '王博', '崔征', '郝冠添',
+      '吴道明', '王健', '邓志慧', '朱轲', '孙源', '陈富锦', '丁戈', '王少华',
+      '周成', '胡烽', '付瑞雯', '夏熊', '蔡金波', '左爽', '刘钰', '周健',
+      '刘畅', '黄艳', '袁英平', '白从望', '胡诗晗', '刘健', '韩成', '黄希光',
+      '王蕾', '周其旺', '张敏', '郑彬', '于晓毛', '杨乐人', '刘蓓', '徐刚',
+      '李超行', '王丹'
+    ];
+    var span = document.getElementById('name');
+    var btn = document.getElementById('btn');
+    var storedNames = window.localStorage.getItem('had-won');
+    var intervalId = null;
+    function showName() {
+      var random = Math.random();
+      var userName = staffNmaes[Math.floor(random * staffNmaes.length)];
+      span.innerText = userName;
+    }
+    function stop() {
+      btn.innerText = '开始抽奖'
+      var winner = span.innerText.trim();
+      var wonsStr = window.localStorage.getItem('had-won');
+      window.localStorage.setItem('had-won', wonsStr ? wonsStr + ',' + winner : winner)
+    }
+    btn.addEventListener('click', function () {
+      if (intervalId) {
+        window.clearInterval(intervalId);
+        intervalId = null;
+        stop();
+        return;
+      }
+      btn.innerText = '抽奖中...'
+      var wonsStr = window.localStorage.getItem('had-won');
+      if (wonsStr && wonsStr.split) {
+        var arr = wonsStr.split(',');
+        arr.forEach(function (i) {
+          var startIndex = staffNmaes.indexOf(i);
+          if (startIndex > -1) {
+            staffNmaes.splice(startIndex, 1);
+          }
+        })
+      }
+      intervalId = window.setInterval(function () {
+        showName();
+      }, 50)
+    })
+  </script>
+</body>
+
+</html>

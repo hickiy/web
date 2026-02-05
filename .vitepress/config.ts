@@ -18,16 +18,8 @@ export default defineConfig({
       { text: 'Blog', link: '/blog/', activeMatch: '/blog/' },
       { text: '文档', link: '/doc/algorithm/algorithm.md', activeMatch: '/doc/' },
       { text: '实践', link: '/practice/', activeMatch: '/practice/' },
-      { text: 'HTML', link: '/html/', activeMatch: '/html/' }
     ],
     sidebar: {
-      '/html/': [
-        {
-          text: 'HTML Index',
-          collapsed: false,
-          items: [{ text: 'HTML Index', link: '/html/' }]
-        }
-      ],
       '/blog/': [
         {
           text: 'Blog',

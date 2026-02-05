@@ -15,10 +15,21 @@ export default defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
+      { text: 'Blog', link: '/blog/', activeMatch: '/blog/' },
       { text: '文档', link: '/doc/algorithm/algorithm.md', activeMatch: '/doc/' },
       { text: '实践', link: '/practice/', activeMatch: '/practice/' },
     ],
     sidebar: {
+      '/blog/': [
+        {
+          text: 'Blog',
+          collapsed: false,
+          items: [
+            { text: '精选与入口', link: '/blog/index.md' },
+            { text: '内容分类与目录', link: '/blog/collections.md' }
+          ]
+        }
+      ],
       '/doc/': [
         {
           text: '算法',

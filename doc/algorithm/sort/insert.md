@@ -1,0 +1,142 @@
+---
+title: 插入排序动画
+---
+
+# 插入排序动画
+
+<ClientOnly>
+<div class="sort-demo">
+  <h2>插入排序动画（柱状图移动效果）</h2>
+  <div id="container"></div>
+  <button id="startBtn">开始排序</button>
+</div>
+
+<style>
+  .sort-demo {
+    height: 100vh;
+    font-family: sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sort-demo #container {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  .sort-demo .bar {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    background-color: steelblue;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    transition: left 0.5s ease;
+  }
+
+  .sort-demo #startBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+</style>
+
+<script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const initPage = () => {
+    // 设置数据及相关参数
+    const container = document.getElementById('container');
+    const startBtn = document.getElementById('startBtn');
+    if (!container || !startBtn) {
+      requestAnimationFrame(initPage);
+      return;
+    }
+    const barWidth = 40;
+    const gap = 20;
+    let bars = [];
+    let values = [250, 100, 200, 300, 150, 50, 275, 125, 175, 225];
+
+  // 根据 values 数组创建柱状图
+  function init() {
+    container.innerHTML = '';
+    bars = [];
+    for (let i = 0; i < values.length; i++) {
+      const bar = document.createElement('div');
+      bar.classList.add('bar');
+      bar.style.height = values[i] + 'px';
+      bar.style.left = (i * (barWidth + gap)) + 'px';
+      bar.textContent = values[i];
+      container.appendChild(bar);
+      bars.push(bar);
+    }
+  }
+
+  // 延时函数，用于动画暂停
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // 更新所有柱子的 left 坐标，根据它们在 bars 数组中的索引
+  function updatePositions() {
+    for (let i = 0; i < bars.length; i++) {
+      bars[i].style.left = (i * (barWidth + gap)) + 'px';
+    }
+  }
+
+  // 插入排序动画
+  async function insertionSort() {
+    startBtn.disabled = true;
+    // 从第二个开始遍历
+    for (let i = 1; i < bars.length; i++) {
+      const keyBar = bars[i];
+      const keyVal = parseInt(keyBar.textContent);
+      // 高亮当前插入的柱子
+      keyBar.style.backgroundColor = 'orange';
+      await sleep(600);
+
+      let j = i - 1;
+      // 找到第一个比 keyVal 小的位置
+      while (j >= 0 && parseInt(bars[j].textContent) > keyVal) {
+        // 高亮比较的柱子
+        bars[j].style.backgroundColor = 'red';
+        await sleep(600);
+        // 将条形图向右移动一格（模拟右移操作）
+        bars[j + 1] = bars[j];
+        j--;
+        updatePositions();
+        await sleep(600);
+        // 恢复颜色
+        if (j + 1 < bars.length) {
+          bars[j + 1].style.backgroundColor = 'steelblue';
+        }
+      }
+      // 插入 keyBar 到正确位置
+      bars[j + 1] = keyBar;
+      updatePositions();
+      await sleep(600);
+      // 恢复 keyBar 的颜色
+      keyBar.style.backgroundColor = 'steelblue';
+    }
+    startBtn.disabled = false;
+  }
+
+  // 初始化及事件绑定
+  init();
+    startBtn.addEventListener('click', async () => {
+      init(); // 每次排序前重置数据
+      await insertionSort();
+    });
+  };
+
+  initPage();
+});
+</script>
+</ClientOnly>

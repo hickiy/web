@@ -1,0 +1,185 @@
+---
+title: 快速排序递归演示
+---
+
+# 快速排序递归演示
+
+<ClientOnly>
+<div class="sort-demo">
+  <h2>快速排序递归演示</h2>
+  <div id="container"></div>
+  <div id="recursionInfo">递归信息将在此显示</div>
+  <button id="startBtn">开始排序</button>
+</div>
+
+<style>
+  .sort-demo {
+    height: 100vh;
+    font-family: sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sort-demo #container {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  .sort-demo .bar {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    background-color: steelblue;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    transition: left 0.5s ease, border 0.5s ease;
+  }
+
+  .sort-demo #recursionInfo {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+  }
+
+  .sort-demo #startBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+</style>
+
+<script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const initPage = () => {
+    const container = document.getElementById('container');
+    const startBtn = document.getElementById('startBtn');
+    const recursionInfo = document.getElementById('recursionInfo');
+    if (!container || !startBtn || !recursionInfo) {
+      requestAnimationFrame(initPage);
+      return;
+    }
+    const barWidth = 40;
+    const gap = 20;
+    let bars = [];
+    let values = [250, 100, 200, 300, 150, 50, 275, 125, 175, 225];
+
+  // 初始化柱状图
+  function init() {
+    container.innerHTML = '';
+    bars = [];
+    for (let i = 0; i < values.length; i++) {
+      const bar = document.createElement('div');
+      bar.classList.add('bar');
+      bar.style.height = values[i] + 'px';
+      bar.style.left = (i * (barWidth + gap)) + 'px';
+      bar.textContent = values[i];
+      container.appendChild(bar);
+      bars.push(bar);
+    }
+    recursionInfo.textContent = '递归信息将在此显示';
+  }
+
+  // 延时函数
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // 更新柱子位置
+  function updatePositions() {
+    for (let i = 0; i < bars.length; i++) {
+      bars[i].style.left = (i * (barWidth + gap)) + 'px';
+    }
+  }
+
+  // 交换两个柱子并动画展示
+  async function swap(i, j) {
+    bars[i].style.backgroundColor = 'red';
+    bars[j].style.backgroundColor = 'red';
+    await sleep(600);
+    let temp = bars[i];
+    bars[i] = bars[j];
+    bars[j] = temp;
+    updatePositions();
+    await sleep(600);
+    bars[i].style.backgroundColor = 'steelblue';
+    bars[j].style.backgroundColor = 'steelblue';
+  }
+
+  // 分区函数（Lomuto法），动画中展示pivot选中效果
+  async function partition(low, high) {
+    let pivotVal = parseInt(bars[high].textContent);
+    bars[high].style.backgroundColor = 'orange';
+    await sleep(600);
+    let i = low - 1;
+    for (let j = low; j < high; j++) {
+      bars[j].style.backgroundColor = 'yellow';
+      await sleep(600);
+      if (parseInt(bars[j].textContent) < pivotVal) {
+        i++;
+        await swap(i, j);
+      } else {
+        bars[j].style.backgroundColor = 'steelblue';
+      }
+    }
+    await swap(i + 1, high);
+    bars[i + 1].style.backgroundColor = 'steelblue';
+    return i + 1;
+  }
+
+  // 给指定区间的柱子添加边框高亮显示
+  function highlightSubarray(low, high, color) {
+    for (let i = low; i <= high; i++) {
+      bars[i].style.border = `3px solid ${color}`;
+    }
+  }
+
+  // 清除指定区间柱子的高亮边框
+  function clearHighlight(low, high) {
+    for (let i = low; i <= high; i++) {
+      bars[i].style.border = 'none';
+    }
+  }
+
+  // 递归实现快速排序，并展示递归调用信息
+  async function quickSort(low, high, depth = 0) {
+    if (low < high) {
+      recursionInfo.textContent = `深度 ${depth}: 排序区间 [${low}, ${high}]`;
+      highlightSubarray(low, high, 'orange');
+      await sleep(2000);
+      let pi = await partition(low, high);
+      clearHighlight(low, high);
+      await quickSort(low, pi - 1, depth + 1);
+      await quickSort(pi + 1, high, depth + 1);
+    } else if (low === high) {
+      // 单个元素也标记一下，表示已归位
+      recursionInfo.textContent = `深度 ${depth}: 单个元素 ${bars[low].textContent} 已归位`;
+      bars[low].style.border = '3px solid green';
+      await sleep(2000);
+      bars[low].style.border = 'none';
+    }
+  }
+
+  // 事件绑定及启动排序
+  startBtn.addEventListener('click', async () => {
+    startBtn.disabled = true;
+    init();
+    await quickSort(0, bars.length - 1);
+    recursionInfo.textContent = '排序完成！';
+    startBtn.disabled = false;
+  });
+
+    init();
+  };
+
+  initPage();
+});
+</script>
+</ClientOnly>

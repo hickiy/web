@@ -1,0 +1,187 @@
+---
+title: 堆排序演示
+---
+
+# 堆排序演示
+
+<ClientOnly>
+<div class="sort-demo">
+  <h2>堆排序演示</h2>
+  <div id="container"></div>
+  <div id="recursionInfo">排序信息将在此显示</div>
+  <button id="startBtn">开始排序</button>
+</div>
+
+<style>
+  .sort-demo {
+    height: 100vh;
+    font-family: sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sort-demo #container {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  .sort-demo .bar {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    background-color: steelblue;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    transition: left 0.5s ease, border 0.5s ease, background-color 0.5s ease;
+  }
+
+  .sort-demo #recursionInfo {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+  }
+
+  .sort-demo #startBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+</style>
+
+<script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const initPage = () => {
+    const container = document.getElementById('container');
+    const startBtn = document.getElementById('startBtn');
+    const recursionInfo = document.getElementById('recursionInfo');
+    if (!container || !startBtn || !recursionInfo) {
+      requestAnimationFrame(initPage);
+      return;
+    }
+    const barWidth = 40;
+    const gap = 20;
+    let bars = [];
+    let values = [250, 100, 200, 300, 150, 50, 275, 125, 175, 225];
+
+  // 初始化柱状图
+  function init() {
+    container.innerHTML = '';
+    bars = [];
+    for (let i = 0; i < values.length; i++) {
+      const bar = document.createElement('div');
+      bar.classList.add('bar');
+      bar.style.height = values[i] + 'px';
+      bar.style.left = (i * (barWidth + gap)) + 'px';
+      bar.textContent = values[i];
+      container.appendChild(bar);
+      bars.push(bar);
+    }
+    recursionInfo.textContent = '排序信息将在此显示';
+  }
+
+  // 延时函数
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // 更新柱子位置
+  function updatePositions() {
+    for (let i = 0; i < bars.length; i++) {
+      bars[i].style.left = (i * (barWidth + gap)) + 'px';
+    }
+  }
+
+  // 交换两个柱子并展示动画效果
+  async function swap(i, j) {
+    bars[i].style.backgroundColor = 'red';
+    bars[j].style.backgroundColor = 'red';
+    await sleep(2000);
+    let temp = bars[i];
+    bars[i] = bars[j];
+    bars[j] = temp;
+    updatePositions();
+    await sleep(2000);
+    bars[i].style.backgroundColor = 'steelblue';
+    bars[j].style.backgroundColor = 'steelblue';
+  }
+
+  // 堆化函数：维护最大堆性质，并展示堆化过程动画
+  async function heapify(n, i) {
+    let largest = i;
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
+
+    // 高亮当前父节点
+    bars[i].style.backgroundColor = 'orange';
+    recursionInfo.textContent = `堆化: 当前节点 ${bars[i].textContent}`;
+    await sleep(2000);
+
+    if (left < n) {
+      bars[left].style.backgroundColor = 'yellow';
+      recursionInfo.textContent = `比较左子 ${bars[left].textContent} vs 当前最大 ${bars[largest].textContent}`;
+      await sleep(2000);
+      if (parseInt(bars[left].textContent) > parseInt(bars[largest].textContent)) {
+        largest = left;
+      }
+      bars[left].style.backgroundColor = 'steelblue';
+    }
+
+    if (right < n) {
+      bars[right].style.backgroundColor = 'yellow';
+      recursionInfo.textContent = `比较右子 ${bars[right].textContent} vs 当前最大 ${bars[largest].textContent}`;
+      await sleep(600);
+      if (parseInt(bars[right].textContent) > parseInt(bars[largest].textContent)) {
+        largest = right;
+      }
+      bars[right].style.backgroundColor = 'steelblue';
+    }
+
+    if (largest !== i) {
+      recursionInfo.textContent = `交换节点 ${bars[i].textContent} 与 ${bars[largest].textContent}`;
+      await swap(i, largest);
+      // 递归堆化受影响的子树
+      await heapify(n, largest);
+    }
+    bars[i].style.backgroundColor = 'steelblue';
+  }
+
+  // 堆排序函数
+  async function heapSort() {
+    let n = bars.length;
+    // 构建最大堆
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      recursionInfo.textContent = `构建堆: 堆化节点 ${i}`;
+      await heapify(n, i);
+    }
+    // 排序过程：不断将最大值（根）与堆尾交换，并堆化剩余部分
+    for (let i = n - 1; i > 0; i--) {
+      recursionInfo.textContent = `交换根节点 ${bars[0].textContent} 与叶节点 ${bars[i].textContent}`;
+      await swap(0, i);
+      await heapify(i, 0);
+    }
+    recursionInfo.textContent = '排序完成！';
+  }
+
+  // 绑定按钮事件并启动排序
+  startBtn.addEventListener('click', async () => {
+    startBtn.disabled = true;
+    init();
+    await heapSort();
+    startBtn.disabled = false;
+  });
+
+    init();
+  };
+
+  initPage();
+});
+</script>
+</ClientOnly>

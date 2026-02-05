@@ -38,7 +38,22 @@ export default defineConfig({
             { text: '算法概述', link: '/doc/algorithm/algorithm.md' },
             { text: '常用函数', link: '/doc/function/common_function.md' },
             { text: '数学符号', link: '/doc/symbol/greek_letter.md' },
-            { text: '排序算法', link: '/doc/algorithm/sort/sort.md' },
+            {
+              text: '排序算法',
+              collapsed: false,
+              items: [
+                { text: '排序概览', link: '/doc/algorithm/sort/sort' },
+                { text: '冒泡排序', link: '/doc/algorithm/sort/bubble' },
+                { text: '选择排序', link: '/doc/algorithm/sort/select' },
+                { text: '插入排序', link: '/doc/algorithm/sort/insert' },
+                { text: '归并排序', link: '/doc/algorithm/sort/merge' },
+                { text: '快速排序', link: '/doc/algorithm/sort/quick' },
+                { text: '计数排序', link: '/doc/algorithm/sort/counting' },
+                { text: '基数排序', link: '/doc/algorithm/sort/redix' },
+                { text: '桶排序', link: '/doc/algorithm/sort/buket' },
+                { text: '堆排序', link: '/doc/algorithm/sort/heap' }
+              ]
+            },
             { text: '随机选择', link: '/doc/algorithm/order-statistic/randomized-select.md' },
             { text: '确定性选择', link: '/doc/algorithm/order-statistic/deterministic-slect.md' }
           ]

@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build"
+    "build": "vitepress build",
+    "build:html-index": "node scripts/build-html-index.mjs",
+    "build:html-assets": "node scripts/copy-html-assets.mjs"
   },
   "author": "hickey",
   "license": "ISC",

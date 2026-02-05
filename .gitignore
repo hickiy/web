@@ -33,7 +33,6 @@ dist-ssr
 # for build results
 dist
 temp
-**/blog
 **/build
 **/*.exe
 **/*.pdb

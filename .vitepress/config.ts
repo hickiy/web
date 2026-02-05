@@ -18,8 +18,16 @@ export default defineConfig({
       { text: 'Blog', link: '/blog/', activeMatch: '/blog/' },
       { text: '文档', link: '/doc/algorithm/algorithm.md', activeMatch: '/doc/' },
       { text: '实践', link: '/practice/', activeMatch: '/practice/' },
+      { text: 'HTML', link: '/html/', activeMatch: '/html/' }
     ],
     sidebar: {
+      '/html/': [
+        {
+          text: 'HTML Index',
+          collapsed: false,
+          items: [{ text: 'HTML Index', link: '/html/' }]
+        }
+      ],
       '/blog/': [
         {
           text: 'Blog',
@@ -36,11 +44,11 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '算法概述', link: '/doc/algorithm/algorithm.md' },
-            { text: '常用函数', link: '/doc/algorithm/common_function.md' },
-            { text: '数学符号', link: '/doc/algorithm/symble_in_math.md' },
+            { text: '常用函数', link: '/doc/function/common_function.md' },
+            { text: '数学符号', link: '/doc/symbol/greek_letter.md' },
             { text: '排序算法', link: '/doc/algorithm/sort/sort.md' },
             { text: '随机选择', link: '/doc/algorithm/order-statistic/randomized-select.md' },
-            { text: '确定性选择', link: '/doc/algorithm/order-statistic/deterministic-select-simple.md' }
+            { text: '确定性选择', link: '/doc/algorithm/order-statistic/deterministic-slect.md' }
           ]
         },
         {

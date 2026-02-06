@@ -46,3 +46,7 @@ temp
 /lang/rust/target/*
 /target
 /target/*
+
+# ignore practice build files
+/blog/practice.md
+/public/practice/*

@@ -16,8 +16,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: 'Blog', link: '/blog/', activeMatch: '/blog/' },
-      { text: '文档', link: '/doc/algorithm/algorithm.md', activeMatch: '/doc/' },
-      { text: '实践', link: '/practice/', activeMatch: '/practice/' },
+      { text: '文档', link: '/doc/algorithm/algorithm.md', activeMatch: '/doc/' }
     ],
     sidebar: {
       '/blog/': [
@@ -26,7 +25,8 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '精选与入口', link: '/blog/index.md' },
-            { text: '内容分类与目录', link: '/blog/collections.md' }
+            { text: '内容分类与目录', link: '/blog/collections.md' },
+            { text: '实践项目', link: '/blog/practice.md' }
           ]
         }
       ],
@@ -113,54 +113,6 @@ export default defineConfig({
           collapsed: true,
           items: [
             { text: '英语符号', link: '/doc/engilsh/symble_in_english.md' }
-          ]
-        }
-      ],
-      '/practice/': [
-        {
-          text: 'HTML5实践',
-          collapsed: false,
-          items: [
-            { text: 'iframe示例', link: '/practice/HTML5/' }
-          ]
-        },
-        {
-          text: 'CSS实践',
-          collapsed: false,
-          items: [
-            { text: 'CSS示例', link: '/practice/CSS/' }
-          ]
-        },
-        {
-          text: '可视化',
-          collapsed: false,
-          items: [
-            { text: 'D3.js', link: '/practice/D3/' },
-            { text: 'Echarts', link: '/practice/Echarts/' },
-            { text: 'SVG', link: '/practice/SVG/' },
-            { text: 'Canvas', link: '/practice/Canvas/' }
-          ]
-        },
-        {
-          text: '地图应用',
-          collapsed: false,
-          items: [
-            { text: '地图示例', link: '/practice/Map/' }
-          ]
-        },
-        {
-          text: '实用工具',
-          collapsed: false,
-          items: [
-            { text: '工具集合', link: '/practice/Tools/' }
-          ]
-        },
-        {
-          text: '其他技术',
-          collapsed: false,
-          items: [
-            { text: 'WebRTC', link: '/practice/Web-RTC/' },
-            { text: '部署相关', link: '/practice/Deploy/' }
           ]
         }
       ]

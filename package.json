@@ -5,10 +5,9 @@
   "main": "index.md",
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev",
-    "build": "vitepress build",
-    "build:html-index": "node scripts/build-html-index.mjs",
-    "build:html-assets": "node scripts/copy-html-assets.mjs"
+    "dev": "node scripts/build-practice-index.mjs && vitepress dev",
+    "build": "node scripts/build-practice-index.mjs && vitepress build",
+    "build:html-index": "node scripts/build-html-index.mjs"
   },
   "author": "hickey",
   "license": "ISC",

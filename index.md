@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 查看博客
-      link: /blog/
+      link: /blog/algorithm/algorithm.md
     # - theme: alt
     #   text: 开始交流
     #   link: /api-examples

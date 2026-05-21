@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node scripts/build-practice-index.mjs && vitepress dev",
     "build": "node scripts/build-practice-index.mjs && vitepress build",
-    "build:html-index": "node scripts/build-html-index.mjs"
+    "build:html-index": "node scripts/build-practice-index.mjs"
   },
   "author": "hickey",
   "license": "ISC",

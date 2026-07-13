@@ -39,11 +39,11 @@ function pickCard(x: Array<{suit: string; card: number; }> | number): any { // �
 // let myDeck = 1123;
 // let pickedCard1 =pickCard(myDeck); // 这里参数类型不能匹配两种重载模式中的任何一种，所以报错
 
-class Person {
+class Person1 {
     constructor( public name:string){}
 }
 
-interface instance extends Person {
+interface instance extends Person1 {
     (name:string): void;
 }
 
@@ -51,4 +51,4 @@ var i:instance = function(name:string){
     console.log(name)
 }
 
-console.log(new Person('jojo'))
+console.log(new Person1('jojo'))

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElUpload Component Sort Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus/dist/index.full.min.js"></script>
+  <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+      background: #f5f7fa;
+    }
+
+    .demo {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .upload-wrapper {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .native-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* #file 插槽自定义拖拽项样式 */
+    .sort-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid #dcdfe6;
+      border-radius: 6px;
+      background: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .sort-item .handle {
+      margin-right: 10px;
+      color: #909399;
+      cursor: grab;
+      font-size: 16px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    const Demo = {
+      template: `
+        <div class="demo">
+          <div class="compare-grid">
+            <div class="upload-wrapper">
+              <div class="upload-header">
+                <h3>ElUpload 自定义插槽拖拽排序</h3>
+              </div>
+
+              <el-upload
+                ref="uploadRef"
+                v-model:file-list="files"
+                :auto-upload="false"
+              >
+                <template #trigger>
+                  <el-icon style="margin-right:4px"><plus /></el-icon>
+                </template>
+
+                <!-- #file 插槽：自定义文件列表项 + 拖拽排序 -->
+                <template #file="{ file: f }">
+                  <div class="sort-item" 
+                    :draggable="true"
+                    @dragstart="onDragStart(f, $event)"
+                    @dragover.prevent
+                    @drop.prevent="onDrop(f, $event)">
+                    <span class="handle">⋮⋮</span>
+                    <span class="file-name">{{ f.name }}</span>
+                  </div>
+                </template>
+              </el-upload>
+            </div>
+
+            <div class="upload-wrapper">
+              <div class="upload-header">
+                <h3>原生 TransitionGroup 包裹拖拽排序</h3>
+              </div>
+              <el-icon style="margin-right:4px; margin-bottom: 12px;"><plus /></el-icon>
+              <transition-group
+                name="sort-fade"
+                tag="div"
+                class="native-list"
+              >
+                <div
+                  v-for="f in files"
+                  :key="f.uid"
+                  class="sort-item"
+                  :draggable="true"
+                  @dragstart="onDragStart(f, $event)"
+                  @dragover.prevent
+                  @drop.prevent="onDrop(f, $event)"
+                >
+                  <span class="handle">⋮⋮</span>
+                  <span class="file-name">{{ f.name }}</span>
+                </div>
+              </transition-group>
+            </div>
+          </div>
+        </div>
+      `,
+      setup() {
+        let dragedFile = null;
+
+        const files = ref([{
+          name: '文件1',
+          uid: 1
+        }, {
+          name: '文件2',
+          uid: 2
+        }, {
+          name: '文件3',
+          uid: 3
+        }]);
+
+        /* 拖拽开始：通过 dataTransfer 记录被拖拽项的索引 */
+        const onDragStart = (file, event) => {
+          dragedFile = file
+        };
+
+        /* 放下：读取 oldIndex，计算 newIndex，执行排序 */
+        const onDrop = (targetFile, event) => {
+          const oldIndex = files.value.findIndex((item) => item.uid === dragedFile.uid);
+          const newIndex = files.value.findIndex((item) => item.uid === targetFile.uid);
+          if (oldIndex === newIndex) return;
+          const [moved] = files.value.splice(oldIndex, 1);
+          files.value.splice(newIndex, 0, moved);
+        };
+
+        return {
+          files,
+          onDragStart,
+          onDrop,
+          Delete: ElementPlusIconsVue.Delete
+        };
+      }
+    };
+
+    const app = createApp(Demo);
+    app.use(ElementPlus);
+    // 注册所有图标为全局组件
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+      app.component(key, component);
+    }
+    app.mount('#app');
+  </script>
+</body>
+
+</html>

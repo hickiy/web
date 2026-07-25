@@ -4,18 +4,22 @@
     (func $fd_write (param i32 i32 i32 i32) (result i32))
   )
 
-  ;; 递归计算斐波那契数
+  ;; 递归计算斐波那契数（改为尾递归风格的迭代实现）
   (func $fib (param $n i32) (result i32)
-    (if (result i32)
-      (i32.lt_s (local.get $n) (i32.const 2))
-      (then (local.get $n))
-      (else
-        (i32.add
-          (call $fib (i32.sub (local.get $n) (i32.const 1)))
-          (call $fib (i32.sub (local.get $n) (i32.const 2)))
-        )
+    (local $a i32) (local $b i32) (local $tmp i32)
+    (local.set $a (i32.const 0))
+    (local.set $b (i32.const 1))
+    (block $end
+      (loop $loop
+        (br_if $end (i32.eqz (local.get $n)))
+        (local.set $tmp (local.get $b))
+        (local.set $b (i32.add (local.get $a) (local.get $b)))
+        (local.set $a (local.get $tmp))
+        (local.set $n (i32.sub (local.get $n) (i32.const 1)))
+        (br $loop)
       )
     )
+    (local.get $a)
   )
 
   ;; 内存声明
@@ -23,7 +27,7 @@
   (export "memory" (memory 0))
 
   ;; 用于存储输出字符串的缓冲区
-  (data (i32.const 1024) "Fibonacci(40) = ")
+  (data (i32.const 1024) "Fibonacci(80) = ")
 
   ;; 主函数
   (func $main (export "_start")
@@ -35,7 +39,7 @@
     (local $i i32)
     ;; 计算fib(40)
     (local $result i32)
-    (local.set $result (call $fib (i32.const 40)))
+    (local.set $result (call $fib (i32.const 80)))
     ;; 将$result转换为字符串并拼接到缓冲区后面
 
     ;; 结果字符串写入的起始位置（"Fibonacci(40) = " 长度为16）
